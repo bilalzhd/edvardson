@@ -10,4 +10,5 @@ body {
 }
 /* .dropdown-menu {display: none;} */
 .navbar-nav li a:hover {color: white}
+.product-thumbnail-bg {background: rgba(188, 160, 142, 0.7)}
 /* .navbar-nav li:has(.dropdown-menu):hover .dropdown-menu {display: flex}; */

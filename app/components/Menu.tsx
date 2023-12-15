@@ -22,7 +22,7 @@ function Menu({menuItems}: any) {
                     className="menu-item relative"
                     onMouseEnter={() => handleMouseEnter(menuItem.label)}
                     onMouseLeave={handleMouseLeave}>
-                    <span className='flex items-center gap-1'>{menuItem.label} {menuItem.subItems && <ChevronDown className='h-4 w-4' />}</span>
+                    <span className='flex items-center gap-1 hover:text-white'><a href={menuItem.url}>{menuItem.label}</a> {menuItem.subItems && <ChevronDown className='h-4 w-4' />}</span>
                     <ul className={`${(hoveredItem === menuItem.label && menuItem.subItems) ? 'block' : 'hidden'} flex flex-col gap-3 submenu absolute bg-black/80 p-4`}>
                         {menuItem.subItems?.map((subItem:any, subIndex:any) => (
                             <li key={subIndex} className='text-white hover:bg-black text-[12px]'>
