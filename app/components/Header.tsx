@@ -2,8 +2,11 @@ import Topbar from './Topbar';
 import Menu from './Menu';
 import { getMenuItems } from '../lib/menu';
 
+
+
 async function Header() {
     const menuItems = await getMenuItems();
+    console.log(menuItems)
     return (
         <>
             <Topbar />
