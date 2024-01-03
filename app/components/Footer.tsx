@@ -1,4 +1,5 @@
 function Footer() {
+
   return (
     <footer className="bg-black pt-10 pb-20">
       <div className="flex flex-col md:flex-row px-4 text-white text-[13px]">

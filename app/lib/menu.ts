@@ -42,12 +42,12 @@ const api = new WooCommerceRestApi({
 // }
 
 export const getProducts = async (count = 20, per_page = 12) => {
-  const responseData: ResponseData = {success: false, products: []};
+  const responseData: ResponseData = { success: false, products: [] };
 
   try {
-    const { data } = await api.get('products', {per_page: per_page})
+    const { data } = await api.get('products', { per_page: per_page })
     responseData.success = true;
-    responseData.products = data; 
+    responseData.products = data;
 
     return responseData;
   } catch (err) {
@@ -59,18 +59,18 @@ export const getProducts = async (count = 20, per_page = 12) => {
 }
 
 
-export const flatListToHierarchical = ( data = [], {idKey='key',parentKey='parentId',childrenKey='children'} = {}) => {
+export const flatListToHierarchical = (data = [], { idKey = 'key', parentKey = 'parentId', childrenKey = 'children' } = {}) => {
   const tree: any = [];
   const childrenOf: any = {};
   data.forEach((item: any) => {
-      const newItem = {...item};
-      const { [idKey]: id, [parentKey]: parentId = 0 } = newItem;
-      childrenOf[id] = childrenOf[id] || [];
-      newItem[childrenKey] = childrenOf[id];
-      parentId ? (
-              childrenOf[parentId] = childrenOf[parentId] || []
-          ).push(newItem)
-          : tree.push(newItem);
+    const newItem = { ...item };
+    const { [idKey]: id, [parentKey]: parentId = 0 } = newItem;
+    childrenOf[id] = childrenOf[id] || [];
+    newItem[childrenKey] = childrenOf[id];
+    parentId ? (
+      childrenOf[parentId] = childrenOf[parentId] || []
+    ).push(newItem)
+      : tree.push(newItem);
   });
   return tree;
 };
@@ -87,6 +87,13 @@ export async function getMenuItems() {
           childItems {
             nodes {
               label
+              url
+              childItems {
+                nodes {
+                  label
+                  url
+                }
+              }
             }
           }
         }
@@ -94,12 +101,12 @@ export async function getMenuItems() {
     }
   }`;
   const response = await fetch(`${process.env.WORDPRESS_API_URL}/graphql`, {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ query }),
-      cache: 'no-store'
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ query }),
+    cache: 'no-store'
   });
   const data = await response.json();
   return flatListToHierarchical(data.data.menu.menuItems.nodes);

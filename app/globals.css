@@ -11,4 +11,17 @@ body {
 /* .dropdown-menu {display: none;} */
 .navbar-nav li a:hover {color: white}
 .product-thumbnail-bg {background: rgba(188, 160, 142, 0.7)}
+
+.menu-item .submenu {
+  display: none;
+  position: absolute;
+  /* Set position styles as per your design */
+}
+
+.menu-item.hovered .submenu {
+  display: block;
+}
+
+
+
 /* .navbar-nav li:has(.dropdown-menu):hover .dropdown-menu {display: flex}; */
