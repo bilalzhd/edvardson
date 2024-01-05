@@ -21,7 +21,3 @@ body {
 .menu-item.hovered .submenu {
   display: block;
 }
-
-
-
-/* .navbar-nav li:has(.dropdown-menu):hover .dropdown-menu {display: flex}; */

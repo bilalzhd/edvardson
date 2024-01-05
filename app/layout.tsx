@@ -1,7 +1,7 @@
 import Header from './components/Header'
 import Footer from './components/Footer'
-import './globals.css'
-import { Roboto_Slab } from 'next/font/google'
+import './globals.css';
+import { Roboto_Slab } from 'next/font/google';
 
 const inter = Roboto_Slab({ subsets: ['latin'] })
 

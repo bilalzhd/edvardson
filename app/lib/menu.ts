@@ -66,14 +66,18 @@ export async function getMenuItems() {
       }
     }
   }`;
-  const response = await fetch(`${process.env.WORDPRESS_API_URL}/graphql`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ query }),
-    cache: 'no-store'
-  });
-  const data = await response.json();
-  return flatListToHierarchical(data.data.menu.menuItems.nodes);
+  try {
+    const response = await fetch(`${process.env.WORDPRESS_API_URL}/graphql`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ query })
+    });
+    const data = await response.json();
+    return flatListToHierarchical(data.data.menu.menuItems.nodes);
+  } catch (err) {
+    console.error(err);
+    return {};
+  }
 }
