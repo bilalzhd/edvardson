@@ -1,16 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap");
+@import "~react-image-gallery/styles/css/image-gallery.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.letter-spacing-1 {letter-spacing: 1px;}
+.letter-spacing-1 {
+  letter-spacing: 1px;
+}
+.letter-spacing-0 {
+  letter-spacing: 0;
+}
+.font-open {
+  font-family: "Open Sans", sans-serif;
+}
 body {
   letter-spacing: 1px;
-  font-family: 'Roboto Slab', serif !important;
+  font-family: "Roboto Slab", serif !important;
 }
 /* .dropdown-menu {display: none;} */
-.navbar-nav li a:hover {color: white}
-.product-thumbnail-bg {background: rgba(188, 160, 142, 0.7)}
+.navbar-nav li a:hover {
+  color: white;
+}
+.product-thumbnail-bg {
+  background: rgba(188, 160, 142, 0.7);
+}
 
 .menu-item .submenu {
   display: none;
