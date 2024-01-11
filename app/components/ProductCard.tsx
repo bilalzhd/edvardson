@@ -27,7 +27,7 @@ export default function ProductCard({ product }: any) {
                         <button className='bg-[#679761] uppercase p-2'>Köp…</button>
                     </div>
                 </Link>
-            ) : <Box>
+            ) : <Box width="100%">
                 <Skeleton containerClassName="flex-1" baseColor="#B1B1B1AA" height={260} />
                 <Skeleton containerClassName="flex-1" baseColor="#B1B1B1AA" height={20} />
                 <Skeleton containerClassName="flex-1" baseColor="#B1B1B1AA" height={60} />
