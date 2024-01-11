@@ -1,3 +1,5 @@
+import { unstable_noStore } from "next/cache";
+
 const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
 
 const api = new WooCommerceRestApi({
@@ -8,6 +10,7 @@ const api = new WooCommerceRestApi({
 });
 
 export const getProducts = async (count = 20, per_page = 12) => {
+    unstable_noStore();
     const responseData: ResponseData = { success: false, products: [] };
 
     try {
@@ -25,6 +28,7 @@ export const getProducts = async (count = 20, per_page = 12) => {
 }
 
 export async function getProductBySlug(slug: string) {
+    unstable_noStore();
     try {
         const response = await api.get("products", {
             slug: slug,
@@ -45,6 +49,7 @@ export async function getProductBySlug(slug: string) {
 }
 
 export async function getProductVariations(productId: number) {
+    unstable_noStore();
     try {
         const response = await api.get(`products/${productId}/variations`, {
             per_page: 50
@@ -63,6 +68,7 @@ export async function getProductVariations(productId: number) {
 } 
 
 export async function getProductsByCategory(category: string) {
+    unstable_noStore();
     try {
         const response = await api.get('products', {
             category,
