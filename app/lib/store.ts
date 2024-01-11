@@ -43,3 +43,21 @@ export async function getProductBySlug(slug: string) {
         throw error;
     }
 }
+
+export async function getProductVariations(productId: number) {
+    try {
+        const response = await api.get(`products/${productId}/variations`, {
+            per_page: 50
+        });
+        if (response.data && response.data.length > 0) {
+            const products = response.data;
+            return products;
+        } else {
+            console.error("Product not found.");
+            return null;
+        }
+    } catch (error: any) {
+        console.error("Error fetching product:", error.message);
+        throw error;
+    }
+} 

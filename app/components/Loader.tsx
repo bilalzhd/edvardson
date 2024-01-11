@@ -1,5 +1,5 @@
-import { PropsWithChildren } from 'react'
-function Box({ children }: PropsWithChildren<unknown>) {
+
+function Box({ children, width = 260 }: {children: React.ReactNode, width: number | undefined | string}) {
   return (
     <div
     className='px-4'
@@ -7,7 +7,7 @@ function Box({ children }: PropsWithChildren<unknown>) {
         display: 'block',
         lineHeight: 2,
         marginBottom: '0.5rem',
-        width: 260,
+        width,
       }}
     >
       {children}

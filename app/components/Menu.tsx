@@ -24,7 +24,7 @@ const MenuItem = ({ label, url, childItems }: { label: string, url: string, chil
 
 const SubMenu = ({ items }: any) => {
   return (
-    <ul className="flex flex-col gap-3 submenu absolute bg-black/80 p-4 capitalize">
+    <ul className="z-10 flex flex-col gap-3 submenu absolute bg-black/80 p-4 capitalize">
       {items.map((item: any) => (
         <MenuItem key={item.id} {...item} />
       ))}
@@ -34,7 +34,7 @@ const SubMenu = ({ items }: any) => {
 
 const Menu = ({ menuItems }: any) => {
   return (
-    <ul className="menu sidebar flex justify-between px-4 pt-4 flex-wrap">
+    <ul className="z-10 menu sidebar flex justify-between px-4 pt-4 flex-wrap">
       {menuItems.map((item: any) => (
         <MenuItem key={item.id} {...item} />
       ))}
