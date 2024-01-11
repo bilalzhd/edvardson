@@ -61,3 +61,22 @@ export async function getProductVariations(productId: number) {
         throw error;
     }
 } 
+
+export async function getProductsByCategory(category: string) {
+    try {
+        const response = await api.get('products', {
+            category,
+            per_page: 10
+        });
+        if (response.data && response.data.length > 0) {
+            const products = response.data;
+            return products;
+        } else {
+            console.error("Product not found.");
+            return null;
+        }
+    } catch (error: any) {
+        console.error("Error fetching product:", error.message);
+        throw error;
+    }
+} 
