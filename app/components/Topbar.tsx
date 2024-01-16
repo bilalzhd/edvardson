@@ -14,7 +14,7 @@ function Topbar() {
                     <select className="bg-transparent" name="" id="">
                         <option value="">SVENSKA / INKL. MOMS</option>
                     </select>
-                    <span>(0) Varukog</span>
+                    <span>(0) Varukorg</span>
                 </div>
             </div>
         </div>

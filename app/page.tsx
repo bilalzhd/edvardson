@@ -15,7 +15,7 @@ export default async function Home() {
         </div>
       </div>
       <div className='p-2 min-h-screen mx-12 bg-black/30'>
-        <div className='flex -mx-4'>
+        <div className='flex flex-wrap mx-4 gap-[10px]'>
           {products.map(product => {
             return (
               <ProductCard key={product.id} product={product} />

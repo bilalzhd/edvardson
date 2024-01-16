@@ -2,6 +2,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import './globals.css';
 import { Roboto_Slab } from 'next/font/google';
+import NextTopLoader from 'nextjs-toploader';
 
 const inter = Roboto_Slab({ subsets: ['latin'] })
 
@@ -18,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <NextTopLoader color='#997D6D' />
         <div className='min-h-screen bg-[url("https://shop.textalk.se/shop/21855/files/wood_bg.jpg")] text-grayish'>
           <Header />
           {children}

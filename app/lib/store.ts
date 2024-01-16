@@ -9,7 +9,7 @@ const api = new WooCommerceRestApi({
     version: "wc/v3"
 });
 
-export const getProducts = async (count = 20, per_page = 12) => {
+export const getProducts = async ( per_page = 12 ) => {
     unstable_noStore();
     const responseData: ResponseData = { success: false, products: [] };
 

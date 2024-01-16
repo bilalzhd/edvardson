@@ -1,5 +1,4 @@
 
-import AddToCart from "@/app/components/AddToCart";
 import Product from "@/app/components/Product";
 import ProductCarousel from "@/app/components/ProductCarousel";
 import ProductGallery from "@/app/components/ProductGallery";
@@ -9,12 +8,11 @@ import { getProductBySlug, getProductVariations, getProductsByCategory } from "@
 export default async function Page({ params }: { params: { slug: string } }) {
   const product = await getProductBySlug(params.slug);
   let variations = [];
-  if(product.type === 'variable') {
+  if (product.type === 'variable') {
     variations = await getProductVariations(product.id);
   }
   const categoriesId = product.categories.map((category: any) => category.id);
   const relatedProducts = await getProductsByCategory(categoriesId[0]);
-  console.log(relatedProducts)
   return (
     <div className="bg-black/50 mx-12 font-open">
       <div className="flex text-white p-6">
@@ -31,8 +29,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
               </span>
             ))}
           </div>
-          <VariationSelector defaultAttributes={product.default_attributes} productId={product.id} variations={variations} />
-          <AddToCart />
+          {variations.length > 0 && <VariationSelector defaultAttributes={product.default_attributes} productId={product.id} variations={variations} />}
+          <div className="flex gap-2">
+            <input type="number" name="quantity" id="quantity" defaultValue={1} min={1} className="max-w-[52px] text-black p-2 text-center" />
+            <button type="submit" className="text-center font-bold w-full py-[13px] px-[28px] transition-all duration-200 uppercase hover:bg-[#538e4c] bg-[#679761] border border-[#679761]">Add To Cart</button>
+          </div>
           <div className="text-[13px] mt-5">
             <p className="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
               <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
