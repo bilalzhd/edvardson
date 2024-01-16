@@ -6,6 +6,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import Box from "./Loader";
 import Link from "next/link";
 import AddToCart from "./AddToCart";
+import Image from "next/image";
 
 export default function ProductCard({ product }: any) {
     const productType = product.type || "";
@@ -21,7 +22,7 @@ export default function ProductCard({ product }: any) {
                 <div className='w-[calc(25%-10px)] mb-8 text-white flex flex-col items-center' key={product.id}>
                     <div className='product-thumbnail-bg'>
                         <Link href={product.permalink || "#"}>
-                            <img src={product.images?.[0]?.src} alt={product.name || ""} width={282.5} height={282.5} />
+                            <Image src={product.images?.[0]?.src} alt={product.name || ""} className="w-[282.5px] h-[282.5px]" width={282.5} height={282.5} />
                         </Link>
                     </div>
                     
