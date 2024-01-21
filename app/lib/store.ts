@@ -1,15 +1,24 @@
 import { unstable_noStore } from "next/cache";
 
 const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
+import CoCartAPI from "@cocart/cocart-rest-api";
+import { Dispatch, SetStateAction } from "react";
+
+const CoCart = new CoCartAPI({
+    url: "https://merablog.merakommunikation.se",
+    consumerKey: "ck_c7d9a5093230470c7dfb681882744f9aa0ec18ba",
+    consumerSecret: "cs_6986ba10b2fd720db1925f456577a7dbb48276de",
+    version: "cocart/v1"
+})
 
 const api = new WooCommerceRestApi({
     url: "https://merablog.merakommunikation.se",
-    consumerKey: process.env.WC_CONSUMER_KEY,
-    consumerSecret: process.env.WC_CONSUMER_SECRET,
+    consumerKey: "ck_c7d9a5093230470c7dfb681882744f9aa0ec18ba",
+    consumerSecret: "cs_6986ba10b2fd720db1925f456577a7dbb48276de",
     version: "wc/v3"
-});
+})
 
-export const getProducts = async ( per_page = 12 ) => {
+export const getProducts = async (per_page = 12) => {
     unstable_noStore();
     const responseData: ResponseData = { success: false, products: [] };
 
@@ -65,7 +74,7 @@ export async function getProductVariations(productId: number) {
         console.error("Error fetching product:", error.message);
         throw error;
     }
-} 
+}
 
 export async function getProductsByCategory(category: string) {
     unstable_noStore();
@@ -85,4 +94,51 @@ export async function getProductsByCategory(category: string) {
         console.error("Error fetching product:", error.message);
         throw error;
     }
-} 
+}
+
+function makeid(length: number) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
+}
+
+export async function addToCart(productId: number, quantity = 1, cart_key: string | null, setLoading: Dispatch<SetStateAction<boolean>>) {
+    try {
+        setLoading(true);
+        const response = await fetch(`https://merablog.merakommunikation.se/wp-json/cocart/v2/cart/add-item?cart_key=${cart_key}`, {
+            method: "POST",
+            body: JSON.stringify({ 
+                "id": String(productId),
+                "quantity": String(quantity)
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        const data = await response.json();
+        if (data.cart_key) {
+            setLoading(false);
+            const cartKeyAlreadyExist = localStorage.getItem("cart_key");
+            if (!cartKeyAlreadyExist) {
+                localStorage.setItem("cart_key", data.cart_key);
+                
+            }
+            return data;
+        }
+
+    } catch (error) {
+        setLoading(false);
+        return error;
+    }
+}
+export async function getCart(cartKey: string) {
+    return fetch(`https://merablog.merakommunikation.se/wp-json/cocart/v2/cart?cart_key=${cartKey}`)
+        .then(response => response.json())
+        .then(res => res)
+}

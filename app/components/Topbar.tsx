@@ -1,3 +1,5 @@
+import Cart from "./Cart";
+
 function Topbar() {
     return (
         <div className="text-[12px] text-white/80 topbar py-2 px-8 min-h-[32px] bg-black">
@@ -14,7 +16,7 @@ function Topbar() {
                     <select className="bg-transparent" name="" id="">
                         <option value="">SVENSKA / INKL. MOMS</option>
                     </select>
-                    <span>(0) Varukorg</span>
+                    <Cart />
                 </div>
             </div>
         </div>

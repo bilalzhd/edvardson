@@ -3,7 +3,9 @@ import Product from "@/app/components/Product";
 import ProductCarousel from "@/app/components/ProductCarousel";
 import ProductGallery from "@/app/components/ProductGallery";
 import VariationSelector from "@/app/components/VariationSelector";
+
 import { getProductBySlug, getProductVariations, getProductsByCategory } from "@/app/lib/store";
+
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const product = await getProductBySlug(params.slug);

@@ -62,7 +62,7 @@ type Product = {
     default_attributes: [
         { id: number, name: string, option: string },
     ],
-    variations: number [],
+    variations: number[],
     grouped_products: [],
     menu_order: number,
     price_html: string,
@@ -110,4 +110,23 @@ type Attribute = {
 type ResponseData = {
     success: boolean,
     products: Array<Product>
+}
+type Cart = {
+    cart_hash: string
+    cart_key: string
+    coupons: any
+    cross_sells: any
+    currency: any
+    customer: any
+    fees: any
+    item_count: number
+    items: any
+    items_weight: number
+    needs_payment: boolean
+    needs_shipping: boolean
+    notices: any
+    removed_items: any
+    shipping: any
+    taxes: any
+    totals: any
 }

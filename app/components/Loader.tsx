@@ -2,7 +2,7 @@
 function Box({ children, width = 260 }: {children: React.ReactNode, width: number | undefined | string}) {
   return (
     <div
-    className='px-4'
+    className='px-2'
       style={{
         display: 'block',
         lineHeight: 2,

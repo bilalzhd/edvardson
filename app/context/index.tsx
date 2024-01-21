@@ -1,28 +1,28 @@
+'use client'
 import { useState, useEffect, createContext } from "react";
+import { getCart } from "../lib/store";
 
-export const AppContext = createContext([{}, () => { }]);
+export const AppContext = createContext([{}, ()=>{}, ""]);
 
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
-    const [cart, setCart] = useState<any>(null);
+    const [cart, setCart] = useState<Cart | {}>({});
+    const [cartKey, setCartKey] = useState("");
 
     useEffect(() => {
-        if (typeof window === 'undefined') {
-            let cartData = localStorage.getItem('next-cart');
-            cartData = null != cartData ? JSON.parse(cartData) : [];
-            setCart(cartData);
+        let cartKey = localStorage.getItem('cart_key') || "";
+        async function getCartData() {
+            const cartData = await getCart(cartKey);
+            setCart(cartData)
+        }
+        if (cartKey) {
+            setCartKey(cartKey)
+            getCartData();
         }
     }, [])
 
-    useEffect(() => {
-
-        if (typeof window === 'undefined') {
-            localStorage.setItem('next-cart', JSON.stringify(cart));
-        }
-
-    }, [cart]);
 
     return (
-        <AppContext.Provider value={[cart, setCart]}>
+        <AppContext.Provider value={[cart, setCart, cartKey]}>
             {children}
         </AppContext.Provider>
     )

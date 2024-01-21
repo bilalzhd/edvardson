@@ -10,6 +10,6 @@ export default function ProductGallery({ items }: any) {
         }
     })
     return (
-        <ImageGallery showPlayButton={false} additionalClass="w-full bg-[#D0BCB0]" items={images}/>
+        <ImageGallery showPlayButton={false} additionalClass="w-full space-x-3 bg-[#D0BCB0]" items={images} />
     )
 }
