@@ -1,8 +1,26 @@
 'use client'
 import { useState, useEffect, createContext } from "react";
 import { getCart } from "../lib/store";
-
-export const AppContext = createContext([{}, ()=>{}, ""]);
+type Cart = {
+    cart_hash: string
+    cart_key: string
+    coupons: any
+    cross_sells: any
+    currency: any
+    customer: any
+    fees: any
+    item_count: number
+    items: any
+    items_weight: number
+    needs_payment: boolean
+    needs_shipping: boolean
+    notices: any
+    removed_items: any
+    shipping: any
+    taxes: any
+    totals: any
+}
+export const AppContext = createContext<[Cart | {}, React.Dispatch<React.SetStateAction<Cart | {}>>, string]>([{}, () => {}, ""]);
 
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     const [cart, setCart] = useState<Cart | {}>({});

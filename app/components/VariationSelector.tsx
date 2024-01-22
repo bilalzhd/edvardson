@@ -4,7 +4,9 @@ import ChevronDown from "./icons/ChevronDown";
 import ChevronUp from "./icons/ChevronUp";
 
 export default function VariationSelector({ variations, productId, defaultAttributes }: { variations: any, productId: string, defaultAttributes: {id: number, name: string, option: string}[] }) {
-    const sortedVariations = variations.sort((a: any, b: any) => parseInt(a.attributes[1].option) - parseInt(b.attributes[1].option));
+    
+    const sortedVariations = variations?.sort((a: any, b: any) => (a.attributes[1]?.option && b.attributes[1]?.option) && parseInt(a.attributes[1].option) - parseInt(b.attributes[1].option));
+
     const defaultOptions = defaultAttributes.map(attr => attr.option);
     const stringOptions: string = defaultOptions.join(", ");
     const defaultOption = sortedVariations.find((variation: any) => variation.name.toString().toLowerCase().replace(/\b(\w+)\s+(\w+)\b/, '$1-$2') === stringOptions)

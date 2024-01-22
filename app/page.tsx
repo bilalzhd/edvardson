@@ -3,7 +3,7 @@ import ProductCard from './components/ProductCard';
 import { isEmpty } from './lib';
 import { getProducts } from './lib/store'
 
-const DEFAULT_NUMBER_OF_PRODUCTS_TO_FETCH = 4
+const DEFAULT_NUMBER_OF_PRODUCTS_TO_FETCH = 12
 
 export default async function Home() {
   const data = await getProducts(DEFAULT_NUMBER_OF_PRODUCTS_TO_FETCH);

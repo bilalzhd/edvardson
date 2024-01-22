@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context";
 import { addToCart } from "../lib/store";
+import MiniCart from "./MiniCart";
 
 export default function AddToCart({ productId, productType, productPermalink }:
   { productId: number, productType: string, productPermalink: string }
