@@ -31,7 +31,7 @@ export default function ProductCard({ product, isGallery = false }: any) {
 
                     <div className='mt-8 flex items-center flex-col gap-4'>
                         <span>{product.price} SEK</span>
-                        {<AddToCart isProductPage={false} productId={product.id} productPermalink={product.permalink} productType={productType} />}
+                        {<AddToCart variations={null} isProductPage={false} productId={product.id} productPermalink={product.permalink} productType={productType} />}
                     </div>
                 </div>
             ) : (
