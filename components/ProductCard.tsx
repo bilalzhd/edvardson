@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import Box from "./Loader";
+import Box from "./Box";
 import Link from "next/link";
 import AddToCart from "./AddToCart";
 
@@ -31,7 +31,7 @@ export default function ProductCard({ product, isGallery = false }: any) {
 
                     <div className='mt-8 flex items-center flex-col gap-4'>
                         <span>{product.price} SEK</span>
-                        {<AddToCart productId={product.id} productPermalink={product.permalink} productType={productType} />}
+                        {<AddToCart isProductPage={false} productId={product.id} productPermalink={product.permalink} productType={productType} />}
                     </div>
                 </div>
             ) : (

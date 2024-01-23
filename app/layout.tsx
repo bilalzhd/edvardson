@@ -1,9 +1,9 @@
-import Header from './components/Header'
-import Footer from './components/Footer'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 import './globals.css';
 import { Roboto_Slab } from 'next/font/google';
 import NextTopLoader from 'nextjs-toploader';
-import { AppProvider } from './context';
+import { AppProvider } from '../context';
 
 const inter = Roboto_Slab({ subsets: ['latin'] })
 
@@ -19,12 +19,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon-3c61b1.png" type="image/png" sizes="32x32" />
+      </head>
       <AppProvider>
         <body className={inter.className}>
           <NextTopLoader color='#997D6D' />
-          <div className='min-h-screen bg-[url("https://shop.textalk.se/shop/21855/files/wood_bg.jpg")] text-grayish'>
+          <div className='min-h-screen bg-[url("/images/wood_bg.jpg")] text-grayish'>
             <Header />
-            {children}
+            <div className='mx-12'>{children}</div>
             <Footer />
           </div>
         </body>
