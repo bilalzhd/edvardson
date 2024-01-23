@@ -13,7 +13,7 @@ export default function MiniCart({ cart, showMiniCart }: any) {
           {loading && <div className="bg-white/80 h-full w-full absolute max-w-[15rem] top-0 z-10 flex items-center justify-center"><LoadingSpinner text="Updating cart..." /></div>}
           {cart?.items && cart?.items.length > 0 ? (
             cart.items.map((item: any) => (
-              <CartItem item={item} setLoading={setLoading} />
+              <CartItem key={item.id} item={item} setLoading={setLoading} />
             ))
           ) : (
             <span className="letter-spacing-0">No items in the cart</span>
