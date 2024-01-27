@@ -38,7 +38,7 @@ export default function CheckoutPage() {
                             </div>
                             <div className="flex flex-col gap-4 mt-4">
                                 {(cart as Cart).items?.map((item: any) => (
-                                    <CheckoutItem item={item} setLoading={setLoading} />
+                                    <CheckoutItem key={item.id} item={item} setLoading={setLoading} />
                                 ))}
                             </div>
                             <button className="mt-4 letter-spacing-1 text-[15px] flex items-center gap-1 bg-white/60 text-[#000] px-[15px] h-[35px] font-semibold rounded uppercase">

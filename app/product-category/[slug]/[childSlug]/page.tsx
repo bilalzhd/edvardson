@@ -38,7 +38,7 @@ export default async function CategoryPage({ params }: { params: { childSlug: st
         </div>
         <div className="flex flex-wrap mx-4 gap-[10px] mt-4">
           {products?.length > 0 ? products?.map((product: any) => {
-            return <ProductCard product={product} isGallery={false} />
+            return <ProductCard key={product.id} product={product} isGallery={false} />
           }) : <span className="text-white text-center py-4">No Products yet</span>}
         </div>
       </div>
