@@ -4,9 +4,9 @@ import Toolbar from "@/components/Toolbar";
 import { getProductCategories, getProductsByCategory } from "@/lib/store";
 import Link from "next/link";
 
-export default async function CategoryPage({ params }: { params: { slug: string } }) {
+export default async function CategoryPage({ params }: { params: { childSlug: string } }) {
   const categories = await getProductCategories();
-  const currentCategory = categories && categories?.find((cat: any) => cat.slug === params.slug);
+  const currentCategory = categories && categories?.find((cat: any) => cat.slug === params.childSlug);
   const childrenCats = categories.filter((cat: any) => cat.parent == currentCategory?.id);
   const products = await getProductsByCategory(currentCategory?.id);
   return (
