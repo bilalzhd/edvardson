@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
-import { CART_ENDPOINT } from "../constants/endpoints";
+// import { CART_ENDPOINT } from "../constants/endpoints";
+import { CART_ENDPOINT } from "../constants";
 import { getApiCartConfig } from "./api";
 import { getSession, storeSession } from "./session";
 import { isEmpty } from "..";
