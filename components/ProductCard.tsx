@@ -18,7 +18,7 @@ export default function ProductCard({ product, isGallery = false }: any) {
     return (
         <>
             {isMount ? (
-                <div className={`mb-8 text-white flex flex-col items-center ${!isGallery && 'w-[calc(25%-10px)]'}`} key={product.id}>
+                <div className={`mb-8 text-white flex flex-col items-center ${!isGallery && 'md:w-[calc(25%-10px)]'} w-full`} key={product.id}>
                     <div className='product-thumbnail-bg'>
                         <Link href={product.permalink || "#"}>
                             <img src={product.images?.[0]?.src} alt={product.name || ""} />
@@ -27,7 +27,7 @@ export default function ProductCard({ product, isGallery = false }: any) {
 
                     <Link href={product.permalink || "#"} className="text-center">
                         <span className='uppercase text-sm mb-2 mt-2'>{product.name?.substring(0, 20)}{product.name.length > 50 && "..."}</span></Link>
-                    <p className='text-[#bdbdbd] text-xs text-center' dangerouslySetInnerHTML={{ __html: product.description?.substring(0, 100) }}></p>
+                    <p className='text-[#bdbdbd] text-xs text-center min-h-[64px]' dangerouslySetInnerHTML={{ __html: product.description?.substring(0, 100) }}></p>
 
                     <div className='mt-8 flex items-center flex-col gap-4'>
                         <span>{product.price} SEK</span>

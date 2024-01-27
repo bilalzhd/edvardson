@@ -15,9 +15,27 @@ const api = new WooCommerceRestApi({
     url: "https://merablog.merakommunikation.se",
     consumerKey: "ck_c7d9a5093230470c7dfb681882744f9aa0ec18ba",
     consumerSecret: "cs_6986ba10b2fd720db1925f456577a7dbb48276de",
-    version: "wc/v3"
+    version: "wc/v3",
+    axiosConfig: {
+        headers: {}
+    }
 })
-
+export const getShippingMethods = async () => {
+    try {
+        const response = await api.get("shipping_methods")
+        return response.data;
+    } catch (err) {
+        return err;
+    }
+}
+export const getProductCategories = async () => {
+    try {
+        const response = await api.get("products/categories?per_page=40")
+        return response.data;
+    } catch (err) {
+        return err;
+    }
+}
 export const getProducts = async (per_page = 12) => {
     unstable_noStore();
     const responseData: ResponseData = { success: false, products: [] };
@@ -78,8 +96,27 @@ export async function getProductVariations(productId: number) {
 export async function getProductsByCategory(category: string) {
     unstable_noStore();
     try {
+        const response = await api.get(`products?category=${category}`, {   
+            per_page: 10
+        });
+        if (response.data && response.data.length > 0) {
+            const products = response.data;
+            return products;
+        } else {
+            console.error("Product not found.");
+            return null;
+        }
+    } catch (error: any) {
+        console.error("Error fetching product:", error.message);
+        throw error;
+    }
+}
+export async function getProductsForCheckout(min_price: string, max_price: string) {
+    unstable_noStore();
+    try {
         const response = await api.get('products', {
-            category,
+            min_price,
+            max_price,
             per_page: 10
         });
         if (response.data && response.data.length > 0) {
@@ -187,5 +224,5 @@ export async function deleteItemFromCart(itemKey: string, cartKey: string, setLo
         .then(res => res)
         .finally(() => {
             setLoading(false)
-        })
+    })
 }

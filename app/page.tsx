@@ -15,7 +15,7 @@ export default async function Home() {
           <p className='text-[#bdbdbd] text-sm font-open letter-spacing-0'>Swedish craftsmanship of the highest quality</p>
         </div>
       </div>
-      <div className='p-2 min-h-screen mx-12 bg-black/30'>
+      <div className='px-2 py-4 min-h-screen md:mx-12 bg-black/30'>
         <div className='flex flex-wrap mx-4 gap-[10px] -m-2'>
           {products.map(product => (
               <ProductCard key={product.id} product={product} />

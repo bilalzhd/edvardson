@@ -7,7 +7,7 @@ import { AppContext } from "../context";
 
 
 export default function CartItem({ item, setLoading }: any) {
-    const [quantity, setQuantity] = useState(1);
+    const [quantity, setQuantity] = useState(item.quantity.value || 1);
     const [, setCart, cartKey] = useContext(AppContext);
 
 
@@ -31,7 +31,7 @@ export default function CartItem({ item, setLoading }: any) {
                 <span className="text-gray-500">(Inkl. moms: {item.totals.total + item.totals.tax})</span>
                 <div className="flex justify-between">
                     <div className="flex w-fit flex-shrink my-2">
-                        <input onChange={(e) => setQuantity(Number(e.target.value))} min={1} className="border border-gray-300 w-12 p-2 rounded-md" type="number" name="cart_product_quantity" id="cart_product_quantity" defaultValue={item.quantity.value} />
+                        <input onChange={(e) => setQuantity(Number(e.target.value))} min={1} className="border border-gray-300 w-12 p-2 rounded-md" type="number" name="cart_product_quantity" id="cart_product_quantity" defaultValue={quantity} />
                         <button onClick={() => updateCartItemQuantityHandler(item.item_key)} type="button" id="updateCart">
                             <Refresh />
                         </button>

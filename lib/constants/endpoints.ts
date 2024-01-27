@@ -1,1 +1,0 @@
-export const CART_ENDPOINT = `https://merablog.merakommunikation.se/wp-json/rae/v1/cart/items/`;

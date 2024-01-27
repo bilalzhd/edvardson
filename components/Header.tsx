@@ -1,5 +1,5 @@
 import Topbar from './Topbar';
-import Menu from './Menu';
+import Menu from './menu/Menu';
 import Link from 'next/link';
 import { getMenuItems } from '../lib/menu';
 
@@ -20,7 +20,7 @@ async function Header() {
                         </div>
                     </div>
                 </div>
-                <Menu menuItems={menuItems} />
+                <Menu menuData={menuItems} />
             </div>
         </>
     );
