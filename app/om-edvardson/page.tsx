@@ -42,7 +42,7 @@ export default function About() {
             E-post: info@edvardson.se
 
             Koordinater
-            WGS 84 (lat, lon):N 60° 44.005', E 13° 33.787'
+            WGS 84 (lat, lon):N 60° 44.005&apos;, E 13° 33.787&apos;
             WGS 84 decimal (lat, lon):60.73341, 13.56312
             RT90:6737249, 1377692
             SWEREF99:6733951, 421639
