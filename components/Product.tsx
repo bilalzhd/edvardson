@@ -7,7 +7,7 @@ import AddToCart from "./AddToCart";
 import VariationSelector from "./VariationSelector";
 
 export default function Product({ product, variations }: any) {
-    const sortedVariations = variations?.sort((a: any, b: any) => (a.attributes?.[1].option && b.attributes[1]?.option) && parseInt(a.attributes[1].option) - parseInt(b.attributes[1].option));
+    const sortedVariations = variations?.sort((a: any, b: any) => (a.attributes?.[1]?.option && b.attributes[1]?.option) && parseInt(a.attributes[1].option) - parseInt(b.attributes[1].option));
     const defaultOptions = product.default_attributes?.map((attr: any) => attr.option);
     const stringOptions: string = defaultOptions?.join(", ");
     const defaultOption = sortedVariations.find((variation: any) => variation.name?.toString().toLowerCase().replace(/\b(\w+)\s+(\w+)\b/, '$1-$2') === stringOptions)
@@ -27,7 +27,7 @@ export default function Product({ product, variations }: any) {
                         <span className="text-2xl font-bold" dangerouslySetInnerHTML={{ __html: product.price_html }}></span>
                         <p className="pt-4 pb-5 text-[#FAFAFA]" dangerouslySetInnerHTML={{__html: product.short_description}}></p>
                         <p className="text-xs">Art.nr: {product.sku}</p>
-                        <img className="pt-4" height="75" width="75" src="//shop.textalk.se/shop/21855/files/sigil_small.png" alt="" />
+                        {/* <img className="pt-4" height="75" width="75" src="//shop.textalk.se/shop/21855/files/sigil_small.png" alt="" /> */}
                         <p className="text-[13px] text-[#FAFAFA]" dangerouslySetInnerHTML={{ __html: product.description }}></p>
                     </>) : (
                     <Box width="100%">

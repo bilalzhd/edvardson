@@ -16,7 +16,7 @@ export default async function Home() {
         </div>
       </div>
       <div className='px-2 py-4 min-h-screen bg-black/30'>
-        <div className='flex flex-wrap mx-4 gap-[10px] -m-2'>
+        <div className='flex flex-wrap mx-4 -m-2'>
           {products.map(product => (
               <ProductCard key={product.id} product={product} />
           ))}
