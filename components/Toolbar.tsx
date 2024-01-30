@@ -1,11 +1,17 @@
-export default function Toolbar() {
+import { Dispatch, SetStateAction } from "react";
+
+export default function Toolbar({ setProductView }: {setProductView: Dispatch<SetStateAction<string>>}) {
     return (
         <div className="btn-toolbar tws-list-controls pull-right flex gap-4 justify-end w-full text-white">
             <div className="btn-group tws-list--control-type--btn-grp flex gap-4">
-                <button type="button" className="btn tws-list--control-type--list-btn btn-default ">
+                <button
+                onClick={() => setProductView("list")}
+                type="button" className="btn tws-list--control-type--list-btn btn-default ">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-4 h-4"><path fill="#fff" d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z" /></svg>
                 </button>
-                <button type="button" className="btn tws-list--control-type--grid-grp btn-default active">
+                <button
+                onClick={() => setProductView("grid")}
+                type="button" className="btn tws-list--control-type--grid-grp btn-default active">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-4 h-4"><path fill="#fff" d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm88 64v64H64V96h88zm56 0h88v64H208V96zm240 0v64H360V96h88zM64 224h88v64H64V224zm232 0v64H208V224h88zm64 0h88v64H360V224zM152 352v64H64V352h88zm56 0h88v64H208V352zm240 0v64H360V352h88z" /></svg>
                 </button>
             </div>

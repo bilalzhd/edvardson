@@ -7,7 +7,7 @@ import Box from "./Box";
 import Link from "next/link";
 import AddToCart from "./AddToCart";
 
-export default function ProductCard({ product, isGallery = false }: any) {
+export default function ProductCardListView({ product }: any) {
     const productType = product.type || "";
     const [isMount, setMount] = useState(false);
     useEffect(() => {
@@ -22,23 +22,15 @@ export default function ProductCard({ product, isGallery = false }: any) {
     return (
         <>
             {isMount ? (
-                <div className={`mb-8 bg-white p-5 text-[#333] flex flex-col items-center border-r-[gray] border-white border hover:border-2 hover:border-r-[#679761] transition-all duration-300 hover:border-[#679761] ${!isGallery && 'md:w-[calc(25%)]'} w-full`} key={product.id}>
-                    <div className='product-thumbnail-bg w-full flex justify-center'>
-                        <Link href={product.permalink || "#"}>
-                            <img className="max-h-[270px]" src={product.images?.[0]?.src} alt={product.name || ""} />
-                        </Link>
+                <div className="mb-2 flex items-center bg-[#fffff0] p-2">
+                    <div className="w-[25%] flex justify-center px-2">
+                        <img className="border rounded w-[60px] h-[60px]" src={product.images?.[0]?.src} alt={product.name} />
                     </div>
-
-                    <Link href={product.permalink || "#"} className="text-center">
-                        <span className='uppercase text-sm mb-2 mt-2'>{product.name?.substring(0, 20)}{product.name.length > 50 && "..."}</span></Link>
-
-                    <p className='text-[#0a0a0a] text-xs text-center min-h-[64px]'
-                        dangerouslySetInnerHTML={{ __html: product.short_description?.length > 0 ? product.short_description?.substring(0, 100) : productDescription.substring(0, 100) }}
-                    >
-                    </p>
-
-                    <div className='mt-8 flex items-center flex-col gap-4'>
-                        <span>{product.price} SEK</span>
+                    <span className="w-[20%] flex justify-center px-2 text-center">{product.price} SEK</span>
+                    <div className="w-[35%] flex justify-center px-2 text-center">
+                        <Link href={product.permalink || "#"}><span className="hover:underline">{product.name}</span></Link>
+                    </div>
+                    <div className="w-[20%] flex justify-center px-2">
                         <AddToCart variations={null} isProductPage={false} productId={product.id} productPermalink={product.permalink} productType={productType} />
                     </div>
                 </div>
