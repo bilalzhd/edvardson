@@ -16,7 +16,7 @@ export default async function CategoryPage({ params }: { params: { childChildslu
         <div className="flex items-center flex-col">
           <div className="mb-[30px]">
             <h1 className="text-white text-[17px] text-center uppercase font-bold letter-spacing-0 font-open">{currentCategory?.name}</h1>
-            <p className="text-[14px] text-[#bdbdbd] letter-spacing-0 font-open">Quality knives for hunting and wilderness life.</p>
+            <p className="text-[14px] text-[#bdbdbd] letter-spacing-0 font-open">{currentCategory?.description}</p>
           </div>
           <Toolbar />
         </div>

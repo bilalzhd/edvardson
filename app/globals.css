@@ -36,5 +36,5 @@ body {
   display: block;
 }
 .sub-menu.parent {position: absolute;}
-/* .sub-menu.sub-menu-2 {left: 135px; top: 0} */
+.sub-menu.sub-menu-2 {left: 135px;}
 .image-gallery-left-nav .image-gallery-svg, .image-gallery-right-nav .image-gallery-svg {height: 60px !important;}

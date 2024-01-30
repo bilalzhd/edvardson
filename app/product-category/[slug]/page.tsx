@@ -23,7 +23,7 @@ export default async function CategoryPage({ params }: { params: { slug: string 
         <div className="flex flex-wrap relative">
           {childrenCats?.length > 0 &&
             childrenCats.map((cat: any) => (
-              <div key={cat.id} className="min-h-[225px] flex items-stretch md:w-[calc(25%-10px)] max-w-[calc(25%-10px)] basis-[calc(25%-10px)] my-[7.5px] mx-[5px]">
+              <div key={cat.id} className="flex items-stretch md:w-[calc(25%-10px)] max-w-[calc(25%-10px)] basis-[calc(25%-10px)] my-[7.5px] mx-[5px]">
                 <div className="bg-[#3D3D3D] text-white flex-col flex items-stretch justify-start w-full cursor-pointer rounded-[2px] md:h-[calc(100%-20px)] p-1 mb-5">
                   <Link href={`/product-category/${cat.slug}`}>
                   <div className="bg-[rgba(188,160,142,0.7)]">
@@ -36,7 +36,7 @@ export default async function CategoryPage({ params }: { params: { slug: string 
             ))
           }
         </div>
-        <div className="flex flex-wrap mx-4 gap-[10px] mt-4">
+        <div className="flex flex-wrap mx-4 mt-4">
           {products?.length > 0 ? products?.map((product: any) => {
             return <ProductCard key={product.id} product={product} isGallery={false} />
           }) : <span className="text-white text-center py-4">No Products yet</span>}
