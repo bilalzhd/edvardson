@@ -22,23 +22,24 @@ export default function ProductCard({ product, isGallery = false }: any) {
     return (
         <>
             {isMount ? (
-                <div className={`mb-8 bg-white p-5 text-[#333] flex flex-col items-center border-r-[gray] border-white border hover:border-2 hover:border-r-[#679761] transition-all duration-300 hover:border-[#679761] ${!isGallery && 'md:w-[calc(25%)]'} w-full`} key={product.id}>
+                <div className={`mb-8 bg-[#F6F6F6] p-5 text-[#333] font-open flex flex-col ${!isGallery && 'md:w-[calc(33%-10px)]'} w-full`} key={product.id}>
                     <div className='product-thumbnail-bg w-full flex justify-center'>
                         <Link href={product.permalink || "#"}>
-                            <img className="max-h-[270px]" src={product.images?.[0]?.src} alt={product.name || ""} />
+                            <img className="max-h-[270px] bg-[#F0F0F0]" src={product.images?.[0]?.src} alt={product.name || ""} />
                         </Link>
                     </div>
+                    <div className="flex flex-col mt-2">
+                        <span className="text-[.875rem] uppercase opacity-30">{product.sku}</span>
+                        <Link className="mt-[calc(1.75rem*.5)]" href={product.permalink || "#"}>
+                            <span className='font-bold text-sm mb-2 mt-2'>{product.name?.substring(0, 20)}{product.name.length > 50 && "..."}</span>
+                        </Link>
 
-                    <Link href={product.permalink || "#"} className="text-center">
-                        <span className='uppercase text-sm mb-2 mt-2'>{product.name?.substring(0, 20)}{product.name.length > 50 && "..."}</span></Link>
+                        {/* <p className='text-[#0a0a0a] text-xs min-h-[64px]'
+                            dangerouslySetInnerHTML={{ __html: product.short_description?.length > 0 ? product.short_description?.substring(0, 100) : productDescription.substring(0, 100) }}
+                        >
+                        </p> */}
 
-                    <p className='text-[#0a0a0a] text-xs text-center min-h-[64px]'
-                        dangerouslySetInnerHTML={{ __html: product.short_description?.length > 0 ? product.short_description?.substring(0, 100) : productDescription.substring(0, 100) }}
-                    >
-                    </p>
-
-                    <div className='mt-8 flex items-center flex-col gap-4'>
-                        <span>{product.price} SEK</span>
+                        <span className="mt-[calc(1.75rem*.5)] mb-[calc(1.75rem*.5)]">Price: {product.price} SEK</span>
                         <AddToCart variations={null} isProductPage={false} productId={product.id} productPermalink={product.permalink} productType={productType} />
                     </div>
                 </div>

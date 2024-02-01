@@ -21,7 +21,7 @@ export default function MenuItem({ item }: any) {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-            <span className="flex items-center gap-1 hover:text-white">
+            <span className="flex items-center gap-1 hover:text-[#bdbdbd]">
                 <Link href={item.url}>{item.label}</Link>
                 {item.childItems?.nodes?.length > 0 && <ChevronDown className="w-4 h-4" />}
             </span>
