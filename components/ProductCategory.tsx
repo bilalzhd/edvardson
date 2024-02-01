@@ -22,14 +22,14 @@ export default function ProductCategory({ currentCategory, childrenCats, product
                 {childrenCats?.length > 0 &&
                     childrenCats.map((cat: any) => (
                         <div key={cat.id} className="flex items-stretch md:w-[calc(25%-10px)] max-w-[calc(25%-10px)] basis-[calc(25%-10px)] my-[7.5px] mx-[5px]">
-                            <div className="bg-[#3D3D3D] text-white flex-col flex items-stretch justify-start w-full cursor-pointer rounded-[2px] md:h-[calc(100%-20px)] p-1 mb-5">
-                                <Link href={`/product-category/${cat.slug}`}>
+                            <Link href={`/product-category/${cat.slug}`} className="w-full">
+                                <div className="bg-[#3D3D3D] text-white flex-col flex items-stretch justify-start w-full cursor-pointer rounded-[2px] md:h-[calc(100%-20px)] p-1 mb-5">
                                     <div className="bg-[rgba(188,160,142,0.7)]">
                                         {cat.image && <img src={cat.image.src} />}
                                     </div>
-                                </Link>
-                                <h2 className="text-center text-[14px] p-[9px]">{cat.name}</h2>
-                            </div>
+                                    <h2 className="text-center text-[14px] p-[9px]">{cat.name}</h2>
+                                </div>
+                            </Link>
                         </div>
                     ))
                 }
@@ -41,7 +41,7 @@ export default function ProductCategory({ currentCategory, childrenCats, product
             </div>) : (
                 <div>
                     {products?.length > 0 ? products?.map((product: any) => {
-                        return <ProductCardListView key={product.id} product={product}/>
+                        return <ProductCardListView key={product.id} product={product} />
                     }) : <span className="text-white text-center py-4">No Products yet</span>}
                 </div>
             )}
