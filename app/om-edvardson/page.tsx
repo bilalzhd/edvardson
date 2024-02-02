@@ -1,15 +1,15 @@
 export default function About() {
     return (
-        <div className="text-white bg-black/60 p-12 text-[14px] font-open font-semibold letter-spacing-0">
+        <div className="text-[#333] mx-auto px-20 2xl:max-w-[76%] py-12 text-[14px] font-open font-semibold letter-spacing-0">
             <div className="mb-5">
-                <h2 className="text-[#ff9900] text-[22px] mb-5">Välkommen till Edvardson Sweden</h2>
+                <h2 className="text-black text-[22px] mb-5">Välkommen till Edvardson Sweden</h2>
                 <p className="mb-2">Edvardson Sweden är ett anrikt familjeföretag, tidigare känt som Malungsfors Läderprodukter. Det började på 1860-talet då farfars farfar Edvard Torstensson började med skomakeri för att livnära sig. Sedan dess har tillverkningen utökats till att även innefatta jakttillbehör och friluftstillbehör i läder.</p>
 
                 <p>Hos oss sätter vi stort värde på kunskap, kvalitet och gediget hantverk.</p>
             </div>
 
             <div className="mb-5">
-                <h2 className="text-[#ff9900] text-[22px] mb-5">Om Edvardson Sweden AB</h2>
+                <h2 className="text-black text-[22px] mb-5">Om Edvardson Sweden AB</h2>
                 <p>God kvalité och bra funktion i allt vi gör, produkter som håller för strapatser och funktion som gör din upplevelse rikare. Vi har skapat de produkter vi själva vill använda och vi testar dem både på älgjakt och fjällvandring.</p>
 
                 <p>Bussarongen av vadmal ska hålla dig varm och torr på fågelskådning en tidig vårdag och det ska inte prassla när du smyger dig fram i terrängen.</p>
@@ -21,12 +21,12 @@ export default function About() {
                 <p>Vi vill att våra produkter ska förhöja din upplevelse oavsett vad du har för hobby.</p>
             </div>
             <div className="mb-5">
-                <h2 className="text-[#ff9900] text-[22px] mb-5">Profilprodukter</h2>
+                <h2 className="text-black text-[22px] mb-5">Profilprodukter</h2>
                 <p>Ge dina kunder och anställda en unik och handgjord present.</p>
                 <p>Vi på Edvardson Sweden har en stor erfarenhet av profilprodukter och du är välkommen att bli vår nästa kund.</p>
             </div>
             <div className="mb-5">
-                <h2 className="text-[#ff9900] text-[22px] mb-5">Historik</h2>
+                <h2 className="text-black text-[22px] mb-5">Historik</h2>
                 <p>Vi i familjen Edvardsson har en lång tradition som skomakare. På 1860-talet kom farfars farfar vandrande från Norge och slog sig ner här i Malungsfors. Han försörjde sig som reparationsskomakare men lärde sig med tiden att göra slitstarka kängor och skor.</p>
 
                 <p>Under första hälften av 1900-talet utvecklades produkterna och yrkeskunnandet fördjupades. Tillverkningen flyttades till större lokaler och fler skinnkunniga bybor fick möjligheten att lära sig skomakeriets ädla konst. Malungsbygden har en lång skinntradition så känslan för skinnet och hur det ska hanteras var en nedärvd kunskap hos folket.</p>
@@ -36,7 +36,7 @@ export default function About() {
                 <p>Vi försöker i största möjliga mån att använda oss av vegetabiliskt garvat läder, med tanke på miljön.</p>
             </div>
             <div className="mb-5">
-                <h2 className="text-[#ff9900] text-[22px] mb-5">Här hittar du oss:</h2>
+                <h2 className="text-black text-[22px] mb-5">Här hittar du oss:</h2>
                 <ul className="mb-5">
                     <li>Skinnargränd 2</li>
                     <li className="mb-5">782 75  MALUNGSFORS</li>
@@ -60,7 +60,7 @@ export default function About() {
                 <p>Länk till försäljningsvillkor</p>
             </div>
             <div className="mb-5">
-                <h2 className="text-[#ff9900] text-[22px] mb-5">Öppettider butik:</h2>
+                <h2 className="text-black text-[22px] mb-5">Öppettider butik:</h2>
                 <p className="font-bold">Varierande öppettider</p>
                 <p className="font-bold">Ring före besök. 070-3158536</p>
             </div>

@@ -6,18 +6,12 @@ const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Show the button when the user scrolls down
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const showThreshold = 300;
-
       setIsVisible(scrollY > showThreshold);
     };
-
-    // Attach the event listener when the component mounts
     window.addEventListener('scroll', handleScroll);
-
-    // Cleanup: Remove the event listener when the component unmounts
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -34,7 +28,7 @@ const ScrollToTopButton = () => {
     <>
       {isVisible && (
         <div className='flex justify-center py-2'>
-          <button className="text-xs scroll-to-top-button text-center underline hover:decoration-none hover:text-white flex items-center text-gray-200" onClick={scrollToTop}>
+          <button className="text-xs scroll-to-top-button text-center underline hover:decoration-none hover:text-[#0a0a0a] flex items-center" onClick={scrollToTop}>
             <ChevronUp className="h-3 w-3" />Tillbaka till toppen
           </button>
         </div>

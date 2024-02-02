@@ -3,11 +3,12 @@ import ProductCategory from "@/components/ProductCategory";
 import { getProductCategories, getProductsByCategory } from "@/lib/store";
 
 export default async function CategoryPage({ params }: { params: { slug: string } }) {
+
   const categories = await getProductCategories();
   const currentCategory = categories && categories?.find((cat: any) => cat.slug === params.slug);
   const childrenCats = categories.filter((cat: any) => cat.parent == currentCategory?.id);
   const products = await getProductsByCategory(currentCategory?.id);
-  console.log(products[0])
+
   return (
     <>
       <BreadCrumb />

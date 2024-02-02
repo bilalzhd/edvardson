@@ -8,7 +8,7 @@ async function Header() {
     return (
         <>
             <Topbar />
-            <div className=" mx-12 px-4 pb-4 text-[13px] uppercase">
+            <div className="2xl:max-w-[70%] 2xl:mx-auto mx-12 px-4 pb-4 text-[13px] uppercase">
                 <div className="flex p-3 justify-end">
                     <div className="flex lg:w-[60%] items-end justify-between">
                         <Link href="/"><img width={250} height={62} src="/images/logoblack.webp" alt="Edvardson Logo" /></Link>

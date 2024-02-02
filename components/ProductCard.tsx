@@ -44,7 +44,7 @@ export default function ProductCard({ product, isGallery = false }: any) {
                     </div>
                 </div>
             ) : (
-                <Box width="270px">
+                <Box width="260px">
                     <Skeleton className="rounded-none" containerClassName="flex-1" baseColor="#B1B1B1AA" height={260} />
                     <Skeleton className="rounded-none" containerClassName="flex-1" baseColor="#B1B1B1AA" height={20} />
                     <Skeleton className="rounded-none" containerClassName="flex-1" baseColor="#B1B1B1AA" height={60} />

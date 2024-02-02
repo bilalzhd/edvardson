@@ -14,6 +14,9 @@ module.exports = {
       },
       textColor: {
         secondary: '#bdbdbd'
+      },
+      screens: {
+        '2xl': '1281px'
       }
     },
   },

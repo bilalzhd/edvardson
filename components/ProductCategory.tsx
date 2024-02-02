@@ -10,11 +10,11 @@ export default function ProductCategory({ currentCategory, childrenCats, product
     const [productView, setProductView] = useState("grid");
 
     return (
-        <div className="min-h-[23.5vh] bg-black/40  p-[10px]">
+        <div className="min-h-[23.5vh] p-[10px] xl:max-w-[80%] mx-auto 2xl:max-w-[70%]">
             <div className="flex items-center flex-col">
                 <div className="mb-[30px]">
-                    <h1 className="text-white text-[17px] text-center uppercase font-bold letter-spacing-0 font-open">{currentCategory?.name}</h1>
-                    <p className="text-[14px] text-[#bdbdbd] letter-spacing-0 font-open">{currentCategory?.description}</p>
+                    <h1 className="text-[17px] text-center uppercase font-bold letter-spacing-0 font-open">{currentCategory?.name}</h1>
+                    <p className="text-[14px] letter-spacing-0 font-open">{currentCategory?.description}</p>
                 </div>
                 <Toolbar setProductView={setProductView} />
             </div>
@@ -34,7 +34,7 @@ export default function ProductCategory({ currentCategory, childrenCats, product
                     ))
                 }
             </div>
-            {productView == "grid" ? (<div className="flex flex-wrap mx-4 mt-4">
+            {productView == "grid" ? (<div className="flex flex-wrap mx-4 mt-4 gap-[10px]">
                 {products?.length > 0 ? products?.map((product: any) => {
                     return <ProductCard key={product.id} product={product} isGallery={false} />
                 }) : <span className="text-white text-center py-4">No Products yet</span>}
