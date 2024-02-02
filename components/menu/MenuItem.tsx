@@ -21,8 +21,8 @@ export default function MenuItem({ item }: any) {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-            <span className="flex items-center gap-1 hover:text-[#bdbdbd]">
-                <Link href={item.url}>{item.label}</Link>
+            <span className="flex items-center">
+                <Link className="hover:text-green-600 hover:font-bold" href={item.url}>{item.label}</Link>
                 {item.childItems?.nodes?.length > 0 && <ChevronDown className="w-4 h-4" />}
             </span>
             <SubMenu isMouseOver={isHovered} childItems={item.childItems?.nodes?.length && item.childItems} />

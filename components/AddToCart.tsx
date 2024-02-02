@@ -21,7 +21,7 @@ export default function AddToCart({ variations, productId, productType, productP
     const cart = await addVariationToCart(variations ?? 0, 1, cartKey, setLoading);
     setCart(cart);
   }
-  const addToCartText = loading ? "Loading..." : (<>Add To Cart <Cart /></>);
+  const addToCartText = loading ? "Loading..." : (<>Lägg i varukorg <Cart /></>);
 
   return (
     <>
@@ -31,7 +31,7 @@ export default function AddToCart({ variations, productId, productType, productP
          (productType === "simple" && !isProductPage) ? addToCartHandler() :
          (productType === "simple" && isProductPage) ? addToCartHandler() : addVariationToCartHandler()
         }
-        type="submit" className="text-center font-bold w-full py-[13px] px-[28px] transition-all duration-200 uppercase hover:bg-[#538e4c] border-[#679761] border bg-transparent flex items-center gap-2">{addToCartText}</button> : <Link className="font-bold w-full py-[13px] px-[28px] flex-1 transition-all duration-200 uppercase hover:bg-[#538e4c] bg-transparent border border-[#679761]" href={productPermalink || "#"}>Buy</Link>}
+        type="submit" className="justify-center mx-auto font-bold w-full py-[13px] px-[28px] transition-all duration-200 uppercase hover:border-[#000] border border-[#f6f6f6] text-center bg-transparent flex items-center gap-2">{addToCartText}</button> : <Link className="font-bold w-full py-[13px] px-[28px] flex-1 transition-all duration-200 uppercase border border-[#f6f6f6] hover:border-[#000] bg-transparent md:max-w-[150px] mx-auto text-center" href={productPermalink || "#"}>Köp…</Link>}
     </>
   )
 }

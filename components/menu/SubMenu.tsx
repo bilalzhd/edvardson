@@ -18,8 +18,8 @@ const SubMenu = ({ childItems, isMouseOver, isSubMenu }: any) => {
       onMouseLeave={handleMouseLeave}
     >
       {childItems?.nodes?.map((subItem: any) => (
-        <li key={subItem.label} className='sub-menu z-10 flex flex-col gap-3 top-10 bg-white p-4 capitalize'>
-          <a href={subItem.url}>{subItem.label}</a>
+        <li key={subItem.label} className='sub-menu z-10 flex flex-col border-b top-8 bg-white p-4 capitalize'>
+          <a className='hover:text-green-600 hover:font-bold' href={subItem.url}>{subItem.label}</a>
             <SubMenu isSubMenu isMouseOver={subItem.childItems?.nodes?.length > 0 && isHovered} childItems={subItem.childItems} />
         </li>
       ))}
