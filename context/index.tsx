@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, createContext } from "react";
+import { useState, useEffect, createContext, SetStateAction, Dispatch } from "react";
 import { getCart } from "../lib/store";
 type Cart = {
     cart_hash: string
@@ -20,27 +20,28 @@ type Cart = {
     taxes: any
     totals: any
 }
-export const AppContext = createContext<[Cart | {}, React.Dispatch<React.SetStateAction<Cart | {}>>, string]>([{}, () => {}, ""]);
+export const AppContext = createContext<[Cart | {}, Dispatch<SetStateAction<Cart | {}>>, string, Dispatch<SetStateAction<string>>]>([{}, () => { }, "", () => {}]);
 
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     const [cart, setCart] = useState<Cart | {}>({});
     const [cartKey, setCartKey] = useState("");
 
     useEffect(() => {
-        let cartKey = localStorage.getItem('cart_key') || "";
         async function getCartData() {
             const cartData = await getCart(cartKey);
             setCart(cartData)
         }
-        if (cartKey) {
+        let cartKey = localStorage.getItem('cart_key') || "";
+        if (cartKey.length < 1) {
             setCartKey(cartKey)
             getCartData();
         }
-    }, [])
+
+    }, [cart])
 
 
     return (
-        <AppContext.Provider value={[cart, setCart, cartKey]}>
+        <AppContext.Provider value={[cart, setCart, cartKey, setCartKey]}>
             {children}
         </AppContext.Provider>
     )

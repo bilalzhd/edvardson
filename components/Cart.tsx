@@ -8,7 +8,7 @@ export default function Cart() {
     const [isMiniCartVisible, setMiniCartVisibility] = useState(false);
 
     return (
-        <div onMouseEnter={() => setMiniCartVisibility(true)} onMouseLeave={() => setMiniCartVisibility(false)}>
+        <div onMouseEnter={() => setMiniCartVisibility(true)} onMouseLeave={() => setMiniCartVisibility(false)} >
             <button className="md:flex-row flex-col font-open letter-spacing-1 items-center gap-2 text-xs flex">
                 <span className="font-bold text-base">({((cart as Cart)?.items || []).length})</span>
                 Varukorg

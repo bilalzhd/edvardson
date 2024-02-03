@@ -96,7 +96,7 @@ export async function getProductVariations(productId: number) {
 export async function getProductsByCategory(category: string) {
     unstable_noStore();
     try {
-        const response = await api.get(`products?category=${category}`, {   
+        const response = await api.get(`products?category=${category}`, {
             per_page: 10
         });
         if (response.data && response.data.length > 0) {
@@ -151,7 +151,6 @@ export async function addToCart(productId: number, quantity = 1, cart_key: strin
             const cartKeyAlreadyExist = localStorage.getItem("cart_key");
             if (!cartKeyAlreadyExist) {
                 localStorage.setItem("cart_key", data.cart_key);
-
             }
         }
         return data;
@@ -179,17 +178,32 @@ export async function addVariationToCart(
         "quantity": String(quantity),
         "variation": variationData
     };
-    return fetch(`https://merablog.merakommunikation.se/wp-json/cocart/v2/cart/add-item?cart_key=${cart_key}`, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" }
 
-    })
-        .then(response => response.json())
-        .then(res => res)
-        .catch(err => console.error(err))
-        .finally(() => setLoading(false))
+    try {
+        const response = await fetch(`https://merablog.merakommunikation.se/wp-json/cocart/v2/cart/add-item?cart_key=${cart_key}`, {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: { "Content-Type": "application/json" }
 
+        })
+        const responseData = await response.json();
+        if (responseData.cart_key) {
+            setLoading(false);
+            const cartKeyAlreadyExist = localStorage.getItem("cart_key");
+            if (!cartKeyAlreadyExist) {
+                localStorage.setItem("cart_key", responseData.cart_key);
+
+            }
+        }
+        return data;
+    }
+    catch(err) {
+        setLoading(false);
+        return data;
+    }
+    finally {
+        setLoading(false);
+    }
 }
 
 export async function getCart(cartKey: string) {
@@ -228,5 +242,5 @@ export async function deleteItemFromCart(itemKey: string, cartKey: string, setLo
         .then(res => res)
         .finally(() => {
             setLoading(false)
-    })
+        })
 }

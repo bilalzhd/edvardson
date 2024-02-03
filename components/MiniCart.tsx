@@ -8,7 +8,7 @@ export default function MiniCart({ cart, showMiniCart }: any) {
   const [loading, setLoading] = useState(false);
   return (
     <>
-      <div className={`${showMiniCart ? 'opacity-1 block' : 'opacity-0 hidden'} z-20 absolute top-8 right-10 mt-2 text-black max-w-xs bg-white p-4 shadow-md mincart`}>
+      <div className={`${showMiniCart ? 'opacity-1 block' : 'opacity-0 hidden'} 2xl:right-[15%] z-20 absolute top-8 right-10 mt-2 text-black max-w-xs bg-white p-4 shadow-md mincart`}>
         <div className="max-h-[300px] overflow-y-auto">
           {loading && <div className="bg-white/80 h-full w-full absolute max-w-[15rem] top-0 z-10 flex items-center justify-center"><LoadingSpinner text="Updating cart..." /></div>}
           {cart?.items && cart?.items.length > 0 ? (
