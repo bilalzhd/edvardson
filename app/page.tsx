@@ -11,7 +11,7 @@ export default async function Home() {
     <>
       <div className='relative py-4'>
         {/* <img className='w-full' src='/images/edvardson_products.jpg' /> */}
-        <div className='bg-[#00030A] relative flex justify-center flex-col text-white p-4 bg-[url("/images/edddd.jpg")] min-h-[25rem] bg-no-repeat md:min-h-[35rem]'>
+        <div className='bg-[#00030A] relative flex justify-center flex-col text-white p-4 2xl:bg-[url("/images/eddd-large.jpg")] bg-[url("/images/edddd.jpg")] min-h-[25rem] bg-no-repeat md:min-h-[35rem]'>
           <div className='absolute inset-0 bg-black/40 flex justify-center items-center'>
             <div className='md:max-w-4xl'>
               <h3 className='text-[48px] font-bold'>Välkommen till Edvardson Sweden</h3>

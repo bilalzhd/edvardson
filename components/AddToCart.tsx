@@ -31,7 +31,8 @@ export default function AddToCart({ variations, productId, productType, productP
          (productType === "simple" && !isProductPage) ? addToCartHandler() :
          (productType === "simple" && isProductPage) ? addToCartHandler() : addVariationToCartHandler()
         }
-        type="submit" className="justify-center mx-auto font-bold w-full py-[13px] px-[28px] transition-all duration-200 uppercase hover:border-[#000] border border-[#f6f6f6] text-center bg-transparent flex items-center gap-2">{addToCartText}</button> : <Link className="font-bold w-full py-[13px] px-[28px] flex-1 transition-all duration-200 uppercase border border-[#f6f6f6] hover:border-[#000] bg-transparent md:max-w-[150px] mx-auto text-center" href={productPermalink || "#"}>Köp…</Link>}
+        type="submit" className={`justify-center mx-auto font-bold w-full py-[13px] px-[28px] transition-all duration-200 uppercase hover:border-[#000] border border-[#f6f6f6] text-center bg-transparent flex items-center gap-2 
+        ${isProductPage ? '!border-black hover:!bg-black hover:!text-white' : ''}`}>{addToCartText}</button> : <Link className="font-bold w-full py-[13px] px-[28px] flex-1 transition-all duration-200 uppercase border border-[#f6f6f6] hover:border-[#000] bg-transparent md:max-w-[150px] mx-auto text-center" href={productPermalink || "#"}>Köp…</Link>}
     </>
   )
 }

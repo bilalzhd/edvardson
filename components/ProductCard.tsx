@@ -25,7 +25,7 @@ export default function ProductCard({ product, isGallery = false }: any) {
                 <div className={`mb-8 bg-[#F6F6F6] p-5 text-[#333] font-open flex flex-col ${!isGallery && 'md:w-[calc(33%-10px)]'} w-full`}>
                     <div className='product-thumbnail-bg w-full flex justify-center'>
                         <Link href={product.permalink || "#"}>
-                            <img className="max-h-[270px] bg-[#F0F0F0]" src={product.images?.[0]?.src} alt={product.name || ""} />
+                            <img className="md:max-h-[232px] bg-[#F0F0F0]" src={product.images?.[0]?.src} alt={product.name || ""} />
                         </Link>
                     </div>
                     <div className="flex flex-col mt-2">

@@ -31,3 +31,16 @@ body {
 .sub-menu.parent {position: absolute;}
 .sub-menu.sub-menu-2 {left: 135px;}
 .image-gallery-left-nav .image-gallery-svg, .image-gallery-right-nav .image-gallery-svg {height: 60px !important;}
+.active-link {font-weight: bold;}
+.image-gallery-image {background-color: #F0F0F0;}
+.react-multi-carousel-item {padding-right: 10px}
+@media screen and (min-width: 1500px) {
+.react-multi-carousel-item {padding-right: 30px}
+}
+@media screen and (min-width: 992px) {
+  .image-gallery-slides {padding: 25px}
+}
+.image-gallery-thumbnail:hover {border-width: 2px !important; border-color: #000 !important}
+.image-gallery-thumbnail .image-gallery-thumbnail-image {background-color: #f0f0f0;}
+.image-gallery-thumbnails-wrapper {padding-inline: 25px;}
+.image-gallery-thumbnail.active, .image-gallery-thumbnail:focus {border-color: #000 !important; border-width: 2px !important;}

@@ -15,12 +15,12 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const categoriesId = product.categories.map((category: any) => category.id);
   const relatedProducts = await getProductsByCategory(categoriesId[0]);
   return (
-    <div className="bg-black/50  font-open">
-      <div className="flex text-white p-6">
-        <div className="flex flex-col items-center w-1/2 p-4">
+    <div className="font-open 2xl:max-w-[70%] xl:px-8 mx-auto">
+      <div className="flex md:flex-row flex-col p-6">
+        <div className="flex flex-col items-center w-full md:w-1/2 p-4">
           <ProductGallery items={product.images} />
         </div>
-        <div className="w-1/2 ml-[8%] px-4">
+        <div className="w-full md:w-1/2 ml-[8%] px-4">
           <Product product={product} variations={variations} />
           
           <div className="text-[13px] mt-5">
@@ -35,11 +35,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
         </div>
       </div>
       <div className="my-6">
-        <h3 className="text-white text-center text-3xl mb-4">You may want to add</h3>
+        <h3 className="text-center text-2xl uppercase md:text-[34px] mb-4 font-bold">You may want to add</h3>
         <ProductCarousel products={relatedProducts} />
       </div>
       <div className="my-12">
-        <h3 className="text-white text-center text-3xl mb-4">Others also bought</h3>
+        <h3 className="text-center text-2xl uppercase md:text-[34px] mb-4 font-bold">Others also bought</h3>
         <ProductCarousel products={relatedProducts} />
       </div>
     </div>

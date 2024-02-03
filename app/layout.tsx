@@ -24,7 +24,7 @@ export default function RootLayout({
       </head>
       <AppProvider>
         <body className={inter.className}>
-          <NextTopLoader color='#997D6D' />
+          <NextTopLoader color='#000' />
           {/* <div className='min-h-screen 
           bg-[url("/images/edvardson_bg.jpeg")] bg-fixed 
           text-grayish'> */}
