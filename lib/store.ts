@@ -138,8 +138,8 @@ export async function addToCart(productId: number, quantity = 1, cart_key: strin
         const response = await fetch(`https://merablog.merakommunikation.se/wp-json/cocart/v2/cart/add-item?cart_key=${cart_key}`, {
             method: "POST",
             body: JSON.stringify({
-                "id": String(productId),
-                "quantity": String(quantity)
+                id: String(productId),
+                quantity: String(quantity)
             }),
             headers: {
                 "Content-Type": "application/json"
@@ -153,12 +153,15 @@ export async function addToCart(productId: number, quantity = 1, cart_key: strin
                 localStorage.setItem("cart_key", data.cart_key);
 
             }
-            return data;
         }
+        return data;
 
     } catch (error) {
         setLoading(false);
         return error;
+    }
+    finally {
+        setLoading(false)
     }
 }
 
@@ -197,6 +200,7 @@ export async function getCart(cartKey: string) {
 }
 
 export async function updateCartItemQuantity(itemKey: string, quantity: number, cartKey: string, setLoading: Dispatch<SetStateAction<boolean>>) {
+    console.log(itemKey)
     setLoading(true);
     return fetch(`https://merablog.merakommunikation.se/wp-json/cocart/v2/cart/item/${itemKey}?cart_key=${cartKey}`, {
         method: "POST",

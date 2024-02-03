@@ -14,7 +14,7 @@ export default function ProductCategory({ currentCategory, childrenCats, product
             <div className="flex items-center flex-col">
                 <div className="mb-[30px]">
                     <h1 className="text-[24px] text-center uppercase font-bold letter-spacing-0 font-open">{currentCategory?.name}</h1>
-                    <p className="text-[14px] letter-spacing-0 font-open">{currentCategory?.description}</p>
+                    <p className="text-[14px] letter-spacing-0 font-open text-center">{currentCategory?.description}</p>
                 </div>
                 <Toolbar setProductView={setProductView} />
             </div>

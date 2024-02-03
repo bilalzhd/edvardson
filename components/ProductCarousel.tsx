@@ -24,7 +24,7 @@ const responsive = {
 export default function ProductCarousel({ products }: any) {
 
     return (
-        <div className="px-10">
+        <div className="px-4 md:px-10">
             <Carousel className="gap-[10px] space-x-4" infinite responsive={responsive}>
                 {products?.map((product: any) => <ProductCard isGallery key={product.id} product={product} />)}
             </Carousel>

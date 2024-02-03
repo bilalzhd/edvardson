@@ -20,7 +20,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         <div className="flex flex-col items-center w-full md:w-1/2 p-4">
           <ProductGallery items={product.images} />
         </div>
-        <div className="w-full md:w-1/2 ml-[8%] px-4">
+        <div className="w-full md:w-1/2 md:ml-[8%] px-4">
           <Product product={product} variations={variations} />
           
           <div className="text-[13px] mt-5">

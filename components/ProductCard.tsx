@@ -40,7 +40,7 @@ export default function ProductCard({ product, isGallery = false }: any) {
                         </p>
 
                         <span className="mb-[calc(1.75rem*.5)]">Pris: {product.price} SEK</span>
-                        <AddToCart variations={null} isProductPage={false} productId={product.id} productPermalink={product.permalink} productType={productType} />
+                        <AddToCart quantity={null} variations={null} isProductPage={false} productId={product.id} productPermalink={product.permalink} productType={productType} />
                     </div>
                 </div>
             ) : (

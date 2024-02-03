@@ -31,7 +31,7 @@ export default function ProductCardListView({ product }: any) {
                         <Link href={product.permalink || "#"}><span className="hover:underline">{product.name}</span></Link>
                     </div>
                     <div className="w-[20%] flex justify-center px-2">
-                        <AddToCart variations={null} isProductPage={false} productId={product.id} productPermalink={product.permalink} productType={productType} />
+                        <AddToCart quantity={null} variations={null} isProductPage={false} productId={product.id} productPermalink={product.permalink} productType={productType} />
                     </div>
                 </div>
             ) : (

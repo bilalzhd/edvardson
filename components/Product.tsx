@@ -7,6 +7,7 @@ import AddToCart from "./AddToCart";
 import VariationSelector from "./VariationSelector";
 
 export default function Product({ product, variations }: any) {
+    const [quantity, setQuantity] = useState(1)
     const sortedVariations = variations?.sort((a: any, b: any) => (a.attributes?.[1]?.option && b.attributes[1]?.option) && parseInt(a.attributes[1].option) - parseInt(b.attributes[1].option));
     const defaultOptions = product.default_attributes?.map((attr: any) => attr.option);
     const stringOptions: string = defaultOptions?.join(", ");
@@ -45,9 +46,9 @@ export default function Product({ product, variations }: any) {
                 ))}
             </div>
             {variations.length > 0 && <VariationSelector selected={selected} setSelected={setSelected} defaultAttributes={product.default_attributes} productId={product.id} variations={sortedVariations} />}
-            <div className="mt-4 flex gap-2">
-                <input type="number" name="quantity" id="quantity" defaultValue={1} min={1} className="border border-black max-w-[52px] text-black p-2 text-center" />
-                <AddToCart variations={selected} isProductPage productId={product.id} productType={product.type} productPermalink={product.permalink} />
+            <div className="mt-4 flex gap-2 relative">
+                <input type="number" name="quantity" id="quantity" defaultValue={1} min={1} className="border border-black max-w-[52px] text-black p-2 text-center" onChange={(e) => setQuantity(Number(e.target.value))} />
+                <AddToCart quantity={null} variations={selected} isProductPage productId={product.id} productType={product.type} productPermalink={product.permalink} />
             </div>
         </>
     )
