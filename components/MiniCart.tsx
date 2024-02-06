@@ -26,7 +26,7 @@ export default function MiniCart({ cart, showMiniCart }: any) {
               <p>Totalt: </p>
               <p>{cart.totals.total}</p>
             </div>
-            <button className="w-full border-[#000] transition-all duration-300 text-black border hover:bg-black hover:text-white px-4 py-2 mt-2 uppercase"><Link href="/checkout">GÅ Till Varukorgen</Link></button>
+            <Link className="w-full border-[#000] transition-all duration-300 text-black border hover:bg-black hover:text-white px-4 py-2 mt-2 uppercase text-center" href="/checkout">GÅ Till Varukorgen</Link>
           </div>
         )}
       </div>
