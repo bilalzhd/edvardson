@@ -32,6 +32,5 @@ export default function MiniCart({ cart, showMiniCart }: any) {
       </div>
     </>
   );
-
 }
 

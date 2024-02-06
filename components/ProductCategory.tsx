@@ -34,15 +34,15 @@ export default function ProductCategory({ currentCategory, childrenCats, product
                     ))
                 }
             </div>
-            {productView == "grid" ? (<div className="flex flex-wrap mx-4 mt-4 gap-[10px] w-full">
+            {productView == "grid" ? (<div className="flex justify-center flex-wrap mx-4 mt-4 gap-[10px] w-full">
                 {products?.length > 0 ? products?.map((product: any) => {
                     return <ProductCard key={product.id} product={product} isGallery={false} />
-                }) : <span className="text-white text-center py-4">No Products yet</span>}
+                }) : <span className="text-center py-4">No Products yet</span>}
             </div>) : (
                 <div>
                     {products?.length > 0 ? products?.map((product: any) => {
                         return <ProductCardListView key={product.id} product={product} />
-                    }) : <span className="text-white text-center py-4">No Products yet</span>}
+                    }) : <span className="text-center py-4">No Products yet</span>}
                 </div>
             )}
         </div>

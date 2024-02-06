@@ -36,19 +36,19 @@ export default async function Page({ params }: { params: { slug: string } }) {
             <div className="w-fit border-b border-black mt-4">
               <span className="font-bold text-[14px] mr-2">Varumärke</span> {product.brands?.map((b: any) => b.name)}
             </div>
-            <div className="w-fit border-b border-black mt-4">
+            <div className="w-fit border-b border-black my-4">
               <span className="font-bold text-[14px] mr-2">HS Number</span> {product?.meta_data[0]?.value}
             </div>
-              <button className="text-[20px] bg-black hover:bg-black/50 rounded text-white py-2 px-4 mt-2">Share</button>
+              <button className="text-md bg-black hover:bg-black/50 rounded text-white py-2 px-4 mt-2">Share</button>
           </div>
         </div>
       </div>
       <div className="my-6">
-        <h3 className="text-center text-2xl uppercase md:text-[34px] mb-4 font-bold">You may want to add</h3>
+        <h3 className="text-center text-2xl uppercase md:text-[30px] mb-8 font-bold">Du kanske också behöver</h3>
         <ProductCarousel products={relatedProducts} />
       </div>
       <div className="my-12">
-        <h3 className="text-center text-2xl uppercase md:text-[34px] mb-4 font-bold">Others also bought</h3>
+        <h3 className="text-center text-2xl uppercase md:text-[30px] font-bold mb-8">Andra köpte också</h3>
         <ProductCarousel products={relatedProducts} />
       </div>
     </div>

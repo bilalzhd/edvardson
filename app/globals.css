@@ -49,6 +49,7 @@ body {
 .image-gallery-thumbnail {border-width: 2px !important;}
 .image-gallery-thumbnail.active, .image-gallery-thumbnail:focus {border-color: #000 !important; border-width: 2px !important;}
 .transform-scale-80 {scale: 0.8}
+iframe {width: 100%; margin-top: 10px; margin-bottom: 10px;}
 
 
 

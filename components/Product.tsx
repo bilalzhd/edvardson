@@ -27,7 +27,7 @@ export default function Product({ product, variations }: any) {
                         <h1 className="text-xl font-semibold">{product.name}</h1>
                         <span className="text-2xl font-bold" dangerouslySetInnerHTML={{ __html: product.price_html }}></span>
                         <p className="pt-4 pb-5 text-[#333]" dangerouslySetInnerHTML={{ __html: product.short_description }}></p>
-                        <p className="text-xs">Art.nr: {product.sku}</p>
+                        <p className="text-xs mb-5">Art.nr: {product.sku}</p>
                         <p className="text-[13px] text-[#333]" dangerouslySetInnerHTML={{ __html: product.description }}></p>
                     </>) : (
                     <Box width="100%">
