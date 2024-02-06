@@ -21,10 +21,11 @@ const MainMenu = ({ menuData, isScrolled }: any) => {
       <ul className={`border-t border-b z-10 relative menu sidebar flex justify-between px-4 py-4 flex-wrap ${isScrolled ? '' : 'mt-2'}`}>
         {menuData?.map((el: any) => {
           const id = parseInt(atob(el.id).split(':')[1]);
-          let pathname = usePathname();
-          const url = el.url.startsWith("https://") ? el.url.substring(29) : el.url;
-          pathname = el.url.startsWith("https://") ? pathname + "/" : pathname;
-          const isActive = pathname == url;
+          
+          // let pathname = usePathname();
+          // const url = el.url.startsWith("https://") ? el.url.substring(29) : el.url;
+          // pathname = el.url.startsWith("https://") ? pathname + "/" : pathname;
+          const isActive = false;
           if (!el.childItems?.nodes) {
             return (
               <li key={id}>

@@ -52,6 +52,22 @@ export const getProducts = async (per_page = 12) => {
         return responseData;
     }
 }
+export const getSearchedProducts = async (searchTerm: string, per_page = 12) => {
+    unstable_noStore();
+    const responseData: ResponseData = { success: false, products: [] };
+
+    try {
+        const { data } = await api.get(`products?search=${searchTerm}`, { per_page: per_page })
+        responseData.success = true;
+        responseData.products = data;
+
+        return responseData;
+    } catch (err) {
+        responseData.success = false;
+        responseData.products = [];
+        return responseData;
+    }
+}
 
 export async function getProductBySlug(slug: string) {
     unstable_noStore();

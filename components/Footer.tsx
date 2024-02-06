@@ -48,11 +48,11 @@ function Footer() {
           <img src="/images/edvardsonlogow.png" alt="Edvardson" className='w-52' />
         </div>
         <div className="border-b border-white pb-12 flex flex-col items-center md:flex-row px-4 mx-4 text-white text-[13px]">
-          <div className="md:w-1/4 flex flex-col justify-center px-4">
+          <div className="md:w-1/4 flex flex-col justify-center px-4 gap-1">
             <h5 className="pb-4">EDVARDSON SWEDEN AB</h5>
             <p>Skinnargränd 2 782 75 Malungsfors</p>
-            <a href="mailto:info@edvardson.se">info@edvardson.se</a>
-            <a href="tel:0703158536">070-315 85 36</a>
+            <a className='hover:underline' href="mailto:info@edvardson.se">info@edvardson.se</a>
+            <a className='hover:underline' href="tel:0703158536">070-315 85 36</a>
             <Link className='hover:underline' href="/villkor-info">Villkor & info</Link>
           </div>
           <div className="md:w-1/4 px-4 gap-4 flex justify-center flex-col">
