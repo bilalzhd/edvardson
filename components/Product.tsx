@@ -26,9 +26,8 @@ export default function Product({ product, variations }: any) {
                     <>
                         <h1 className="text-xl font-semibold">{product.name}</h1>
                         <span className="text-2xl font-bold" dangerouslySetInnerHTML={{ __html: product.price_html }}></span>
-                        <p className="pt-4 pb-5 text-[#333]" dangerouslySetInnerHTML={{__html: product.short_description}}></p>
+                        <p className="pt-4 pb-5 text-[#333]" dangerouslySetInnerHTML={{ __html: product.short_description }}></p>
                         <p className="text-xs">Art.nr: {product.sku}</p>
-                        {/* <img className="pt-4" height="75" width="75" src="//shop.textalk.se/shop/21855/files/sigil_small.png" alt="" /> */}
                         <p className="text-[13px] text-[#333]" dangerouslySetInnerHTML={{ __html: product.description }}></p>
                     </>) : (
                     <Box width="100%">

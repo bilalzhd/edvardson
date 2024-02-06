@@ -12,7 +12,7 @@ function Topbar() {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                     </svg> Design</p>
                 <div className="flex space-x-2 text-sm items-center">
-                    <span>Logga in</span>
+                    <span className="hover:underline cursor-pointer">Logga in</span>
                     <select className="bg-transparent" name="" id="">
                         <option value="">SVENSKA / INKL. MOMS</option>
                     </select>

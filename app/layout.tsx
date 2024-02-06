@@ -31,7 +31,7 @@ export default function RootLayout({
           <div className='min-h-screen 
           text-grayish'>
             <Header />
-            <main>{children}</main>
+            <main className='transition-all duration-100'>{children}</main>
             <Footer />
           </div>
         </body>

@@ -20,7 +20,7 @@ type Cart = {
     taxes: any
     totals: any
 }
-export const AppContext = createContext<[Cart | {}, Dispatch<SetStateAction<Cart | {}>>, string, Dispatch<SetStateAction<string>>]>([{}, () => { }, "", () => {}]);
+export const AppContext = createContext<[Cart | {}, Dispatch<SetStateAction<Cart | {}>>, string, Dispatch<SetStateAction<string>>]>([{}, () => { }, "", () => { }]);
 
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     const [cart, setCart] = useState<Cart | {}>({});
@@ -32,12 +32,10 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
             setCart(cartData)
         }
         let cartKey = localStorage.getItem('cart_key') || "";
-        if (cartKey.length < 1) {
-            setCartKey(cartKey)
-            getCartData();
-        }
+        setCartKey(cartKey)
+        getCartData();
 
-    }, [cart])
+    }, [])
 
 
     return (

@@ -24,38 +24,39 @@ export default function CheckoutPage() {
     return (
         <>
             {loading && <div className="w-screen fixed top-0 flex items-center text-white text-center justify-center h-screen bg-white/50"><LoadingSpinner text="Updating..." /></div>}
-            <div className="flex bg-black/60 text-white pr-[60px] pl-[40px] py-[30px] font-open">
+            <div className="flex pr-[60px] pl-[40px] py-[30px] font-open">
                 <div className="w-[calc(100%-270px)]">
                     <h2 className="font-semibold text-xl">Cart</h2>
                     <div className="px-4 pt-6 pb-3">
                         <div className="mb-[30px]">
                             <div className="border-b p-2">
-                                <div className="flex ml-[100px]">
+                                {(cart as Cart)?.items?.length > 0 && (<div className="flex ml-[100px]">
                                     <div className="w-[40%] text-left">Product</div>
                                     <div className="w-[100px] text-left">Quantity</div>
                                     <div className="w-[calc(60%-140px)] text-left">Price</div>
-                                </div>
+                                </div>)}
                             </div>
                             <div className="flex flex-col gap-4 mt-4">
-                                {(cart as Cart).items?.map((item: any) => (
+                                {(cart as Cart)?.items?.length > 0 ? (cart as Cart).items?.map((item: any) => (
                                     <CheckoutItem key={item.id} item={item} setLoading={setLoading} />
-                                ))}
+                                )) : <p>No items in the cart</p>}
                             </div>
-                            <button className="mt-4 letter-spacing-1 text-[15px] flex items-center gap-1 bg-white/60 text-[#000] px-[15px] h-[35px] font-semibold rounded uppercase">
+                            {(cart as Cart)?.items?.length > 0 && (<button className="mt-4 letter-spacing-1 text-[15px] flex items-center gap-1 bg-white/60 text-[#000] px-[15px] h-[35px] font-semibold rounded uppercase">
                                 <Trash fill="#333" className="w-4 h-4" />
-                                Töm varukorg</button>
+                                Töm varukorg</button>)}
                         </div>
-                        <div>
+                        {(cart as Cart)?.items?.length > 0 && (<><div>
                             <h2 className="text-center font-semibold text-[20px] mb-5">Andra köpte också</h2>
                             <ProductCarousel products={checkoutProducts || []} />
                         </div>
-                        <div className="bg-white p-4 rounded-md text-black text-[15px]">
-                            <p>Produkter beställda i December 2023 har bytesrätt t.o.m Januari 2024</p>
-                        </div>
-                        <div>
-                            <label>Leveransland</label>
-                            <Select className="text-black" options={options} />
-                        </div>
+                            <div className="bg-white p-4 rounded-md text-black text-[15px]">
+                                <p>Produkter beställda i December 2023 har bytesrätt t.o.m Januari 2024</p>
+                            </div>
+                            <div>
+                                <label>Leveransland</label>
+                                <Select className="text-black" options={options} />
+                            </div>
+                        </>)}
                     </div>
                 </div>
                 <div className="w-[250px] block float-right">

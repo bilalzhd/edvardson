@@ -8,7 +8,6 @@ export default function CheckoutItem({ item, setLoading }: any) {
     const [, setCart, cartKey] = useContext(AppContext);
     const [quantity, setQuantity] = useState(item.quantity.value || 1);
 
-
     async function deleteItemFromCartHandler(itemKey: string) {
         const cart = await deleteItemFromCart(itemKey, cartKey, setLoading)
         setCart(cart)
@@ -24,7 +23,7 @@ export default function CheckoutItem({ item, setLoading }: any) {
                 <img src={item.featured_image} alt={item.name} className="w-[90px] h-[90px] border p-1 border-gray-500" />
             </div>
             <div className="w-[40%]">{item.name}</div>
-            <div className="flex w-[100px] text-black bg-white/40 rounded px-3">
+            <div className="flex w-[100px] text-black bg-white/40 rounded px-3 border">
                 <input onChange={e => setQuantity(e.target.value)} type="number" className="focus:outline-none w-full py-3 bg-transparent" defaultValue={quantity} />
                 <button onClick={() => updateCartItemQuantityHandler(item.item_key)}><Refresh /></button>
             </div>

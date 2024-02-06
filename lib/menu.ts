@@ -25,10 +25,12 @@ export async function getMenuItems() {
           parentId
           childItems {
             nodes {
+              id
               label
               url
               childItems {
                 nodes {
+                  id
                   label
                   url
                 }

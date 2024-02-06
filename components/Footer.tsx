@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react';
 import ChevronUp from './icons/ChevronUp';
+import Link from 'next/link';
 
 const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -52,13 +53,13 @@ function Footer() {
             <p>Skinnargränd 2 782 75 Malungsfors</p>
             <a href="mailto:info@edvardson.se">info@edvardson.se</a>
             <a href="tel:0703158536">070-315 85 36</a>
-            <a href="/villkor-and-info">Villkor & info</a>
+            <Link className='hover:underline' href="/villkor-info">Villkor & info</Link>
           </div>
           <div className="md:w-1/4 px-4 gap-4 flex justify-center flex-col">
             <h5>ORG/VAT NO</h5>
             <p>SE556833383401</p>
-            <a href="/faq" className="block hover:underline">FAQ</a>
-            <a href="/integritetspolicy" className="block hover:underline">Integritetspolicy</a>
+            <Link href="/faq" className="block hover:underline">FAQ</Link>
+            <Link href="/integritetspolicy" className="block hover:underline">Integritetspolicy</Link>
           </div>
           <div className="md:w-1/4 px-4 flex gap-3 md:justify-center items-center">
             <a><img src="https://themes.abicart.com/components/tws-social-icons/1.1.11/files/assets/facebook-rounded_white.svg" alt="Facebook Icon" /></a>
