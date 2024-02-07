@@ -4,11 +4,11 @@ import CartItem from "./CartItem";
 import LoadingSpinner from "./LoadingSpinner";
 import Link from "next/link";
 
-export default function MiniCart({ cart, showMiniCart }: any) {
+export default function MiniCart({ cart, showMiniCart, onClick }: any) {
   const [loading, setLoading] = useState(false);
   return (
     <>
-      <div className={`${showMiniCart ? 'opacity-1 block' : 'opacity-0 hidden'} 2xl:right-[15%] z-20 absolute top-8 right-10 mt-2 text-black max-w-xs bg-white p-4 shadow-md mincart`}>
+      <div onClick={onClick} className={`${showMiniCart ? 'opacity-1 block' : 'opacity-0 hidden'} 2xl:right-[15%] z-[1000000] absolute top-8 right-10 mt-2 text-black max-w-xs bg-white p-4 shadow-md mincart`}>
         <div className="max-h-[300px] overflow-y-auto">
           {loading && <div className="bg-white/80 h-full w-full absolute max-w-[15rem] top-0 z-10 flex items-center justify-center"><LoadingSpinner text="Updating cart..." /></div>}
           {cart?.items && cart?.items.length > 0 ? (

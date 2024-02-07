@@ -37,7 +37,7 @@ export const getProductCategories = async () => {
     }
 }
 export const getProducts = async (per_page = 12) => {
-    unstable_noStore();
+    // unstable_noStore();
     const responseData: ResponseData = { success: false, products: [] };
 
     try {
@@ -53,7 +53,7 @@ export const getProducts = async (per_page = 12) => {
     }
 }
 export const getSearchedProducts = async (searchTerm: string, per_page = 12) => {
-    unstable_noStore();
+    // unstable_noStore();
     const responseData: ResponseData = { success: false, products: [] };
 
     try {
@@ -70,7 +70,7 @@ export const getSearchedProducts = async (searchTerm: string, per_page = 12) => 
 }
 
 export async function getProductBySlug(slug: string) {
-    unstable_noStore();
+    // unstable_noStore();
     try {
         const response = await api.get("products", {
             slug: slug,
@@ -91,7 +91,7 @@ export async function getProductBySlug(slug: string) {
 }
 
 export async function getProductVariations(productId: number) {
-    unstable_noStore();
+    // unstable_noStore();
     try {
         const response = await api.get(`products/${productId}/variations`, {
             per_page: 50
@@ -110,7 +110,7 @@ export async function getProductVariations(productId: number) {
 }
 
 export async function getProductsByCategory(category: string) {
-    unstable_noStore();
+    // unstable_noStore();
     try {
         const response = await api.get(`products?category=${category}`, {
             per_page: 10
@@ -128,7 +128,7 @@ export async function getProductsByCategory(category: string) {
     }
 }
 export async function getProductsForCheckout(min_price: string, max_price: string) {
-    unstable_noStore();
+    // unstable_noStore();
     try {
         const response = await api.get('products', {
             min_price,
@@ -213,7 +213,7 @@ export async function addVariationToCart(
         }
         return data;
     }
-    catch(err) {
+    catch (err) {
         setLoading(false);
         return data;
     }

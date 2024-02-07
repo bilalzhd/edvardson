@@ -28,30 +28,96 @@ body {
 .menu-item.hovered .submenu {
   display: block;
 }
-.sub-menu.parent {position: absolute;}
-.sub-menu.sub-menu-2 {left: 135px;}
-.active-link {font-weight: bold;}
-.image-gallery-image {background-color: #F0F0F0;}
-.react-multi-carousel-item {padding-right: 10px}
+.sub-menu.parent {
+  position: absolute;
+}
+.sub-menu.sub-menu-2 {
+  left: 135px;
+}
+.active-link {
+  font-weight: bold;
+}
+.image-gallery-image {
+  background-color: #f0f0f0;
+}
+.react-multi-carousel-item {
+  padding-right: 10px;
+}
 @media screen and (min-width: 1500px) {
-.react-multi-carousel-item {padding-right: 30px}
+  .react-multi-carousel-item {
+    padding-right: 30px;
+  }
 }
 @media screen and (min-width: 992px) {
-  .image-gallery-slides {padding: 25px}
-  .react-multiple-carousel__arrow--left {left: -10px !important; top: 52%; transform: translateY(-48%)}
-  .react-multiple-carousel__arrow--right {right: 0 !important; top: 52%; transform: translateY(-48%)}
+  .image-gallery-slides {
+    padding: 25px;
+  }
+  .react-multiple-carousel__arrow--left {
+    left: -10px !important;
+    top: 52%;
+    transform: translateY(-48%);
+  }
+  .react-multiple-carousel__arrow--right {
+    right: 0 !important;
+    top: 52%;
+    transform: translateY(-48%);
+  }
 }
-.image-gallery-left-nav .image-gallery-svg:hover, .image-gallery-right-nav .image-gallery-svg:hover {color: white; background: black}
-.image-gallery-left-nav .image-gallery-svg, .image-gallery-right-nav .image-gallery-svg {transition: all 0.2s; color: black;background: #f6f6f6; border-radius: 50%; height: 50px!important; width: 50px!important;}
-.image-gallery-thumbnail:hover {border-width: 2px !important; border-color: #000 !important}
-.image-gallery-thumbnail .image-gallery-thumbnail-image {background-color: #f0f0f0;}
-.image-gallery-thumbnails-wrapper {padding-inline: 25px;}
-.image-gallery-thumbnail {border-width: 2px !important;}
-.image-gallery-thumbnail.active, .image-gallery-thumbnail:focus {border-color: #000 !important; border-width: 2px !important;}
-.transform-scale-80 {scale: 0.8}
-iframe {width: 100%; margin-top: 10px; margin-bottom: 10px;}
+.image-gallery-left-nav .image-gallery-svg:hover,
+.image-gallery-right-nav .image-gallery-svg:hover {
+  color: white;
+  background: black;
+}
+.image-gallery-left-nav .image-gallery-svg,
+.image-gallery-right-nav .image-gallery-svg {
+  transition: all 0.2s;
+  color: black;
+  background: #f6f6f6;
+  border-radius: 50%;
+  height: 50px !important;
+  width: 50px !important;
+}
+.image-gallery-thumbnail:hover {
+  border-width: 2px !important;
+  border-color: #000 !important;
+}
+.image-gallery-thumbnail .image-gallery-thumbnail-image {
+  background-color: #f0f0f0;
+}
+.image-gallery-thumbnails-wrapper {
+  padding-inline: 25px;
+}
+.image-gallery-thumbnail {
+  border-width: 2px !important;
+}
+.image-gallery-thumbnail.active,
+.image-gallery-thumbnail:focus {
+  border-color: #000 !important;
+  border-width: 2px !important;
+}
+.transform-scale-80 {
+  scale: 0.8;
+}
+iframe {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
-
+@media screen and (max-width: 568px) {
+  .transform-scale-80 {scale: 1}
+  .chevron {width: 100%; display: flex; justify-content: flex-end;}
+  .navbar {
+    position: absolute;
+    background-color: white;
+    z-index: 100;
+    width: 100%;
+    padding-inline: 16px;
+    top: 64px;
+    left: 0;
+  }
+  .bg-pos-x-xl {background-position-x: -210px;}
+}
 
 /* 0d1b2a 1b263b 415a77 778da9 e0e1dd  */
 .header-parent {
@@ -66,13 +132,11 @@ iframe {width: 100%; margin-top: 10px; margin-bottom: 10px;}
   margin: 0 2rem;
 }
 
-
 .logo {
   height: 45px;
 }
 
 /* NAVIGATION */
-
 
 /* .header-nav-li {} */
 
@@ -90,8 +154,6 @@ iframe {width: 100%; margin-top: 10px; margin-bottom: 10px;}
   align-self: center;
 }
 
-
-
 .header-nav-options {
   position: relative;
   display: flex;
@@ -104,7 +166,6 @@ iframe {width: 100%; margin-top: 10px; margin-bottom: 10px;}
 
   height: 100%;
   display: flex;
-  justify-content: center;
   border-bottom: none;
 }
 
@@ -135,7 +196,7 @@ iframe {width: 100%; margin-top: 10px; margin-bottom: 10px;}
 }
 
 .sub-menu-li:last-child {
-  border-bottom: solid 1px #CDD1C4;
+  border-bottom: solid 1px #cdd1c4;
 }
 .header-nav-ul {
   position: absolute;

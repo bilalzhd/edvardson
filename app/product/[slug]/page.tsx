@@ -16,8 +16,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const relatedProducts = await getProductsByCategory(categoriesId[0]);
   return (
     <div className="font-open 2xl:max-w-[70%] xl:px-8 mx-auto">
-      <div className="flex md:flex-row flex-col p-6">
-        <div className="flex flex-col items-center w-full md:w-1/2 p-4">
+      <div className="flex md:flex-row flex-col md:p-6 p-2">
+        <div className="flex flex-col items-center w-full md:w-1/2 md:p-4">
           <ProductGallery items={product.images} />
         </div>
         <div className="w-full md:w-1/2 md:ml-[8%] px-4">

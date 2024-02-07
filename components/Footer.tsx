@@ -44,32 +44,32 @@ function Footer() {
     <>
       <ScrollToTopButton />
       <footer className="bg-black pt-8 pb-4">
-        <div className='border-b border-white pb-8 mx-4 mb-10 pl-6 flex items-center'>
+        <div className='border-b border-white pb-8 mx-4 mb-10 md:pl-6 flex items-center'>
           <img src="/images/edvardsonlogow.png" alt="Edvardson" className='w-52' />
         </div>
-        <div className="border-b border-white pb-12 flex flex-col items-center md:flex-row px-4 mx-4 text-white text-[13px]">
-          <div className="md:w-1/4 flex flex-col justify-center px-4 gap-1">
+        <div className="gap-10 md:gap-0 border-b border-white pb-12 flex flex-col items-center md:flex-row md:px-4 md:mx-4 text-white text-[13px]">
+          <div className="md:w-1/4 w-full flex flex-col md:justify-center px-4 gap-1">
             <h5 className="pb-4">EDVARDSON SWEDEN AB</h5>
             <p>Skinnargränd 2 782 75 Malungsfors</p>
             <a className='hover:underline' href="mailto:info@edvardson.se">info@edvardson.se</a>
             <a className='hover:underline' href="tel:0703158536">070-315 85 36</a>
             <Link className='hover:underline' href="/villkor-info">Villkor & info</Link>
           </div>
-          <div className="md:w-1/4 px-4 gap-4 flex justify-center flex-col">
+          <div className="md:w-1/4 w-full px-4 gap-4 flex md:justify-center flex-col">
             <h5>ORG/VAT NO</h5>
             <p>SE556833383401</p>
             <Link href="/faq" className="block hover:underline">FAQ</Link>
             <Link href="/integritetspolicy" className="block hover:underline">Integritetspolicy</Link>
           </div>
-          <div className="md:w-1/4 px-4 flex gap-3 md:justify-center items-center">
+          <div className="md:w-1/4 w-full px-4 flex gap-3 md:justify-center items-center">
             <a><img src="https://themes.abicart.com/components/tws-social-icons/1.1.11/files/assets/facebook-rounded_white.svg" alt="Facebook Icon" /></a>
             <a><img src="https://themes.abicart.com/components/tws-social-icons/1.1.11/files/assets/instagram-rounded_white.svg" alt="Instagram Icon" /></a>
           </div>
-          <div className="md:w-1/4 px-4 flex md:justify-center">
+          <div className="md:w-1/4 w-full px-4 flex md:justify-center">
             <img className="max-w-[250px] object-contain" src="https://cdn.klarna.com/1.0/shared/image/generic/badge/sv_se/checkout/short-white.png?width=510" alt="Klarna Payment" />
           </div>
         </div>
-        <p className='text-white pt-4 text-center text-[13px]'>Copyright © 2024 Edvardson. Drivs av <a href='https://merakommunikation.se' className='hover:underline' rel='nofollow' target='_blank'>Merakommunikation</a></p>
+        <p className='text-white pt-4 text-center md:text-[13px] text-[10px]'>Copyright © 2024 Edvardson. Drivs av <a href='https://merakommunikation.se' className='hover:underline' rel='nofollow' target='_blank'>Merakommunikation</a></p>
       </footer>
     </>
   );
