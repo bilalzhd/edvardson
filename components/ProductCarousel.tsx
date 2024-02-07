@@ -29,7 +29,7 @@ export default function ProductCarousel({ products }: any) {
         <div className="px-4 md:px-10">
             <Carousel className="gap-[10px] space-x-4" infinite responsive={responsive}>
                 {products?.map((product: any) => (
-                    <div className={`mb-8 bg-[#F6F6F6] p-2 md:p-5 text-[#333] font-open flex flex-col md:w-[calc(33%-10px)] w-full mx-[6px] md:mx-0`}>
+                    <div key={product.id} className={`mb-8 bg-[#F6F6F6] p-2 md:p-5 text-[#333] font-open flex flex-col md:w-[calc(33%-10px)] w-full mx-[6px] md:mx-0`}>
                         <div className='product-thumbnail-bg w-full flex justify-center'>
                             <Link href={product.permalink || "#"}>
                                 <img className="md:max-h-[285px] bg-[#F0F0F0]" src={product.images?.[0]?.src} alt={product.name || ""} />
