@@ -8,7 +8,6 @@ import ProductCardListView from "./ProductCardListView";
 export default function ProductCategory({ currentCategory, childrenCats, products }: any) {
 
     const [productView, setProductView] = useState("grid");
-
     return (
         <div className="min-h-[23.5vh] p-[10px] xl:max-w-[80%] mx-auto 2xl:max-w-[70%] mt-4">
             <div className="flex items-center flex-col">
@@ -34,7 +33,7 @@ export default function ProductCategory({ currentCategory, childrenCats, product
                     ))
                 }
             </div>
-            {productView == "grid" ? (<div className="flex justify-center flex-wrap md:mx-4 mt-4 md:gap-[10px] w-full">
+            {productView == "grid" ? (<div className="flex flex-wrap md:mx-4 mt-4 md:gap-[10px] w-full">
                 {products?.length > 0 ? products?.map((product: any) => {
                     return <ProductCard key={product.id} product={product} isGallery={false} />
                 }) : <span className="text-center py-4">No Products yet</span>}

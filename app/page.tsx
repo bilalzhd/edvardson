@@ -25,7 +25,7 @@ export default async function Home() {
       </div>
       <div className='xl:max-w-[80%] 2xl:max-w-[70%] lg:w-full mx-auto py-4 min-h-screen'>
         <div className='px-[10px]'>
-          <h2 className='uppercase font-bold text-[2.125rem]'>Veckans erbjudande</h2>
+          <h2 className='uppercase font-bold text-[2.125rem] leading-[1.1] mb-2'>Veckans erbjudande</h2>
           <p className='mb-10'>The changing seasons place new demands on hunting clothing. Here’s our recommendations for the new season.</p>
         </div>
         <div className='flex flex-wrap md:gap-[10px] px-[6px] md:px-0'>

@@ -37,7 +37,6 @@ export const getProductCategories = async () => {
     }
 }
 export const getProducts = async (per_page = 12) => {
-    // unstable_noStore();
     const responseData: ResponseData = { success: false, products: [] };
 
     try {
@@ -53,7 +52,6 @@ export const getProducts = async (per_page = 12) => {
     }
 }
 export const getSearchedProducts = async (searchTerm: string, per_page = 12) => {
-    // unstable_noStore();
     const responseData: ResponseData = { success: false, products: [] };
 
     try {
@@ -70,7 +68,6 @@ export const getSearchedProducts = async (searchTerm: string, per_page = 12) => 
 }
 
 export async function getProductBySlug(slug: string) {
-    // unstable_noStore();
     try {
         const response = await api.get("products", {
             slug: slug,
@@ -108,6 +105,28 @@ export async function getProductVariations(productId: number) {
         throw error;
     }
 }
+
+export async function getProductsByRelatedIds(relatedIds: number[]) {
+    try {
+        const relatedIdsString = relatedIds?.join(',');
+
+        const response = await api.get(`products?related_ids=${relatedIdsString}`, {
+            per_page: 10
+        });
+
+        if (response.data && response.data.length > 0) {
+            const products = response.data;
+            return products;
+        } else {
+            console.error("Products not found for the given related IDs.");
+            return null;
+        }
+    } catch (error: any) {
+        console.error("Error fetching products by related IDs:", error.message);
+        throw error;
+    }
+}
+
 
 export async function getProductsByCategory(category: string) {
     // unstable_noStore();
@@ -200,22 +219,21 @@ export async function addVariationToCart(
             method: "POST",
             body: JSON.stringify(data),
             headers: { "Content-Type": "application/json" }
-
         })
         const responseData = await response.json();
+
         if (responseData.cart_key) {
             setLoading(false);
             const cartKeyAlreadyExist = localStorage.getItem("cart_key");
             if (!cartKeyAlreadyExist) {
                 localStorage.setItem("cart_key", responseData.cart_key);
-
             }
         }
-        return data;
+        return responseData;
     }
     catch (err) {
         setLoading(false);
-        return data;
+        return err;
     }
     finally {
         setLoading(false);
@@ -230,7 +248,6 @@ export async function getCart(cartKey: string) {
 }
 
 export async function updateCartItemQuantity(itemKey: string, quantity: number, cartKey: string, setLoading: Dispatch<SetStateAction<boolean>>) {
-    console.log(itemKey)
     setLoading(true);
     return fetch(`https://merablog.merakommunikation.se/wp-json/cocart/v2/cart/item/${itemKey}?cart_key=${cartKey}`, {
         method: "POST",

@@ -19,13 +19,13 @@ const MainMenu = ({ menuData, isScrolled, isMenuOpen }: { menuData: any, isScrol
   return (
     <nav className={`navbar ${isMenuOpen ? 'min-h-screen fixed' : ''}`}>
 
-      <ul className={`md:flex-row flex-col md:flex border-t border-b z-10 relative menu sidebar md:gap-0 gap-3 justify-between md:px-4 py-4 flex-wrap ${isScrolled ? '' : 'mt-2'} ${isMenuOpen ? 'flex' : 'hidden'}`}>
+      <ul className={`md:flex-row flex-col md:flex border-t z-10 relative menu sidebar md:gap-0 gap-3 justify-between md:px-4 py-4 flex-wrap ${isScrolled ? '' : 'mt-2'} ${isMenuOpen ? 'flex' : 'hidden'}`}>
         {menuData?.map((el: any) => {
           const id = parseInt(atob(el.id).split(':')[1]);
 
           // let pathname = usePathname();
           // const url = el.url.startsWith("https://") ? el.url.substring(29) : el.url;
-          // pathname = el.url.startsWith("https://") ? pathname + "/" : pathname;
+          // pathname = el.url.startsWith("https://") ? pathname + "/" : pathname;  
           const isActive = false;
           if (!el.childItems?.nodes) {
             return (
@@ -42,14 +42,14 @@ const MainMenu = ({ menuData, isScrolled, isMenuOpen }: { menuData: any, isScrol
               key={id}
               onMouseEnter={() => subMenuOnMouseEnterHandler(id)}
               onMouseLeave={() => subMenuOnMouseLeaveHandler(id)}
-              className='header-nav-options options-hover relative border-b md:border-b-0 pb-2 md:pb-0'>
+              className='header-nav-options md:items-center md:flex-row flex-col options-hover relative border-b md:border-b-0 pb-2 md:pb-0'>
               <Link className={`${isActive ? 'active-link' : ''} w-full md:w-fit hover:font-bold`} href={el.url}>
                 <div className='header-nav-div justify-between md:justify-center items-center'>
                   {el.label}
                 </div>
               </Link>
               {el.childItems?.nodes?.length > 0 && <button className="chevron"><ChevronDown className="w-4 h-4" /></button>}
-              <ul className={`bg-white header-nav-ul absolute top-full left-0 
+              <ul className={`bg-white header-nav-ul md:absolute top-full left-0 
                 ${showSubMenu[id] ? "block" : "hidden"}`}>
                 {el.childItems?.nodes.map((ele: any) => {
                   const subMenuId = parseInt(atob(ele.id).split(':')[1]);

@@ -3,22 +3,25 @@ import Product from "@/components/Product";
 import ProductCarousel from "@/components/ProductCarousel";
 import ProductGallery from "@/components/ProductGallery";
 
-import { getProductBySlug, getProductVariations, getProductsByCategory } from "@/lib/store";
+import { getProductBySlug, getProductVariations, getProductsByCategory, getProductsByRelatedIds } from "@/lib/store";
 
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const product = await getProductBySlug(params.slug);
+  console.log(product)
   let variations = [];
   if (product?.type === 'variable') {
     variations = await getProductVariations(product.id);
   }
   const categoriesId = product?.categories.map((category: any) => category.id);
-  const relatedProducts = await getProductsByCategory(categoriesId[0]);
+  const upsellProducts = await getProductsByCategory(categoriesId);
+  const relatedProducts = await getProductsByRelatedIds(product?.related_ids);
+
   return (
     <div className="font-open 2xl:max-w-[70%] xl:px-8 mx-auto">
       <div className="flex md:flex-row flex-col md:p-6 p-2">
         <div className="flex flex-col items-center w-full md:w-1/2 md:p-4">
-          <ProductGallery items={product.images} />
+          {product && <ProductGallery items={product?.images} />}
         </div>
         <div className="w-full md:w-1/2 md:ml-[8%] px-4">
           <Product product={product} variations={variations} />
@@ -34,7 +37,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
               E-mail us, we reply swiftly!</p>
 
             <div className="w-fit border-b border-black mt-4">
-              <span className="font-bold text-[14px] mr-2">Varumärke</span> {product.brands?.map((b: any) => b.name)}
+              <span className="font-bold text-[14px] mr-2">Varumärke</span> {product?.brands?.map((b: any) => b.name)}
             </div>
             <div className="w-fit border-b border-black my-4">
               <span className="font-bold text-[14px] mr-2">HS Number</span> {product?.meta_data[0]?.value}
@@ -45,11 +48,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
       </div>
       <div className="my-6">
         <h3 className="text-center text-2xl uppercase md:text-[30px] mb-8 font-bold">Du kanske också behöver</h3>
-        <ProductCarousel products={relatedProducts} />
+        {relatedProducts && <ProductCarousel products={relatedProducts} />}
       </div>
       <div className="my-12">
         <h3 className="text-center text-2xl uppercase md:text-[30px] font-bold mb-8">Andra köpte också</h3>
-        <ProductCarousel products={relatedProducts} />
+        {upsellProducts && <ProductCarousel products={upsellProducts} />}
       </div>
     </div>
   )

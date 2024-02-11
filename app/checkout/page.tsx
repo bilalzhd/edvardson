@@ -20,7 +20,6 @@ export default function CheckoutPage() {
         getProductsForCheckout("0", "500").then(products => setCheckoutProducts(products));
         getShippingMethods().then(res => setShippingMethods(res));
     }, [])
-    // console.log(shippingMethods)
     return (
         <>
             {loading && <div className="w-screen fixed top-0 flex items-center text-white text-center justify-center h-screen bg-white/50"><LoadingSpinner text="Updating..." /></div>}

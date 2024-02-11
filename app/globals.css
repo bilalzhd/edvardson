@@ -157,7 +157,6 @@ iframe {
 .header-nav-options {
   position: relative;
   display: flex;
-  align-items: center;
   cursor: pointer;
 }
 
@@ -199,7 +198,6 @@ iframe {
   border-bottom: solid 1px #cdd1c4;
 }
 .header-nav-ul {
-  position: absolute;
   top: 100%;
   list-style: none;
   z-index: 10000;
@@ -207,10 +205,11 @@ iframe {
 
 .sub-menu-options {
   position: relative;
+  display: flex;
   width: 100%;
   min-width: fit-content;
 }
-
+ins {color: #f75966}
 .sub-menu-ul {
   position: absolute;
   list-style: none;

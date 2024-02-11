@@ -19,11 +19,19 @@ export default function ProductCard({ product, isGallery = false }: any) {
     if (product.description.startsWith("<p><img")) {
         productDescription = productDescription.substring(116);
     }
+    function calculateSalePercent(regPrice: number, salePrice: number) {
+        const discountPercent = ((regPrice - salePrice) / regPrice) * 100;
+
+        const roundedDiscountPercent = Math.floor(discountPercent);
+
+        return roundedDiscountPercent;
+    }
     return (
         <>
             {isMount ? (
-                <div className={`mb-8 bg-[#F6F6F6] p-2 md:p-5 text-[#333] font-open flex flex-col ${!isGallery && 'md:w-[calc(33%-10px)]'} w-[calc(50%-12px)] mx-[6px] md:mx-0`}>
+                <div className={`mb-8 bg-[#F6F6F6] p-2 md:p-5 text-[#333] font-open flex flex-col ${!isGallery && 'md:w-[calc(33%-10px)]'} w-[calc(50%-12px)] mx-[6px] md:mx-0 relative`}>
                     <div className='product-thumbnail-bg w-full flex justify-center'>
+                        {product?.on_sale && <span className="bg-red-500 absolute left-[-5px] text-white text-sm p-1 top-0">-{calculateSalePercent(product.regular_price, product.sale_price)}%</span>}
                         <Link href={product.permalink || "#"}>
                             <img className="md:max-h-[285px] bg-[#F0F0F0]" src={product.images?.[0]?.src} alt={product.name || ""} />
                         </Link>
@@ -39,7 +47,7 @@ export default function ProductCard({ product, isGallery = false }: any) {
                         >
                         </p>
 
-                        <span className="mb-[calc(1.75rem*.5)] text-[12px] md:text-[16px]">Pris: {product.price} SEK</span>
+                        <span className="mb-[calc(1.75rem*.5)] text-[12px] md:text-[16px]" dangerouslySetInnerHTML={{ __html: product.price_html }}></span>
                         <AddToCart quantity={null} variations={null} isProductPage={false} productId={product.id} productPermalink={product.permalink} productType={productType} />
                     </div>
                 </div>
