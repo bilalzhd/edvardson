@@ -26,6 +26,10 @@ export default function ProductCard({ product, isGallery = false }: any) {
 
         return roundedDiscountPercent;
     }
+    console.log(product.short_description)
+    const description = product.short_description?.length > 0 ? product.short_description?.substring(0, 100) : productDescription.substring(0, 100);
+    
+    
     return (
         <>
             {isMount ? (
@@ -43,7 +47,7 @@ export default function ProductCard({ product, isGallery = false }: any) {
                         </Link>
 
                         <p className='text-[#0a0a0a] text-xs md:min-h-[64px] min-h-[80px] mt-[calc(1.75rem*.25)]'
-                            dangerouslySetInnerHTML={{ __html: product.short_description?.length > 0 ? product.short_description?.substring(0, 100) : productDescription.substring(0, 100) }}
+                            dangerouslySetInnerHTML={{ __html: description}}
                         >
                         </p>
 

@@ -18,7 +18,7 @@ export default function Product({ product, variations }: any) {
         if (product) {
             setMount(true);
         }
-    }, [])
+    }, [product])
     return (
         <>
             <div>

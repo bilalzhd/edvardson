@@ -15,12 +15,11 @@ const MainMenu = ({ menuData, isScrolled, isMenuOpen }: { menuData: any, isScrol
   const subMenuOnMouseLeaveHandler = (subMenuId: number) => {
     setShowSubMenu((prev) => ({ ...prev, [subMenuId]: false }));
   };
-
   return (
     <nav className={`navbar ${isMenuOpen ? 'min-h-screen fixed' : ''}`}>
 
       <ul className={`md:flex-row flex-col md:flex border-t z-10 relative menu sidebar md:gap-0 gap-3 justify-between md:px-4 py-4 flex-wrap ${isScrolled ? '' : 'mt-2'} ${isMenuOpen ? 'flex' : 'hidden'}`}>
-        {menuData?.map((el: any) => {
+        {menuData.length > 0 && menuData.map((el: any) => {
           const id = parseInt(atob(el.id).split(':')[1]);
 
           // let pathname = usePathname();

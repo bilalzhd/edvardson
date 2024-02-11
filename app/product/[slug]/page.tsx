@@ -8,7 +8,7 @@ import { getProductBySlug, getProductVariations, getProductsByCategory, getProdu
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const product = await getProductBySlug(params.slug);
-  console.log(product)
+  // console.log(product)
   let variations = [];
   if (product?.type === 'variable') {
     variations = await getProductVariations(product.id);
