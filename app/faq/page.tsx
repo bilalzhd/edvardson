@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Faq() {
     return (
         <>
-        <BreadCrumb firstLink="FAQ" />
+        <BreadCrumb />
         <div className="xl:max-w-[80%] 2xl:max-w-[70%] mx-auto my-5 text-[14px]">
             <h1 className="font-[22px] mb-5">Vanliga frågor</h1>
             <ul>

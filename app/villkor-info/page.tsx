@@ -3,7 +3,7 @@ import BreadCrumb from "@/components/BreadCrumb";
 export default function Terms() {
     return (
         <>
-            <BreadCrumb firstLink="Villkor Info" />
+            <BreadCrumb />
             <div className="xl:max-w-[80%] 2xl:max-w-[70%] mx-auto my-5 text-[14px]">
                 <h1 className="text-[27px] font-bold mb-5">Köpvillkor & Info</h1>
                 <h2 className="text-[18px] mb-5 font-bold">Tillämplighet</h2>

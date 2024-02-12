@@ -3,7 +3,7 @@ import BreadCrumb from "@/components/BreadCrumb";
 export default function About() {
     return (
         <>
-        <BreadCrumb firstLink="Om Edvardson" />
+        <BreadCrumb />
             <div className="text-[#333] mx-auto px-20 2xl:max-w-[76%] py-12 text-[14px] font-open font-semibold letter-spacing-0">
                 <div className="mb-5">
                     <h2 className="text-black text-[22px] mb-5">Välkommen till Edvardson Sweden</h2>
