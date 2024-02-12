@@ -246,3 +246,10 @@ ins {color: #f75966}
   margin-left: auto;
   padding-right: 10px;
 }
+
+.topbar-container {
+  @apply relative text-[12px] text-black/80 md:px-8 min-h-[32px] bg-white
+}
+.topbar {
+  @apply items-center flex-col md:flex-row border-b 2xl:max-w-[70%] xl:mx-auto md:py-2 flex justify-between max-w-[1170px]
+}

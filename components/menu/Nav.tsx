@@ -42,9 +42,9 @@ export default function Nav({ menuItems }: any) {
 
     return (
         <>
-            <div className={`${isScrolled ? '!fixed w-full bg-white top-0 md:px-16 z-[10000]' : 'md:mx-12'} relative 2xl:max-w-[70%] z-20 2xl:mx-auto px-4 pb-2 text-[13px] uppercase flex md:block`}>
+            <div className={`${isScrolled ? '!fixed w-full bg-white top-0 md:px-16 z-[10000]' : 'md:mx-12'} relative z-20 2xl:mx-auto px-4 text-[13px] uppercase flex md:block`}>
                 <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="block md:hidden" aria-label="Toggle Menu" type="button"><Bars className="w-6 h-6" /></button>
-                <div className="flex md:p-3 items-center justify-center md:justify-end w-full py-3">
+                <div className="2xl:max-w-[70%] mx-auto flex md:p-3 items-center justify-center md:justify-end w-full py-3">
                     <div className="flex md:flex-row flex-col w-full lg:w-[60%] items-center md:gap-0 gap-2 md:items-end justify-center md:justify-between">
                         <Link href="/">
                             <img src="/images/logoblack.webp" alt="Edvardson Logo" className={`transition-all duration-300 w-[150px] md:w-[250px] ${isScrolled ? 'transform-scale-80 ' : ''}`} /></Link>

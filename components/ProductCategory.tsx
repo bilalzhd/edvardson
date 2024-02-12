@@ -20,7 +20,7 @@ export default function ProductCategory({ currentCategory, childrenCats, product
             <div className="flex flex-wrap relative md:mx-3 w-full mt-4">
                 {childrenCats?.length > 0 &&
                     childrenCats.map((cat: any) => (
-                        <div key={cat.id} className="flex bg-[#F6F6F6] items-center md:min-h-[300px] md:w-[calc(33%-10px)] md:max-w-[calc(33%-10px)] md:basis-[calc(33%-10px)] w-[calc(50%-10px)] max-w-[calc(50%-10px)] basis-[calc(50%-10px)] my-[7.5px] mx-[5px]">
+                        <div key={cat.id} className="flex bg-[#F6F6F6] items-center md:min-h-[300px] md:w-[calc(33%-10px)] md:max-w-[calc(33%-10px)] md:basis-[calc(33%-10px)] w-[calc(50%-10px)] 2xl:basis-[calc(25%-10px)] 2xl:max-w-[calc(25%-10px)] 2xl:w-[calc(25%-10px)] max-w-[calc(50%-10px)] basis-[calc(50%-10px)] my-[7.5px] mx-[5px]">
                             <Link href={`/product-category/${cat.slug}`} className="w-full">
                                 <div className="text-[#333] font-bold flex-col flex items-stretch justify-start w-full cursor-pointer rounded-[2px] p-1 mb-5">
                                     <div className="bg-[#f0f0f0]">

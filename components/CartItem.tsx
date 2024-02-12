@@ -31,8 +31,8 @@ export default function CartItem({ item, setLoading }: any) {
             <div className="flex flex-col pb-2 px-2">
                 <Link className="hover:underline" href={`/product/${item.slug}` || "#"}>{item.name}</Link>
                 <span className="text-gray-500">Enhet: {item.price.substring(0, item.price.length - 2)} SEK</span>
-                <span>Totalt: {item.totals.total}</span>
-                <span className="text-gray-500">(Inkl. moms: {item.totals.total + item.totals.tax})</span>
+                <span>Totalt: {item.totals.total} SEK</span>
+                <span className="text-gray-500">(Inkl. moms: {item.totals.total + item.totals.tax} SEK)</span>
                 <div className="flex justify-between">
                     <div className="flex w-fit flex-shrink my-2">
                         <input onChange={(e) => setQuantity(Number(e.target.value))} min={1} className="border border-gray-300 w-12 p-2 rounded-md" type="number" name="cart_product_quantity" id="cart_product_quantity" value={quantity} />

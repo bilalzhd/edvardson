@@ -36,7 +36,9 @@ export default async function Home() {
       </div>
       <div className='mb-12 flex flex-col items-center'>
         <h3 className='text-xl font-bold text-center'>Fynda gärna i vår OUTLET</h3>
-        <button className='bg-white text-black uppercase hover:bg-black hover:text-white transition-all duration-200 px-6 py-3 rounded-[2rem] font-bold mt-4 border-black border w-fit'>Hitta</button>
+        <Link href="/product-category/fore-och-efter-jakten/ovrigt/edvardson-outlet/" className='bg-white text-black uppercase hover:bg-black hover:text-white transition-all duration-200 px-6 py-3 rounded-[2rem] font-bold mt-4 border-black border w-fit'>
+          Hitta
+          </Link>
       </div>
       <div className='bg-[#E5FFEA] mb-12'>
         <div className='flex md:flex-row flex-col-reverse xl:max-w-[80%] 2xl:max-w-[70%] mx-auto'>

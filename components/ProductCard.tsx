@@ -19,25 +19,23 @@ export default function ProductCard({ product, isGallery = false }: any) {
     if (product.description.startsWith("<p><img")) {
         productDescription = productDescription.substring(116);
     }
+
     function calculateSalePercent(regPrice: number, salePrice: number) {
         const discountPercent = ((regPrice - salePrice) / regPrice) * 100;
-
         const roundedDiscountPercent = Math.floor(discountPercent);
-
         return roundedDiscountPercent;
     }
-    console.log(product.short_description)
+
     const description = product.short_description?.length > 0 ? product.short_description?.substring(0, 100) : productDescription.substring(0, 100);
-    
     
     return (
         <>
             {isMount ? (
-                <div className={`mb-8 bg-[#F6F6F6] p-2 md:p-5 text-[#333] font-open flex flex-col ${!isGallery && 'md:w-[calc(33%-10px)]'} w-[calc(50%-12px)] mx-[6px] md:mx-0 relative`}>
+                <div className={`mb-8 bg-[#F6F6F6] p-2 md:p-5 text-[#333] font-open flex flex-col ${!isGallery && '2xl:w-[calc(25%-10px)] md:w-[calc(33%-10px)]'} w-[calc(50%-12px)] mx-[6px] md:mx-0 relative`}>
                     <div className='product-thumbnail-bg w-full flex justify-center'>
                         {product?.on_sale && <span className="bg-red-500 absolute left-[-5px] text-white text-sm p-1 top-0">-{calculateSalePercent(product.regular_price, product.sale_price)}%</span>}
                         <Link href={product.permalink || "#"}>
-                            <img className="md:max-h-[285px] bg-[#F0F0F0]" src={product.images?.[0]?.src} alt={product.name || ""} />
+                            <img className="md:max-h-[285px] bg-[#F0F0F0]" src={product.images?.[0]?.src} alt={product.name || "Product Image"} />
                         </Link>
                     </div>
                     <div className="flex flex-col mt-2">
