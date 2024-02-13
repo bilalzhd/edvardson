@@ -48,7 +48,7 @@ const MainMenu = ({ menuData, isScrolled, isMenuOpen }: { menuData: any, isScrol
                     {el.label}
                   </div>
                 </Link>
-                {el.childItems?.nodes?.length > 0 && <button className="chevron md:w-full w-fit"><ChevronDown className="w-4 h-4" /></button>}
+                {el.childItems?.nodes?.length > 0 && <button className="chevron w-fit"><ChevronDown className="w-4 h-4" /></button>}
               </div>
               <ul className={`bg-white header-nav-ul md:absolute top-full left-0 border text-[12px] px-[5px]
                 ${showSubMenu[id] ? "block" : "hidden"}`}>
