@@ -6,6 +6,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import Box from "./Box";
 import Link from "next/link";
 import AddToCart from "./AddToCart";
+import Image from "next/image";
 
 export default function ProductCard({ product, isGallery = false }: any) {
     const productType = product.type || "";
@@ -35,7 +36,7 @@ export default function ProductCard({ product, isGallery = false }: any) {
                     <div className='product-thumbnail-bg w-full flex justify-center'>
                         {product?.on_sale && <span className="bg-red-500 absolute left-[-5px] text-white text-sm p-1 top-0">-{calculateSalePercent(product.regular_price, product.sale_price)}%</span>}
                         <Link href={product.permalink || "#"}>
-                            <img className="md:max-h-[285px] bg-[#F0F0F0]" src={product.images?.[0]?.src} alt={product.name || "Product Image"} />
+                            <Image className="md:max-h-[285px] bg-[#F0F0F0]" src={product.images?.[0]?.src} alt={product.name || "Product Image"} width={285} height={285} />
                         </Link>
                     </div>
                     <div className="flex flex-col mt-2">

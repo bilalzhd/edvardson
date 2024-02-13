@@ -42,33 +42,40 @@ const MainMenu = ({ menuData, isScrolled, isMenuOpen }: { menuData: any, isScrol
               onMouseEnter={() => subMenuOnMouseEnterHandler(id)}
               onMouseLeave={() => subMenuOnMouseLeaveHandler(id)}
               className='header-nav-options md:items-center md:flex-row flex-col options-hover relative border-b md:border-b-0 pb-2 md:pb-0'>
-              <Link className={`${isActive ? 'active-link' : ''} w-full md:w-fit hover:font-bold`} href={el.url}>
-                <div className='header-nav-div justify-between md:justify-center items-center'>
-                  {el.label}
-                </div>
-              </Link>
-              {el.childItems?.nodes?.length > 0 && <button className="chevron"><ChevronDown className="w-4 h-4" /></button>}
-              <ul className={`bg-white header-nav-ul md:absolute top-full left-0 
+              <div className="flex">
+                <Link className={`${isActive ? 'active-link' : ''} w-full md:w-fit hover:font-bold`} href={el.url}>
+                  <div className='header-nav-div justify-between md:justify-center items-center'>
+                    {el.label}
+                  </div>
+                </Link>
+                {el.childItems?.nodes?.length > 0 && <button className="chevron md:w-full w-fit"><ChevronDown className="w-4 h-4" /></button>}
+              </div>
+              <ul className={`bg-white header-nav-ul md:absolute top-full left-0 border text-[12px] px-[5px]
                 ${showSubMenu[id] ? "block" : "hidden"}`}>
                 {el.childItems?.nodes.map((ele: any) => {
                   const subMenuId = parseInt(atob(ele.id).split(':')[1]);
                   return (
                     <li
                       key={subMenuId}
-                      className='sub-menu-options sub-menu-hover'
+                      className='sub-menu-options sub-menu-hover items-center md:flex-row flex-col border-b md:border-b-0'
                       onMouseEnter={() => subMenuOnMouseEnterHandler(subMenuId)}
                       onMouseLeave={() => subMenuOnMouseLeaveHandler(subMenuId)}>
-                      <Link className={`${isActive ? 'active-link' : ''}`} href={ele.url}>
-                        <div className='sub-menu-div flex items-center border-b pl-2 pr-2 py-4 capitalize justify-between'>
-                          {ele.label}
-                        </div>
-                      </Link>
-                      {ele.childItems?.nodes?.length > 0 && <button className="chevron"><ChevronRight className="w-4 h-4" /></button>}
+                      <div className="flex items-center w-full">
+                        <Link className={`${isActive ? 'active-link' : ''} w-full`} href={ele.url}>
+                          <div className='sub-menu-div flex items-center md:border-b pl-2 pr-2 py-4 capitalize justify-between'>
+                            {ele.label}
+                          </div>
+                        </Link>
+                        {ele.childItems?.nodes?.length > 0 && (<button className="chevron">
+                          <ChevronRight className="w-4 h-4 hidden md:block" />
+                          <ChevronDown className="w-4 h-4 md:hidden block" />
+                        </button>)}
+                      </div>
                       <ul
-                        className={`sub-menu-ul top-0 ${showSubMenu[subMenuId] ? "block" : "hidden"
+                        className={`sub-menu-ul top-0 w-full ${showSubMenu[subMenuId] ? "block" : "hidden"
                           }`}>
                         {ele.childItems?.nodes.map((elem: any) => (
-                          <li key={elem.id} className='border-b py-2 px-3 border-l grand-child-link bg-white capitalize'>
+                          <li key={elem.id} className='md:border-t md:border-l md:border-r md:border-black py-2 px-3 grand-child-link bg-white capitalize'>
                             <Link className={`${isActive ? 'active-link' : ''} hover:font-bold`} href={elem.url}>
                               {elem.label}
                             </Link>

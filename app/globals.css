@@ -103,17 +103,16 @@ iframe {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-
 @media screen and (max-width: 568px) {
   .transform-scale-80 {scale: 1}
-  .chevron {width: 100%; display: flex; justify-content: flex-end;}
+  .chevron {display: flex; justify-content: flex-end;}
   .navbar {
     position: absolute;
     background-color: white;
     z-index: 100;
     width: 100%;
     padding-inline: 16px;
-    top: 64px;
+    top: 50px;
     left: 0;
   }
   .bg-pos-x-xl {background-position-x: -210px;}
@@ -210,12 +209,7 @@ iframe {
   min-width: fit-content;
 }
 ins {color: #f75966}
-.sub-menu-ul {
-  position: absolute;
-  list-style: none;
-  top: 0px;
-  left: 100%;
-}
+
 
 .grand-child-link a {
   text-decoration: none;
@@ -246,10 +240,6 @@ ins {color: #f75966}
   margin-left: auto;
   padding-right: 10px;
 }
-
-.topbar-container {
-  @apply relative text-[12px] text-black/80 md:px-8 min-h-[32px] bg-white
-}
-.topbar {
-  @apply items-center flex-col md:flex-row border-b 2xl:max-w-[70%] xl:mx-auto md:py-2 flex justify-between max-w-[1170px]
-}
+.topbar-container { @apply relative text-[12px] text-black/80 md:px-8 min-h-[32px] bg-white }
+.topbar { @apply items-center flex-col md:flex-row border-b 2xl:max-w-[70%] xl:mx-auto md:py-2 flex justify-between max-w-[1170px] }
+.sub-menu-ul { @apply md:absolute top-0 left-full }
