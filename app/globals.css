@@ -5,9 +5,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.letter-spacing-1 {
-  letter-spacing: 1px;
-}
+.letter-spacing-1 { letter-spacing: 1px; }
 .letter-spacing-0 {
   letter-spacing: 0;
 }
@@ -243,3 +241,6 @@ ins {color: #f75966}
 .topbar-container { @apply relative text-[12px] text-black/80 md:px-8 min-h-[32px] bg-white }
 .topbar { @apply items-center flex-col md:flex-row border-b 2xl:max-w-[70%] xl:mx-auto md:py-2 flex justify-between max-w-[1170px] }
 .sub-menu-ul { @apply md:absolute top-0 left-full }
+.buy-now-button { @apply font-bold w-full py-3 px-2 md:py-[13px] md:px-[28px] flex-1 transition-all duration-200 uppercase border border-[#f6f6f6] hover:border-[#000] bg-transparent md:max-w-[150px] mx-auto text-center text-[12px] md:text-[16px]}
+.add-to-cart-button { @apply justify-center mx-auto font-bold w-full text-[12px] md:text-[16px] py-3 px-2 md:py-[13px] md:px-[28px] transition-all duration-200 uppercase hover:border-[#000] border border-[#f6f6f6] text-center bg-transparent flex items-center gap-2 }
+.mobile-menu {@apply w-[95%] mx-auto placeholder:text-black/80 h-fit p-2 flex items-center bg-white/90 border border-black justify-between md:w-fit md:hidden}

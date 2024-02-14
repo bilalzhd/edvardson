@@ -1,6 +1,9 @@
-import React from 'react'
+"use client"
+import { AppContext } from '@/context'
+import React, { useContext } from 'react'
 
-export default function CheckoutInvoiceSummary({ cart }: { cart: {} | Cart }) {
+export default function CheckoutInvoiceSummary() {
+    const [cart, , ] = useContext(AppContext)
     return (
         <>
             <h3 className="border-b pb-4 mb-[15px]">{(cart as Cart).items?.length || 0} items</h3>

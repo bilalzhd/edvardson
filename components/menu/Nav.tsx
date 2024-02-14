@@ -61,7 +61,7 @@ export default function Nav({ menuItems }: any) {
                 </div>
                 <Menu isMenuOpen={isMenuOpen} isScrolled={isScrolled} menuData={menuItems} />
             </div>
-            <div className="w-[95%] mx-auto placeholder:text-black/80 text-grayish h-fit p-2 flex items-center bg-white/90 border border-black justify-between md:w-fit md:hidden">
+            <div className="mobile-menu">
                 <input className="text-grayish bg-transparent text-sm placeholder:text-grayish focus:outline-none active:outline-none" placeholder="Sök produkt" type="text" name="" id="" onChange={(e) => setSearchTerm(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleSearch()} />
                 <button onClick={handleSearch}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-4">

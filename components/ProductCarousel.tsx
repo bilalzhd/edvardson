@@ -4,7 +4,7 @@ import "react-multi-carousel/lib/styles.css";
 import Link from "next/link";
 import AddToCart from "./AddToCart";
 
-const responsive = {
+export const responsive = {
     superLargeDesktop: {
         breakpoint: { max: 4000, min: 3000 },
         items: 5

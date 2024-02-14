@@ -1,6 +1,6 @@
 'use client'
 import Link from "next/link";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../context";
 import { addToCart, addVariationToCart } from "../lib/store";
 import Cart from "../components/icons/Cart";
@@ -49,10 +49,9 @@ export default function AddToCart({ quantity, variations, productId, productType
             (productType === "simple" && !isProductPage) ? addToCartHandler() :
               (productType === "simple" && isProductPage) ? addToCartHandler() : addVariationToCartHandler()
           }
-          type="submit" className={`justify-center mx-auto font-bold w-full text-[12px] md:text-[16px] py-3 px-2 md:py-[13px] md:px-[28px] transition-all duration-200 uppercase hover:border-[#000] border border-[#f6f6f6] text-center bg-transparent flex items-center gap-2 
-        ${isProductPage ? '!border-black hover:!bg-black hover:!text-white' : ''}`}>{addToCartText}
+          type="submit" className={`add-to-cart-button ${isProductPage ? '!border-black hover:!bg-black hover:!text-white' : ''}`}>{addToCartText}
         </button>) :
-        (<Link className="font-bold w-full py-3 px-2 md:py-[13px] md:px-[28px] flex-1 transition-all duration-200 uppercase border border-[#f6f6f6] hover:border-[#000] bg-transparent md:max-w-[150px] mx-auto text-center text-[12px] md:text-[16px]" href={productPermalink || "#"}>Köp…</Link>)}
+        (<Link className="buy-now-button" href={productPermalink || "#"}>Köp…</Link>)}
 
       {error && <span className="absolute error top-[120px] text-[6px] md:text-xs bg-red-500 p-2 text-white font-bold" dangerouslySetInnerHTML={{ __html: error }}></span>}
     </>
