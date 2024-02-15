@@ -102,6 +102,8 @@ iframe {
   margin-bottom: 10px;
 }
 @media screen and (max-width: 568px) {
+  .react-multiple-carousel__arrow--left {left: -16px !important}
+  .react-multiple-carousel__arrow--right {right: -0 !important}
   .transform-scale-80 {scale: 1}
   .chevron {display: flex; justify-content: flex-end;}
   .navbar {

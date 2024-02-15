@@ -2,6 +2,7 @@
 import Product from "@/components/Product";
 import ProductCarousel from "@/components/ProductCarousel";
 import ProductGallery from "@/components/ProductGallery";
+import ShareButton from "@/components/ShareButton";
 
 import { getProductBySlug, getProductVariations, getProductsByCategory, getProductsByRelatedIds } from "@/lib/store";
 
@@ -42,7 +43,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
             <div className="w-fit border-b border-black my-4">
               <span className="font-bold text-[14px] mr-2">HS Number</span> {product?.meta_data[0]?.value}
             </div>
-              <button className="text-md bg-black hover:bg-black/50 rounded text-white py-2 px-4 mt-2">Share</button>
+              <ShareButton productImage={product.images[0].src} productName={product.name} />
           </div>
         </div>
       </div>
