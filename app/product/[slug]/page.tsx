@@ -1,13 +1,35 @@
-
 import Product from "@/components/Product";
 import ProductCarousel from "@/components/ProductCarousel";
 import ProductGallery from "@/components/ProductGallery";
 import ShareButton from "@/components/ShareButton";
+import {
+  getProductBySlug, getProductVariations, getProductsByCategory,
+  getProductsByRelatedIds
+} from "@/lib/store";
+import { Metadata, ResolvingMetadata } from "next";
 
-import { getProductBySlug, getProductVariations, getProductsByCategory, getProductsByRelatedIds } from "@/lib/store";
+type Props = {
+  params: { slug: string }
+}
+
+export async function generateMetadata({ params }: Props, 
+  parent: ResolvingMetadata): Promise<Metadata> {
+
+  const slug = params.slug;
+  const product = await getProductBySlug(slug);
+  const prevImages = (await parent).openGraph?.images || [];
+  return {
+    title: product.name,
+    description: product.short_description,
+    openGraph: {
+      images: [...product.images, ...prevImages]
+    }
+  }
+}
 
 
-export default async function Page({ params }: { params: { slug: string } }) {
+
+export default async function Page({ params }: Props) {
   const product = await getProductBySlug(params.slug);
   // console.log(product)
   let variations = [];
@@ -43,7 +65,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
             <div className="w-fit border-b border-black my-4">
               <span className="font-bold text-[14px] mr-2">HS Number</span> {product?.meta_data[0]?.value}
             </div>
-              <ShareButton productImage={product.images[0].src} productName={product.name} />
+            <ShareButton productImage={product.images[0].src} productName={product.name} />
           </div>
         </div>
       </div>

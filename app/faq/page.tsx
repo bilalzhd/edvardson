@@ -1,6 +1,11 @@
 import BreadCrumb from "@/components/BreadCrumb";
 import Link from "next/link";
 
+import { Metadata } from "next";
+export const metadata: Metadata = {
+    title: "FAQs",
+}
+
 export default function Faq() {
     return (
         <>

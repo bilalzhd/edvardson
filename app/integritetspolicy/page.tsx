@@ -1,5 +1,8 @@
 import BreadCrumb from "@/components/BreadCrumb";
-
+import { Metadata } from "next";
+export const metadata: Metadata = {
+    title: "Integritetspolicy",
+}
 export default function Policy() {
     return (
         <>

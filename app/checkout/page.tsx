@@ -3,6 +3,10 @@ import Trash from "@/components/icons/Trash";
 import CheckoutInvoiceSummary from "./CheckoutInvoiceSummary";
 import UpsellProducts from "./UpsellProducts";
 import CheckoutItems from "./CheckoutItems";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+    title: "Kassa",
+}
 
 export default function CheckoutPage() {
 
