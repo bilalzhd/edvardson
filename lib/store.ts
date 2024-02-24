@@ -28,19 +28,19 @@ export const getShippingMethods = async () => {
         return err;
     }
 }
-export const getProductCategories = async () => {
+export const getProductCategories = async (lang="sv") => {
     try {
-        const response = await api.get("products/categories?per_page=40")
+        const response = await api.get(`products/categories?per_page=40&lang=${lang}`)
         return response.data;
     } catch (err) {
         return err;
     }
 }
-export const getProducts = async (per_page = 12) => {
+export const getProducts = async (per_page = 12, lang = 'sv') => {
     const responseData: ResponseData = { success: false, products: [] };
 
     try {
-        const { data } = await api.get('products', { per_page: per_page })
+        const { data } = await api.get(`products`, { per_page: per_page })
         responseData.success = true;
         responseData.products = data;
 
@@ -128,10 +128,10 @@ export async function getProductsByRelatedIds(relatedIds: number[]) {
 }
 
 
-export async function getProductsByCategory(category: string) {
+export async function getProductsByCategory(category: string, lang = 'sv') {
     // unstable_noStore();
     try {
-        const response = await api.get(`products?category=${category}`, {
+        const response = await api.get(`products?category=${category}&lang=${lang}`, {
             per_page: 10
         });
         if (response.data && response.data.length > 0) {

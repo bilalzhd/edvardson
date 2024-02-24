@@ -1,9 +1,31 @@
 import BreadCrumb from "@/components/BreadCrumb";
 import ProductCategory from "@/components/ProductCategory";
 import { getProductCategories, getProductsByCategory } from "@/lib/store";
-import { useRouter } from "next/navigation";
+import { Metadata, ResolvingMetadata } from "next";
 
-export default async function CategoryPage({ params }: { params: { childChildSlug: string } }) {
+type Props = {
+  params: { childChildSlug: string }
+}
+
+export async function generateMetadata({ params }: Props,
+  parent: ResolvingMetadata): Promise<Metadata> {
+
+  const slug = params.childChildSlug;
+  const categories = await getProductCategories();
+  const currentCategory = categories && categories?.find((cat: any) => cat.slug === slug);
+
+  const prevImages = (await parent).openGraph?.images || [];
+
+  return {
+    title: currentCategory.name,
+    description: currentCategory.description,
+    openGraph: {
+      images: [currentCategory.image?.src, ...prevImages]
+    }
+  }
+}
+
+export default async function CategoryPage({ params }: Props) {
   const categories = await getProductCategories();
   const currentCategory = categories && categories?.find((cat: any) => cat.slug === params.childChildSlug);
   const childrenCats = categories.filter((cat: any) => cat.parent == currentCategory?.id);

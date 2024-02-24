@@ -3,18 +3,20 @@ import ProductCarousel from "@/components/ProductCarousel";
 import ProductGallery from "@/components/ProductGallery";
 import ShareButton from "@/components/ShareButton";
 import {
-  getProductBySlug, getProductVariations, getProductsByCategory,
+  getProductBySlug,
+  getProductCategories,
+  getProductVariations,
+  getProductsByCategory,
   getProductsByRelatedIds
 } from "@/lib/store";
-import { Metadata, ResolvingMetadata } from "next";
 
+import { Metadata, ResolvingMetadata } from "next";
 type Props = {
   params: { slug: string }
 }
 
-export async function generateMetadata({ params }: Props, 
+export async function generateMetadata({ params }: Props,
   parent: ResolvingMetadata): Promise<Metadata> {
-
   const slug = params.slug;
   const product = await getProductBySlug(slug);
   const prevImages = (await parent).openGraph?.images || [];
@@ -36,9 +38,11 @@ export default async function Page({ params }: Props) {
   if (product?.type === 'variable') {
     variations = await getProductVariations(product.id);
   }
+  // console.log(product)
   const categoriesId = product?.categories.map((category: any) => category.id);
   const upsellProducts = await getProductsByCategory(categoriesId);
   const relatedProducts = await getProductsByRelatedIds(product?.related_ids);
+  console.log(await getProductCategories())
 
   return (
     <div className="font-open 2xl:max-w-[70%] xl:px-8 mx-auto">
@@ -53,17 +57,23 @@ export default async function Page({ params }: Props) {
             <p className="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
               <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
             </svg>
-              Secure payment by card</p>
+              Säker betalning med kort
+            </p>
             <p className="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
             </svg>
-              E-mail us, we reply swiftly!</p>
+              Maila oss, vi svarar snabbt!
+            </p>
 
             <div className="w-fit border-b border-black mt-4">
               <span className="font-bold text-[14px] mr-2">Varumärke</span> {product?.brands?.map((b: any) => b.name)}
             </div>
             <div className="w-fit border-b border-black my-4">
-              <span className="font-bold text-[14px] mr-2">HS Number</span> {product?.meta_data[0]?.value}
+              {product?.meta_data[0]?.value && (<>
+                <span className="font-bold text-[14px] mr-2">HS Number</span> <span>{product?.meta_data[0]?.value}</span>
+              </>
+              )}
+
             </div>
             <ShareButton productImage={product.images[0].src} productName={product.name} />
           </div>
