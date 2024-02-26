@@ -2,12 +2,47 @@
 import Link from "next/link";
 import Toolbar from "./Toolbar";
 import ProductCard from "./ProductCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductCardListView from "./ProductCardListView";
 
-export default function ProductCategory({ currentCategory, childrenCats, products }: any) {
+type FilterState = "latest" | "name" | "price" | "stock" | "popularity";
 
+export default function ProductCategory({ currentCategory, childrenCats, products }: any) {
     const [productView, setProductView] = useState("grid");
+    const [filters, setFilters] = useState<FilterState>("latest");
+    const [sortedProducts, setSortedProducts] = useState(products);
+    console.log(products)
+    const sortProducts = (attribute: FilterState) => {
+        const sortedProductsCopy = [...sortedProducts]
+        switch (attribute) {
+            case 'latest':
+                sortedProductsCopy.sort((a, b) => {
+                    const dateA = new Date(a.date_created).getTime();
+                    const dateB = new Date(b.date_created).getTime();
+                    return dateB - dateA;
+                });
+                break;
+            case 'popularity':
+                sortedProductsCopy.sort((a, b) => b.average_rating - a.average_rating);
+                break;
+            case 'name':
+                sortedProductsCopy.sort((a, b) => a.name.localeCompare(b.name));
+                break;
+            case 'stock':
+                sortedProductsCopy.sort((a, b) => b.stock_quantity - a.stock_quantity);
+                break;
+            case 'price':
+                sortedProductsCopy.sort((a, b) => b.regular_price - a.regular_price);
+                break;
+            default:
+                break;
+        }
+        setSortedProducts(sortedProductsCopy);
+    }
+    useEffect(() => {
+        sortProducts(filters)
+    }, [filters])
+
     return (
         <div className="min-h-[23.5vh] p-[10px] xl:max-w-[80%] mx-auto 2xl:max-w-[70%] mt-4">
             <div className="flex items-center flex-col">
@@ -15,7 +50,6 @@ export default function ProductCategory({ currentCategory, childrenCats, product
                     <h1 className="text-[24px] text-center uppercase font-bold letter-spacing-0 font-open">{currentCategory?.name}</h1>
                     <p className="text-[14px] letter-spacing-0 font-open text-center">{currentCategory?.description}</p>
                 </div>
-                <Toolbar setProductView={setProductView} />
             </div>
             <div className="flex flex-wrap relative md:mx-3 w-full mt-4">
                 {childrenCats?.length > 0 &&
@@ -33,13 +67,14 @@ export default function ProductCategory({ currentCategory, childrenCats, product
                     ))
                 }
             </div>
+            <Toolbar filters={filters} setFilters={setFilters} setProductView={setProductView} />
             {productView == "grid" ? (<div className="flex flex-wrap md:mx-4 mt-4 md:gap-[10px] w-full">
-                {products?.length > 0 ? products?.map((product: any) => {
+                {products?.length > 0 ? sortedProducts?.map((product: any) => {
                     return <ProductCard key={product.id} product={product} isGallery={false} />
                 }) : <span className="text-center py-4">No Products yet</span>}
             </div>) : (
                 <div>
-                    {products?.length > 0 ? products?.map((product: any) => {
+                    {products?.length > 0 ? sortedProducts?.map((product: any) => {
                         return <ProductCardListView key={product.id} product={product} />
                     }) : <span className="text-center py-4">No Products yet</span>}
                 </div>
