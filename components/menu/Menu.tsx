@@ -1,11 +1,15 @@
 "use client"
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import Link from "next/link";
 import ChevronRight from "../icons/ChevronRight";
 import ChevronDown from "../icons/ChevronDown";
 import { usePathname } from "next/navigation";
 
-const MainMenu = ({ menuData, isScrolled, isMenuOpen }: { menuData: any, isScrolled: boolean, isMenuOpen: boolean }) => {
+type Props = {
+  menuData: any, isScrolled: boolean, isMenuOpen: boolean, setIsMenuOpen: Dispatch<SetStateAction<boolean>> 
+}
+
+const MainMenu = ({ menuData, isScrolled, isMenuOpen, setIsMenuOpen }: Props) => {
   const [showSubMenu, setShowSubMenu] = useState<{ [key: number]: boolean }>({});
 
   const subMenuOnMouseEnterHandler = (subMenuId: number) => {
@@ -29,7 +33,7 @@ const MainMenu = ({ menuData, isScrolled, isMenuOpen }: { menuData: any, isScrol
           if (!el.childItems?.nodes) {
             return (
               <li key={id}>
-                <Link href={el.url} className={`${isActive ? 'active-link' : ''} border-b md:border-b-0 w-full md:w-fit hover:font-bold header-nav-link`}>
+                <Link onClick={() => setIsMenuOpen(false)} href={el.url} className={`${isActive ? 'active-link' : ''} border-b md:border-b-0 w-full md:w-fit hover:text-[#888] header-nav-link`}>
                   <span>{el.label}</span>
                 </Link>
               </li>
@@ -43,7 +47,7 @@ const MainMenu = ({ menuData, isScrolled, isMenuOpen }: { menuData: any, isScrol
               onMouseLeave={() => subMenuOnMouseLeaveHandler(id)}
               className='header-nav-options md:items-center md:flex-row flex-col options-hover relative border-b md:border-b-0 pb-2 md:pb-0'>
               <div className="flex">
-                <Link className={`${isActive ? 'active-link' : ''} w-full md:w-fit hover:font-bold`} href={el.url}>
+                <Link onClick={() => setIsMenuOpen(false)} className={`${isActive ? 'active-link' : ''} w-full md:w-fit hover:text-[#888]`} href={el.url}>
                   <div className='header-nav-div justify-between md:justify-center items-center'>
                     {el.label}
                   </div>
@@ -61,7 +65,7 @@ const MainMenu = ({ menuData, isScrolled, isMenuOpen }: { menuData: any, isScrol
                       onMouseEnter={() => subMenuOnMouseEnterHandler(subMenuId)}
                       onMouseLeave={() => subMenuOnMouseLeaveHandler(subMenuId)}>
                       <div className="flex items-center w-full">
-                        <Link className={`${isActive ? 'active-link' : ''} w-full`} href={ele.url}>
+                        <Link onClick={() => setIsMenuOpen(false)} className={`${isActive ? 'active-link' : ''} w-full`} href={ele.url}>
                           <div className='sub-menu-div flex items-center md:border-b pl-2 pr-2 py-4 capitalize justify-between'>
                             {ele.label}
                           </div>
@@ -75,8 +79,8 @@ const MainMenu = ({ menuData, isScrolled, isMenuOpen }: { menuData: any, isScrol
                         className={`sub-menu-ul top-0 w-full ${showSubMenu[subMenuId] ? "block" : "hidden"
                           }`}>
                         {ele.childItems?.nodes.map((elem: any) => (
-                          <li key={elem.id} className='md:border-t md:border-l md:border-r md:border-black py-2 px-3 grand-child-link bg-white capitalize'>
-                            <Link className={`${isActive ? 'active-link' : ''} hover:font-bold`} href={elem.url}>
+                          <li key={elem.id} className='md:border-t md:border-l md:border-r md:border-b md:border-black py-2 px-3 grand-child-link bg-white capitalize'>
+                            <Link onClick={() => setIsMenuOpen(false)} className={`${isActive ? 'active-link' : ''} hover:text-[#888]`} href={elem.url}>
                               {elem.label}
                             </Link>
                           </li>

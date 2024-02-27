@@ -59,7 +59,7 @@ export default function Nav({ menuItems }: any) {
                     </div>
                     <Cart className="md:hidden block" />
                 </div>
-                <Menu isMenuOpen={isMenuOpen} isScrolled={isScrolled} menuData={menuItems} />
+                <Menu setIsMenuOpen={setIsMenuOpen} isMenuOpen={isMenuOpen} isScrolled={isScrolled} menuData={menuItems} />
             </div>
             <div className="mobile-menu">
                 <input className="text-grayish bg-transparent text-sm placeholder:text-grayish focus:outline-none active:outline-none" placeholder="Sök produkt" type="text" name="" id="" onChange={(e) => setSearchTerm(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleSearch()} />

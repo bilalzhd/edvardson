@@ -32,17 +32,15 @@ export async function generateMetadata({ params }: Props,
 
 
 export default async function Page({ params }: Props) {
+
   const product = await getProductBySlug(params.slug);
-  // console.log(product)
   let variations = [];
   if (product?.type === 'variable') {
     variations = await getProductVariations(product.id);
   }
-  // console.log(product)
   const categoriesId = product?.categories.map((category: any) => category.id);
   const upsellProducts = await getProductsByCategory(categoriesId);
   const relatedProducts = await getProductsByRelatedIds(product?.related_ids);
-  console.log(await getProductCategories())
 
   return (
     <div className="font-open 2xl:max-w-[70%] xl:px-8 mx-auto">

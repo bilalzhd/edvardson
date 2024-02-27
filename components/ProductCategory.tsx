@@ -11,7 +11,6 @@ export default function ProductCategory({ currentCategory, childrenCats, product
     const [productView, setProductView] = useState("grid");
     const [filters, setFilters] = useState<FilterState>("latest");
     const [sortedProducts, setSortedProducts] = useState(products);
-    console.log(products)
     const sortProducts = (attribute: FilterState) => {
         const sortedProductsCopy = [...sortedProducts]
         switch (attribute) {
