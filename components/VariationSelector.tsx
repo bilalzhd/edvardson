@@ -12,27 +12,29 @@ export default function VariationSelector({ selected, setSelected, variations, p
     const visibleVariations = showAll ? variations : variations.slice(0, 5);
     const count = variations.length - 5;
 
-    const showMore = <span className="flex text-white items-center border-b border-r border-l border-white rounded p-2">Show {count} More <ChevronDown className="w-3 h-3 ml-2" /></span>
-    const showLess = <span className="flex text-white items-center border-b border-r border-l border-white rounded p-2">Show less <ChevronUp className="w-3 h-3 ml-2" /></span>
+    const showMore = <span className="flex items-center border-b border-r border-l border-white rounded p-2">Show {count} More <ChevronDown className="w-3 h-3 ml-2" /></span>
+    const showLess = <span className="flex items-center border-b border-r border-l border-white rounded p-2">Show less <ChevronUp className="w-3 h-3 ml-2" /></span>
     return (
         <div>
             {visibleVariations.map((variation: any) => {
-                return <label key={variation.id} className={`${selected && selected.id == variation.id ? 'border-black border-2' : ''} mb-1 border text-[14px] rounded py-5 px-2 cursor-pointer hover:border-black hover:border-2 flex justify-between w-full`} htmlFor={variation.id}>
-                    <div className="flex gap-4 items-center">
-                        <input onChange={() => {
-                            setSelected(variation);
-                            setSelectedVariation(variation.id)
-                        }} className="appearance-none border border-black rounded-full w-4 h-4 checked:bg-black checked:p-1checked:border-white focus:outline-none" name={productId} id={variation.id} value={variation.id} type="radio" checked={selectedVariation == variation.id} />
-                        <img width={30} height={30} src={variation.image?.src} />
-                        <span className={`${selected && selected.id == variation.id ? 'font-bold' : ''}`}>{variation.name}</span>
-                    </div>
-                    <span className={`${selected && selected.id == variation.id ? 'font-bold' : ''}`}>{variation.price}</span>
-                </label>
+                return (
+                    <label key={variation.id} className={`${selected && selected.id == variation.id ? 'border-black border-2' : ''} mb-1 border-2 text-[14px] rounded py-5 px-2 cursor-pointer hover:border-black hover:border-2 flex justify-between w-full`} htmlFor={variation.id}>
+                        <div className="flex gap-4 items-center">
+                            <input onChange={() => {
+                                setSelected(variation);
+                                setSelectedVariation(variation.id)
+                            }} className="appearance-none border border-black rounded-full w-4 h-4 checked:bg-black checked:p-1checked:border-white focus:outline-none" name={productId} id={variation.id} value={variation.id} type="radio" checked={selectedVariation == variation.id} />
+                            <img width={30} height={30} src={variation.image?.src} />
+                            <span className={`${selected && selected.id == variation.id ? 'font-bold' : ''}`}>{variation.name}</span>
+                        </div>
+                        <span className={`${selected && selected.id == variation.id ? 'font-bold' : ''}`}>{variation.price}</span>
+                    </label>
+                )
             })}
-            {variations.length > 7 && (
-                <div className="flex justify-center w-full">
+            {variations.length > 5 && (
+                <div className="flex justify-center w-full mt-[-4px]">
                     <button
-                        className="text-blue-500 cursor-pointer"
+                        className="border-b border-l border-r hover:bg-black hover:text-white transition-all duration-300 cursor-pointer"
                         onClick={() => setShowAll(!showAll)}
                     >
                         {showAll ? showLess : showMore}

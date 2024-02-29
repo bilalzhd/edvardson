@@ -25,7 +25,7 @@ export const responsive = {
 export default function ProductCarouselCheckout({ products }: any) {
 
     return (
-        <div className="px-4 md:px-10">
+        <div>
             <Carousel className="gap-[10px] space-x-4" infinite responsive={responsive}>
                 {products?.map((product: any) => (
                     <div key={product.id} className={`bg-[#F6F6F6] p-2 md:p-3 text-[#333] font-open flex w-full mx-[6px] md:mx-0 gap-3`}>

@@ -31,7 +31,7 @@ export default function ProductCarousel({ products }: any) {
                     <div key={product.id} className={`mb-8 bg-[#F6F6F6] p-2 md:p-5 text-[#333] font-open flex flex-col w-full mx-[6px] md:mx-0`}>
                         <div className='product-thumbnail-bg w-full flex justify-center'>
                             <Link href={product.permalink || "#"}>
-                                <img className="md:max-h-[285px] bg-[#F0F0F0]" src={product.images?.[0]?.src} alt={product.name || ""} />
+                                <img className="md:max-h-[285px] md:min-h-[285px] bg-[#F0F0F0] object-contain" src={product.images?.[0]?.src} alt={product.name || ""} />
                             </Link>
                         </div>
                         <div className="flex flex-col mt-2">

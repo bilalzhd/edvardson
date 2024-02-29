@@ -16,7 +16,7 @@ export default function UpsellProducts() {
                 <h2 className="text-center font-semibold text-[20px] mb-5">Andra köpte också</h2>
                 <ProductCarouselCheckout products={checkoutProducts || []} />
             </div>
-            <div className="bg-white p-4 rounded-md text-black text-[15px]">
+            <div className="bg-white py-4 rounded-md text-black text-[15px]">
                 <p>Produkter beställda i December 2023 har bytesrätt t.o.m Januari 2024</p>
             </div>
         </>

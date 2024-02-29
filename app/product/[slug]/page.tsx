@@ -4,7 +4,6 @@ import ProductGallery from "@/components/ProductGallery";
 import ShareButton from "@/components/ShareButton";
 import {
   getProductBySlug,
-  getProductCategories,
   getProductVariations,
   getProductsByCategory,
   getProductsByRelatedIds
@@ -30,7 +29,6 @@ export async function generateMetadata({ params }: Props,
 }
 
 
-
 export default async function Page({ params }: Props) {
 
   const product = await getProductBySlug(params.slug);
@@ -38,17 +36,20 @@ export default async function Page({ params }: Props) {
   if (product?.type === 'variable') {
     variations = await getProductVariations(product.id);
   }
-  const categoriesId = product?.categories.map((category: any) => category.id);
-  const upsellProducts = await getProductsByCategory(categoriesId);
+  const categoriesId = product?.categories.map((category: any) => category.slug);
+  const upsellProducts = await getProductsByCategory(categoriesId[1]);
   const relatedProducts = await getProductsByRelatedIds(product?.related_ids);
-
+  console.log("Related Ids: ", product?.related_ids)
+  console.log(product)
+  // console.log(relatedProducts.map(e => e.id))
+  // console.log("Upsell Products", upsellProducts.map(e => e.categories))
   return (
     <div className="font-open 2xl:max-w-[70%] xl:px-8 mx-auto">
       <div className="flex md:flex-row flex-col md:p-6 p-2">
         <div className="flex flex-col items-center w-full md:w-1/2 md:p-4">
           {product && <ProductGallery items={product?.images} />}
         </div>
-        <div className="w-full md:w-1/2 md:ml-[8%] px-4">
+        <div className="mt-4 md:mt-0 w-full md:w-1/2 md:ml-[8%] px-4">
           <Product product={product} variations={variations} />
 
           <div className="text-[13px] mt-5">

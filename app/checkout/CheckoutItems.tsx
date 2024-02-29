@@ -8,7 +8,7 @@ export default function CheckoutItems() {
     const [cart, ,] = useContext(AppContext);
     const [loading, setLoading] = useState(true)
     useEffect(() => {
-        if (cart) {
+        if ((cart as Cart)?.items?.length > 0) {
             setLoading(false)
         }
     })

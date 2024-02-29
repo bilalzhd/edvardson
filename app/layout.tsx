@@ -22,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="sv">
       <head>
         <link rel="icon" href="/favicon-3c61b1.png" type="image/png" sizes="32x32" />
       </head>
@@ -32,7 +32,7 @@ export default function RootLayout({
           {/* <div className='min-h-screen 
           bg-[url("/images/edvardson_bg.jpeg")] bg-fixed 
           text-grayish'> */}
-          <div className='min-h-screen 
+          <div className='min-h-screen overflow-x-hidden
           text-grayish'>
             <Header />
             <main className='transition-all duration-100'>{children}</main>

@@ -3,18 +3,19 @@ import { unstable_noStore } from "next/cache";
 import CoCartAPI from "@cocart/cocart-rest-api";
 const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
 
-
+const cart_url = "https://merablog.merakommunikation.se/wp-json/cocart/v2";
 
 const CoCart = new CoCartAPI({
     url: "https://merablog.merakommunikation.se",
-    consumerKey: "ck_c7d9a5093230470c7dfb681882744f9aa0ec18ba",
-    consumerSecret: "cs_6986ba10b2fd720db1925f456577a7dbb48276de"
+    consumerKey: process.env.WC_CONSUMER_KEY || "",
+    consumerSecret: process.env.WC_CONSUMER_SECRET || "",
 });
+
 
 const api = new WooCommerceRestApi({
     url: "https://merablog.merakommunikation.se",
-    consumerKey: "ck_c7d9a5093230470c7dfb681882744f9aa0ec18ba",
-    consumerSecret: "cs_6986ba10b2fd720db1925f456577a7dbb48276de",
+    consumerKey: process.env.WC_CONSUMER_KEY || "ck_c7d9a5093230470c7dfb681882744f9aa0ec18ba",
+    consumerSecret: process.env.WC_CONSUMER_SECRET || "cs_6986ba10b2fd720db1925f456577a7dbb48276de",
     version: "wc/v3",
     axiosConfig: {
         headers: {}
@@ -28,7 +29,7 @@ export const getShippingMethods = async () => {
         return err;
     }
 }
-export const getProductCategories = async (lang="sv") => {
+export const getProductCategories = async (lang = "sv") => {
     try {
         const response = await api.get(`products/categories?per_page=40&lang=${lang}`)
         return response.data;
@@ -40,7 +41,7 @@ export const getProducts = async (per_page = 12, lang = 'sv') => {
     const responseData: ResponseData = { success: false, products: [] };
 
     try {
-        const { data } = await api.get(`products`, { per_page: per_page })
+        const { data } = await api.get(`products`, { per_page: per_page, lang })
         responseData.success = true;
         responseData.products = data;
 
@@ -106,12 +107,12 @@ export async function getProductVariations(productId: number) {
     }
 }
 
-export async function getProductsByRelatedIds(relatedIds: number[]) {
+export async function getProductsByRelatedIds(relatedIds: number[], lang = 'sv') {
     try {
         const relatedIdsString = relatedIds?.join(',');
-
-        const response = await api.get(`products?related_ids=${relatedIdsString}`, {
-            per_page: 10
+        console.log(relatedIdsString);
+        const response = await api.get(`products?include=${relatedIds}`, {
+            per_page: 10, lang
         });
 
         if (response.data && response.data.length > 0) {
@@ -131,8 +132,8 @@ export async function getProductsByRelatedIds(relatedIds: number[]) {
 export async function getProductsByCategory(category: string, lang = 'sv') {
     // unstable_noStore();
     try {
-        const response = await api.get(`products?category=${category}&lang=${lang}`, {
-            per_page: 10
+        const response = await api.get(`products?filter[categories]=${category}`, {
+            per_page: 10, lang
         });
         if (response.data && response.data.length > 0) {
             const products = response.data;
@@ -146,13 +147,14 @@ export async function getProductsByCategory(category: string, lang = 'sv') {
         throw error;
     }
 }
-export async function getProductsForCheckout(min_price: string, max_price: string) {
+export async function getProductsForCheckout(min_price: string, max_price: string, lang = "sv") {
     // unstable_noStore();
     try {
         const response = await api.get('products', {
             min_price,
             max_price,
-            per_page: 10
+            per_page: 10,
+            lang
         });
         if (response.data && response.data.length > 0) {
             const products = response.data;
@@ -170,7 +172,7 @@ export async function getProductsForCheckout(min_price: string, max_price: strin
 export async function addToCart(productId: number, quantity = 1, cart_key: string | null, setLoading: Dispatch<SetStateAction<boolean>>) {
     try {
         setLoading(true);
-        const response = await fetch(`https://merablog.merakommunikation.se/wp-json/cocart/v2/cart/add-item?cart_key=${cart_key}`, {
+        const response = await fetch(`${cart_url}/cart/add-item?cart_key=${cart_key}`, {
             method: "POST",
             body: JSON.stringify({
                 id: String(productId),
@@ -215,7 +217,7 @@ export async function addVariationToCart(
     };
 
     try {
-        const response = await fetch(`https://merablog.merakommunikation.se/wp-json/cocart/v2/cart/add-item?cart_key=${cart_key}`, {
+        const response = await fetch(`${cart_url}/cart/add-item?cart_key=${cart_key}`, {
             method: "POST",
             body: JSON.stringify(data),
             headers: { "Content-Type": "application/json" }
@@ -241,7 +243,7 @@ export async function addVariationToCart(
 }
 
 export async function getCart(cartKey: string) {
-    return fetch(`https://merablog.merakommunikation.se/wp-json/cocart/v2/cart?cart_key=${cartKey}`)
+    return fetch(`${cart_url}/cart?cart_key=${cartKey}`)
         .then(response => response.json())
         .then(res => res)
         .catch(err => console.error(err))
@@ -249,7 +251,7 @@ export async function getCart(cartKey: string) {
 
 export async function updateCartItemQuantity(itemKey: string, quantity: number, cartKey: string, setLoading: Dispatch<SetStateAction<boolean>>) {
     setLoading(true);
-    return fetch(`https://merablog.merakommunikation.se/wp-json/cocart/v2/cart/item/${itemKey}?cart_key=${cartKey}`, {
+    return fetch(`${cart_url}/cart/item/${itemKey}?cart_key=${cartKey}`, {
         method: "POST",
         body: JSON.stringify({ quantity }),
         headers: {
@@ -265,7 +267,7 @@ export async function updateCartItemQuantity(itemKey: string, quantity: number, 
 
 export async function deleteItemFromCart(itemKey: string, cartKey: string, setLoading: Dispatch<SetStateAction<boolean>>) {
     setLoading(true);
-    return fetch(`https://merablog.merakommunikation.se/wp-json/cocart/v2/cart/item/${itemKey}?cart_key=${cartKey}`, {
+    return fetch(`${cart_url}/cart/item/${itemKey}?cart_key=${cartKey}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"
@@ -276,4 +278,52 @@ export async function deleteItemFromCart(itemKey: string, cartKey: string, setLo
         .finally(() => {
             setLoading(false)
         })
+}
+
+// CHECKOUT /// 
+
+
+export const createWoocommerceCustomer = async (data: any) => {
+    // const d = JSON.stringify(data)
+    // console.log(d)
+
+    const _data = {
+        email: "john.doe@example.com",
+        first_name: "John",
+        last_name: "Doe",
+        username: "john.doe",
+        billing: {
+          first_name: "John",
+          last_name: "Doe",
+          company: "",
+          address_1: "969 Market",
+          address_2: "",
+          city: "San Francisco",
+          state: "CA",
+          postcode: "94103",
+          country: "US",
+          email: "john.doe@example.com",
+          phone: "(555) 555-5555"
+        },
+        shipping: {
+          first_name: "John",
+          last_name: "Doe",
+          company: "",
+          address_1: "969 Market",
+          address_2: "",
+          city: "San Francisco",
+          state: "CA",
+          postcode: "94103",
+          country: "US"
+        }
+      };
+
+      
+    try {
+        const response = await api.post("customers", JSON.stringify(_data))
+        return response;
+    }
+    catch (error: any) {
+        console.log(error.response.data);
+    };
 }

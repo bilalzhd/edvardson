@@ -32,8 +32,13 @@ export default function Product({ product, variations }: any) {
                     </>) : (
                     <Box width="100%">
                         <Skeleton containerClassName="flex-1" baseColor="#B1B1B1AA" height={30} />
-                        <Skeleton containerClassName="flex-1" className="mb-40" baseColor="#B1B1B1AA" height={40} />
-                        <Skeleton containerClassName="flex-1" baseColor="#B1B1B1AA" height={360} />
+                        <Skeleton containerClassName="flex-1" baseColor="#B1B1B1AA" height={30} />
+                        <Skeleton containerClassName="flex-1" className="mt-10 mb-10" baseColor="#B1B1B1AA" height={40} />
+                        <Skeleton containerClassName="flex-1" baseColor="#B1B1B1AA" height={18} />
+                        <Skeleton containerClassName="flex-1" baseColor="#B1B1B1AA" height={18} />
+                        <Skeleton containerClassName="flex-1" baseColor="#B1B1B1AA" height={18} />
+                        <Skeleton containerClassName="flex-1" baseColor="#B1B1B1AA" height={18} />
+                        <Skeleton containerClassName="flex-1" baseColor="#B1B1B1AA" height={18} />
                     </Box>)}
             </div>
             <div className="pt-6 text-center mb-2">
