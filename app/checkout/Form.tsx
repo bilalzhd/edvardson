@@ -1,64 +1,54 @@
 "use client"
 import { createWoocommerceCustomer } from "@/lib/store";
 import CountrySelector from "./CountrySelector";
-import { FormEvent, useRef } from "react";
-import { useFormState, useFormStatus } from "react-dom";
+import { getSessionToken, getStates } from "@/lib";
+import { useContext, useEffect, useState } from "react";
+import { InlineCheckout } from '@bambora/checkout-sdk-web';
+import { AppContext } from "@/context";
+// import { FormEvent, useRef } from "react";
+// import { useFormState, useFormStatus } from "react-dom";
 
-export default function Form() {
-    const data = useFormStatus();
-
-    async function fn(data: FormData) {
-        const email = data.get("email");
-        const address_1 = data.get("billing-address_1");
-        const address_2 = data.get("billing-address_2");
-        const postcode = data.get("billing-postcode");
-        const phone = data.get("billing-phone");
-        const first_name = data.get("billing-first_name");
-        const last_name = data.get("billing-last_name");
-        const city = data.get("billing-city");
+export default function Form({ countriesData }: any) {
+    const [token, setToken] = useState("")
+    const [mount, setMount] = useState(false)
+    // const [states, setStates] = useState([])
+    const [cart, ,] = useContext(AppContext);
 
 
 
-        const customerData = {
-            email,
-            first_name,
-            last_name,
-            username: email,
-            billing: {
-                first_name,
-                last_name,
-                company: "",
-                address_1,
-                address_2,
-                city,
-                state: "",
-                postcode,
-                country: "SV",
-                email,
-                phone
+    useEffect(() => {
+        const data = {
+            order: {
+                id: (cart as Cart)?.cart_hash?.substring(0, 19),
+                amount: (cart as Cart)?.totals?.total,
+                currency: (cart as Cart)?.currency?.currency_code
             },
-            shipping: {
-                first_name,
-                last_name,
-                company: "",
-                address_1,
-                address_2,
-                city,
-                state: "",
-                postcode,
-                country: "SV",
-                email,
-                phone
+            url: {
+                accept: "https://edvardson.se/accept",
+                cancel: "https://edvardson.se/cancel"
+            }
+        }
+        async function getTokenAndSetCheckout() {
+            const sessionToken = await getSessionToken(data)
+            if (sessionToken) {
+                setToken(sessionToken)
+                const checkout = new InlineCheckout(sessionToken, {
+                    container: document.getElementById("#payment-options"),
+                    language: "sv",
+                    endpoint: "https://v1.checkout.bambora.com/",
+                    }
+                )
+                checkout.initialize(sessionToken);
+                checkout.mount(document.getElementById("payment-options") || document.body)
             }
         }
 
-        const response = createWoocommerceCustomer(customerData)
-        console.log(response)
-    }
+        getTokenAndSetCheckout();
+    }, [cart])
 
 
     return (
-        <form action={fn} id="checkoutForm" className="px-4 pt-6 pb-3 md:max-w-[calc(100%-270px)]">
+        <form id="checkoutForm" className="px-4 pt-6 pb-3 md:max-w-[calc(100%-270px)]">
             <div className="grid grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-2">
                 <div className="sm:col-span-2">
                     <div className="mt-2.5">
@@ -87,7 +77,7 @@ export default function Form() {
                 </div>
                 <div className="space-y-2">
                     <label className="mb-4">Delivery Country</label>
-                    <CountrySelector />
+                    <CountrySelector countries={countriesData?.shippingCountries} />
                 </div>
                 <div className="flex items-end">
                     <input type="text" required className="input-field" name="billing-city" id="billing-city" placeholder="Ort" />
@@ -107,9 +97,11 @@ export default function Form() {
                     </div>
                 </div>
             </div>
+            <div id="payment-options"></div>
             <div className="mt-10">
                 <button type="submit" className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                    {data.pending ? 'Loading...' : 'Place Order'}
+                    {/* {data.pending ? 'Loading...' : 'Place Order'} */}
+                    Place Order
                 </button>
             </div>
         </form>

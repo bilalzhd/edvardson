@@ -39,10 +39,6 @@ export default async function Page({ params }: Props) {
   const categoriesId = product?.categories.map((category: any) => category.slug);
   const upsellProducts = await getProductsByCategory(categoriesId[1]);
   const relatedProducts = await getProductsByRelatedIds(product?.related_ids);
-  console.log("Related Ids: ", product?.related_ids)
-  console.log(product)
-  // console.log(relatedProducts.map(e => e.id))
-  // console.log("Upsell Products", upsellProducts.map(e => e.categories))
   return (
     <div className="font-open 2xl:max-w-[70%] xl:px-8 mx-auto">
       <div className="flex md:flex-row flex-col md:p-6 p-2">

@@ -6,7 +6,6 @@ import MiniCart from "./MiniCart";
 export default function Cart({className}: any) {
     const [cart,] = useContext(AppContext);
     const [isMiniCartVisible, setMiniCartVisibility] = useState(false);
-
     return (
         <div className={className || ""} onMouseEnter={() => setMiniCartVisibility(true)} onMouseLeave={() => setMiniCartVisibility(false)} >
             <button className="font-open letter-spacing-1 items-center gap-2 text-xs flex">

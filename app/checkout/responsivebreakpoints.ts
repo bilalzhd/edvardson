@@ -264,3 +264,55 @@ export const countries = [
     { code: 'ZM', name: 'Zambia' },
     { code: 'ZW', name: 'Zimbabwe' }
 ]
+
+
+// const data = useFormStatus();
+
+    // async function fn(data: FormData) {
+    //     const email = data.get("email");
+    //     const address_1 = data.get("billing-address_1");
+    //     const address_2 = data.get("billing-address_2");
+    //     const postcode = data.get("billing-postcode");
+    //     const phone = data.get("billing-phone");
+    //     const first_name = data.get("billing-first_name");
+    //     const last_name = data.get("billing-last_name");
+    //     const city = data.get("billing-city");
+
+
+
+    //     const customerData = {
+    //         email,
+    //         first_name,
+    //         last_name,
+    //         username: email,
+    //         billing: {
+    //             first_name,
+    //             last_name,
+    //             company: "",
+    //             address_1,
+    //             address_2,
+    //             city,
+    //             state: "",
+    //             postcode,
+    //             country: "SV",
+    //             email,
+    //             phone
+    //         },
+    //         shipping: {
+    //             first_name,
+    //             last_name,
+    //             company: "",
+    //             address_1,
+    //             address_2,
+    //             city,
+    //             state: "",
+    //             postcode,
+    //             country: "SV",
+    //             email,
+    //             phone
+    //         }
+    //     }
+
+    //     const response = createWoocommerceCustomer(customerData)
+    //     console.log(response)
+    // }

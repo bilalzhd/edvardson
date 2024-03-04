@@ -161,3 +161,15 @@ type Customer = {
         country: string,
     }
 }
+
+type OrderData = {
+    order: {
+        id: string,
+        amount: number,
+        currency: string
+    },
+    url: {
+        accept: string,
+        cancel: string,
+    }
+}
