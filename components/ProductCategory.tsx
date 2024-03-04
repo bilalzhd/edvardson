@@ -52,9 +52,7 @@ export default function ProductCategory({ currentCategory, childrenCats, product
     }
     useEffect(() => {
         products?.length > 0 && sortProducts(filters)
-        // const reduce = sortedProducts.map(f => [f.regular_price, f.sale_price])
-        console.log(sortedProducts);
-    }, [filters])
+    }, [filters, products?.length, sortProducts])
 
     return (
         <div className="min-h-[23.5vh] p-[10px] xl:max-w-[80%] mx-auto 2xl:max-w-[70%] mt-4">
@@ -71,7 +69,7 @@ export default function ProductCategory({ currentCategory, childrenCats, product
                             <Link href={`/product-category/${cat.slug}`} className="w-full">
                                 <div className="text-[#333] font-bold flex-col flex items-stretch justify-start w-full cursor-pointer rounded-[2px] p-1 mb-5">
                                     <div className="bg-[#f0f0f0] flex justify-center items-center md:min-h-[250px] md:max-h-[250px] min-h-[120px] max-h-[120px]">
-                                        {cat.image && <img className="md:max-h-[250px] object-contain" src={cat.image.src} />}
+                                        {cat.image && <img className="md:max-h-[250px] object-contain" alt={cat.name} src={cat.image.src} />}
                                     </div>
                                     <h2 className="text-center text-[14px] p-[9px]">{cat.name}</h2>
                                 </div>

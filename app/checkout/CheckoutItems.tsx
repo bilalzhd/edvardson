@@ -11,7 +11,7 @@ export default function CheckoutItems() {
         if ((cart as Cart)?.items?.length > 0) {
             setLoading(false)
         }
-    })
+    }, [cart])
     return (
         <div className="relative">
             {(cart as Cart)?.items?.length > 0 ? (cart as Cart).items?.map((item: any) => (

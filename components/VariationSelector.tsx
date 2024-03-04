@@ -24,7 +24,7 @@ export default function VariationSelector({ selected, setSelected, variations, p
                                 setSelected(variation);
                                 setSelectedVariation(variation.id)
                             }} className="appearance-none border border-black rounded-full w-4 h-4 checked:bg-black checked:p-1checked:border-white focus:outline-none" name={productId} id={variation.id} value={variation.id} type="radio" checked={selectedVariation == variation.id} />
-                            <img width={30} height={30} src={variation.image?.src} />
+                            <img width={30} height={30} src={variation.image?.src} alt={variation.name} />
                             <span className={`${selected && selected.id == variation.id ? 'font-bold' : ''}`}>{variation.name}</span>
                         </div>
                         <span className={`${selected && selected.id == variation.id ? 'font-bold' : ''}`}>{variation.price}</span>
