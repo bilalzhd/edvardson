@@ -238,6 +238,8 @@ ins {
   border-bottom: none;
   white-space: nowrap;
 }
+#payment-options iframe {min-height: 450px;}
+#payment-options iframe:nth-of-type(2) {display: none;}
 .main-nav { display: flex; list-style: none; justify-content: space-between; }
 .main-content { @apply h-full flex items-center justify-center my-auto mx-[2rem] }
 .heading { @apply text-[#181818] }

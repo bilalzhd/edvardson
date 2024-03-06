@@ -73,6 +73,18 @@ export default async function CheckoutPage() {
                     <UpsellProducts />
                 </div>
             </div>
+            <div className="flex px-4">
+                <div className="md:w-1/2 p-4">
+                    <h3 className="text-[20px] font-bold mb-3">Leveransmetod</h3>
+                    <div className="p-4 border rounded flex items-center gap-10">
+                        <input className="border-r border-gray-700 pr-10" type="checkbox" name="post-goods-letter" id="post-goods-letter" />
+                        <label className="text-[14px]">Posten Varubrev</label>
+                    </div>
+                </div>
+                <div className="md:w-1/2">
+                    <h3 className="text-[20px] font-bold">Betalningsmetod</h3>
+                </div>
+            </div>
             <Form countriesData={countries} />
         </div>
     )

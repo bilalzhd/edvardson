@@ -52,7 +52,7 @@ export default function ProductCategory({ currentCategory, childrenCats, product
     }
     useEffect(() => {
         products?.length > 0 && sortProducts(filters)
-    }, [filters, products?.length, sortProducts])
+    }, [filters])
 
     return (
         <div className="min-h-[23.5vh] p-[10px] xl:max-w-[80%] mx-auto 2xl:max-w-[70%] mt-4">
