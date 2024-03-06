@@ -8,6 +8,55 @@ import { AppContext } from "@/context";
 // import { FormEvent, useRef } from "react";
 // import { useFormState, useFormStatus } from "react-dom";
 
+function createKlarnaPayment() {
+    let username = "K848303_9bce3e325ac0"
+    let password = "85LhBOKpub6Z5DwJ"
+    const encoded = "Szg0ODMwM185YmNlM2UzMjVhYzA6ODVMaEJPS3B1YjZaNUR3Sg==";
+    username = btoa(username);
+    password = btoa(password);
+    const script = document.createElement("script");
+    script.src = "https://x.klarnacdn.net/kp/lib/v1/api.js";
+    script.async = true;
+
+    document.body.appendChild(script);
+
+    script.onload = () => {
+        // Perform the POST request to initiate a session
+        fetch("https://api.klarna.com/payments/v1/sessions", {
+            method: "POST",
+            body: JSON.stringify({
+                locale: "SE",
+                purchase_country: "Sweden",
+                purchase_currency: "SEK",
+                order_amount: "1000",
+                order_lines: "",
+                merchant_urls: {
+                    authorization: "https://api.klarna.com/payments/v1/sessions"
+                }
+
+            }),
+            headers: {
+                "Authorization": "Basic " + encoded// Make sure encoded is defined somewhere
+            }
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to create Klarna session');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Klarna session created:", data);
+                // Do something with the session data if needed
+            })
+            .catch(error => {
+                console.error("Error creating Klarna session:", error);
+            });
+    };
+    return script;
+}
+
+
 export default function Form({ countriesData }: any) {
     const [token, setToken] = useState("")
     const [mount, setMount] = useState(false)
@@ -36,7 +85,7 @@ export default function Form({ countriesData }: any) {
                     container: document.getElementById("#payment-options"),
                     language: "sv",
                     endpoint: "https://v1.checkout.bambora.com/",
-                    }
+                }
                 )
                 checkout.initialize(sessionToken);
                 checkout.mount(document.getElementById("payment-options") || document.body)
@@ -44,6 +93,11 @@ export default function Form({ countriesData }: any) {
         }
 
         getTokenAndSetCheckout();
+        
+        const script = createKlarnaPayment();
+
+        return () => document.body.removeChild(script);
+
     }, [cart])
 
 

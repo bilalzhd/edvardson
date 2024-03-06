@@ -8,7 +8,6 @@ import CheckoutForm from "./CheckoutForm";
 import getCountries, { getSessionToken } from "@/lib";
 import Form from "./Form";
 
-
 export const metadata: Metadata = {
     title: "Kassa",
 }
@@ -74,82 +73,26 @@ export default async function CheckoutPage() {
                 </div>
             </div>
             <div className="flex px-4">
-                <div className="md:w-1/2 p-4">
+                {/* <div className="md:w-1/2 p-4">
                     <h3 className="text-[20px] font-bold mb-3">Leveransmetod</h3>
                     <div className="p-4 border rounded flex items-center gap-10">
                         <input className="border-r border-gray-700 pr-10" type="checkbox" name="post-goods-letter" id="post-goods-letter" />
                         <label className="text-[14px]">Posten Varubrev</label>
                     </div>
-                </div>
+                </div> */}
                 <div className="md:w-1/2">
                     <h3 className="text-[20px] font-bold">Betalningsmetod</h3>
+                    <div className="p-4 border rounded flex items-center gap-10">
+                        <input className="border-r border-gray-700 pr-10" type="radio" name="payment" id="bambora" />
+                        <label className="text-[14px]" htmlFor="bambora">Bambora</label>
+                    </div>
+                    <div className="p-4 border rounded flex items-center gap-10">
+                        <input className="border-r border-gray-700 pr-10" type="radio" name="payment" id="klarna" />
+                        <label className="text-[14px]" htmlFor="klarna">Klarna</label>
+                    </div>
                 </div>
             </div>
             <Form countriesData={countries} />
         </div>
     )
 }
-
-
-
-
-// let username = "K848303_9bce3e325ac0"
-// let password = "85LhBOKpub6Z5DwJ"
-// const encoded = "Szg0ODMwM185YmNlM2UzMjVhYzA6ODVMaEJPS3B1YjZaNUR3Sg==";
-// username = btoa(username);
-// password = btoa(password);
-
-
-// export default function Page() {
-//   useEffect(() => {
-//     const script = document.createElement("script");
-//     script.src = "https://x.klarnacdn.net/kp/lib/v1/api.js";
-//     script.async = true;
-
-//     document.body.appendChild(script);
-
-//     script.onload = () => {
-//       // Perform the POST request to initiate a session
-//       fetch("https://api.klarna.com/payments/v1/sessions", {
-//         method: "POST",
-//         body: JSON.stringify({
-//             locale: "SE",
-//             purchase_country: "Sweden",
-//             purchase_currency: "SEK",
-//             order_amount: "1000",
-//             order_lines: "",
-//             merchant_urls: {
-//                 authorization: "https://api.klarna.com/payments/v1/sessions"
-//             }
-
-//         }),
-//         headers: {
-//           "Authorization": "Basic " + encoded// Make sure encoded is defined somewhere
-//         }
-//       })
-//       .then(response => {
-//         if (!response.ok) {
-//           throw new Error('Failed to create Klarna session');
-//         }
-//         return response.json();
-//       })
-//       .then(data => {
-//         console.log("Klarna session created:", data);
-//         // Do something with the session data if needed
-//       })
-//       .catch(error => {
-//         console.error("Error creating Klarna session:", error);
-//       });
-//     };
-
-//     return () => {
-//       document.body.removeChild(script);
-//     };
-//   }, []);
-
-//   return (
-//     <div id="klarna-payments-container">
-//       {/* Content if needed */}
-//     </div>
-//   );
-// }
