@@ -93,10 +93,10 @@ export default function Form({ countriesData }: any) {
         }
 
         getTokenAndSetCheckout();
-        
+
         const script = createKlarnaPayment();
 
-        return () => document.body.removeChild(script);
+        // return () => document.body.removeChild(script);
 
     }, [cart])
 
