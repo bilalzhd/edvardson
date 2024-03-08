@@ -80,17 +80,7 @@ export default async function CheckoutPage() {
                         <label className="text-[14px]">Posten Varubrev</label>
                     </div>
                 </div> */}
-                <div className="md:w-1/2">
-                    <h3 className="text-[20px] font-bold">Betalningsmetod</h3>
-                    <div className="p-4 border rounded flex items-center gap-10">
-                        <input className="border-r border-gray-700 pr-10" type="radio" name="payment" id="bambora" />
-                        <label className="text-[14px]" htmlFor="bambora">Bambora</label>
-                    </div>
-                    <div className="p-4 border rounded flex items-center gap-10">
-                        <input className="border-r border-gray-700 pr-10" type="radio" name="payment" id="klarna" />
-                        <label className="text-[14px]" htmlFor="klarna">Klarna</label>
-                    </div>
-                </div>
+                
             </div>
             <Form countriesData={countries} />
         </div>
