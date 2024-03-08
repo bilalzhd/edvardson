@@ -8,64 +8,112 @@ import { AppContext } from "@/context";
 // import { FormEvent, useRef } from "react";
 // import { useFormState, useFormStatus } from "react-dom";
 
-function createKlarnaPayment() {
-    let username = "K848303_9bce3e325ac0"
-    let password = "85LhBOKpub6Z5DwJ"
-    const encoded = "Szg0ODMwM185YmNlM2UzMjVhYzA6ODVMaEJPS3B1YjZaNUR3Sg==";
-    username = btoa(username);
-    password = btoa(password);
-    const script = document.createElement("script");
-    script.src = "https://x.klarnacdn.net/kp/lib/v1/api.js";
-    script.async = true;
 
-    document.body.appendChild(script);
-
-    script.onload = () => {
-        // Perform the POST request to initiate a session
-        fetch("https://api.klarna.com/payments/v1/sessions", {
-            method: "POST",
-            body: JSON.stringify({
-                locale: "SE",
-                purchase_country: "Sweden",
-                purchase_currency: "SEK",
-                order_amount: "1000",
-                order_lines: "",
-                merchant_urls: {
-                    authorization: "https://api.klarna.com/payments/v1/sessions"
-                }
-
-            }),
+async function f() {
+    let username = "PK250113_0a0956f8edfc"
+    let password = "tFAcWacQN4SzUNzq"
+    let encoded = Buffer.from(`${username}:${password}`).toString('base64');
+    const resp = await fetch(
+        `https://api.playground.klarna.com/payments/v1/sessions`,
+        {
+            method: 'POST',
             headers: {
-                "Authorization": "Basic " + encoded// Make sure encoded is defined somewhere
-            }
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Failed to create Klarna session');
+                'Content-Type': 'application/json;charset=utf-8',
+                'Authorization': 'Basic ' + encoded
+            },
+            body: JSON.stringify({
+                locale: "sv-SE",
+                purchase_country: "SE",
+                purchase_currency: "SEk",
+                order_amount: "1800",
+                order_lines: [
+                    {
+                        type: 'physical',
+                        reference: '1',
+                        name: 'Classic Low Bridge Sunglasses',
+                        color: 'White',
+                        size: 'Small',
+                        imgSrc: '/sunglasses2-min.jpg',
+                        quantity: 0,
+                        quantity_unit: 'pcs',
+                        unit_price: 25000,
+                        tax_rate: 2500,
+                        total_amount: 10000
+                    }
+                ],
+                intent: "buy",
+                merchant_urls: {
+                    authorization: "https://edvardson.netlify.app/checkout?order=successful"
                 }
-                return response.json();
+
             })
-            .then(data => {
-                console.log("Klarna session created:", data);
-                // Do something with the session data if needed
-            })
-            .catch(error => {
-                console.error("Error creating Klarna session:", error);
-            });
-    };
-    return script;
+        }
+    );
+
+    const data = await resp.json();
+    console.log(data);
+}
+
+function createKlarnaPayment() {
+    let username = "PK250113_0a0956f8edfc"
+    let password = "tFAcWacQN4SzUNzq"
+    let encoded = "UEsyNTAxMTNfMGEwOTU2ZjhlZGZjOnRGQWNXYWNRTjRTelVOenE="
+    console.log(encoded)
+    const clientId = "klarna_test_client_OWdzWEVkQ1A3QSRXb3JQRXF6OUtTU08zSmooNjh2N0ssNDExYmVlNWYtZTc2NS00MTBmLTk4MmYtOWM1MjNjNTYzMjI2LDEsMnRxb21tYXJmOXZUWVA4bWNmL3puT0Q1VThmbm1QS3BwaXdBZDhIRGZZND0";
+
+    // Perform the POST request to initiate a session
+    fetch("", {
+        method: "POST",
+        body: JSON.stringify({
+            locale: "SE",
+            purchase_country: "Sweden",
+            purchase_currency: "SEK",
+            order_amount: "1000",
+            order_lines: [
+                {
+                    type: 'physical',
+                    reference: '1',
+                    name: 'Classic Low Bridge Sunglasses',
+                    color: 'White',
+                    size: 'Small',
+                    imgSrc: '/sunglasses2-min.jpg',
+                    quantity: 0,
+                    quantity_unit: 'pcs',
+                    unit_price: 25000,
+                    tax_rate: 2500,
+                },
+            ],
+            merchant_urls: {
+                authorization: "https://edvardson.netlify.app/api/authorize_klarna",
+            }
+
+        }),
+        headers: {
+            "Authorization": "Basic " + encoded
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to create Klarna session');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Klarna session created:", data);
+            // Do something with the session data if needed
+        })
+        .catch(error => {
+            console.error("Error creating Klarna session:", error);
+        });
 }
 
 
 export default function Form({ countriesData }: any) {
     const [token, setToken] = useState("")
-    const [mount, setMount] = useState(false)
-    // const [states, setStates] = useState([])
     const [cart, ,] = useContext(AppContext);
 
-
-
     useEffect(() => {
+        f();
         const data = {
             order: {
                 id: (cart as Cart)?.cart_hash?.substring(0, 19),
@@ -94,7 +142,7 @@ export default function Form({ countriesData }: any) {
 
         getTokenAndSetCheckout();
 
-        const script = createKlarnaPayment();
+        createKlarnaPayment();
 
         // return () => document.body.removeChild(script);
 

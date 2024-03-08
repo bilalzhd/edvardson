@@ -110,8 +110,7 @@ export async function getProductVariations(productId: number) {
 export async function getProductsByRelatedIds(relatedIds: number[], lang = 'sv') {
     try {
         const relatedIdsString = relatedIds?.join(',');
-        console.log(relatedIdsString);
-        const response = await api.get(`products?include=${relatedIds}`, {
+        const response = await api.get(`products?include=${relatedIdsString}`, {
             per_page: 10, lang
         });
 
