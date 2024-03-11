@@ -4,7 +4,6 @@ import CheckoutInvoiceSummary from "./CheckoutInvoiceSummary";
 import UpsellProducts from "./UpsellProducts";
 import CheckoutItems from "./CheckoutItems";
 import { Metadata } from "next";
-import CheckoutForm from "./CheckoutForm";
 import getCountries, { getSessionToken } from "@/lib";
 import Form from "./Form";
 

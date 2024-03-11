@@ -1,6 +1,4 @@
 "use client"
-import Select from "react-select";
-import { countryOptions as options } from "@/lib/constants";
 import { useEffect, useState } from "react";
 import { getProductsForCheckout } from "@/lib/store";
 import ProductCarouselCheckout from "./ProductCarouselCheckout";

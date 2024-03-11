@@ -9,7 +9,7 @@ type Country = {
     countryName: string
 }
 
-export default function CountrySelector({ countries }: any) {
+export default function CountrySelector({ data, countries }: any) {
     const [selected, setSelected] = useState("Sweden / SEK");
     const [showCountries, setShowCountries] = useState(false);
     const [search, setSearch] = useState("");
@@ -29,7 +29,7 @@ export default function CountrySelector({ countries }: any) {
     return (
         <div className="relative">
             <div className="px-4 py-2 flex w-full rounded border border-gray-600 items-center justify-between" onClick={() => setShowCountries(prev => !prev)}>
-                <input type="button" value={selected} />
+                <input {...data} type="button" value={selected} />
                 <ChevronDown className="w-4 h-4" />
             </div>
             <div className={`${showCountries ? 'block' : 'hidden'} absolute top-[42px] w-full`}>

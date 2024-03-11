@@ -5,62 +5,74 @@ import { getSessionToken, getStates } from "@/lib";
 import { useContext, useEffect, useState } from "react";
 import { InlineCheckout } from '@bambora/checkout-sdk-web';
 import { AppContext } from "@/context";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+
 // import { FormEvent, useRef } from "react";
 // import { useFormState, useFormStatus } from "react-dom";
 
 // let username = process.env.KLARNA_USERNAME || "PK250113_0a0956f8edfc"
 // let password = process.env.KLARNA_PASSWORD || "tFAcWacQN4SzUNzq"
-
 async function createKlarnaPayment() {
+    const bodyData = {
+        locale: "sv-SE",
+        purchase_country: "SE",
+        purchase_currency: "SEk",
+        order_amount: "5000",
+        order_lines: [
+            {
+                type: 'physical',
+                reference: '1',
+                name: 'Classic Low Bridge Sunglasses',
+                color: 'White',
+                size: 'Small',
+                imgSrc: '/sunglasses2-min.jpg',
+                quantity: 0,
+                quantity_unit: 'pcs',
+                unit_price: 5000,
+                tax_rate: 0,
+                total_amount: 5000,
+                total_tax_amount: 0,
+            }
+        ],
+        intent: "buy",
+        merchant_urls: {
+            authorization: "https://edvardson.netlify.app/kassa?order=successful"
+        }
+    
+    }
     let username = "PK250113_0a0956f8edfc";
     let password = "tFAcWacQN4SzUNzq";
-    let encoded = Buffer.from(`${username}:${password}`).toString('base64');
-    const resp = await fetch(
-        `https://api.playground.klarna.com/payments/v1/sessions`,
-        {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8',
-                'Authorization': 'Basic UEsyNTAxMTNfMGEwOTU2ZjhlZGZjOnRGQWNXYWNRTjRTelVOenE='
-            },
-            body: JSON.stringify({
-                locale: "sv-SE",
-                purchase_country: "SE",
-                purchase_currency: "SEk",
-                order_amount: "1800",
-                order_lines: [
-                    {
-                        type: 'physical',
-                        reference: '1',
-                        name: 'Classic Low Bridge Sunglasses',
-                        color: 'White',
-                        size: 'Small',
-                        imgSrc: '/sunglasses2-min.jpg',
-                        quantity: 0,
-                        quantity_unit: 'pcs',
-                        unit_price: 25000,
-                        tax_rate: 2500,
-                        total_amount: 10000
-                    }
-                ],
-                intent: "buy",
-                merchant_urls: {
-                    authorization: "https://edvardson.netlify.app/checkout?order=successful"
-                }
-
-            })
+    let encodedAuth = Buffer.from(`${username}:${password}`).toString('base64');
+    const axiosInstance = axios.create({
+        baseURL: "https://api.playground.klarna.com",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic ' + encodedAuth
         }
-    );
+    })
+    const { data } = await axiosInstance.post("/payments/v1/sessions", bodyData)
 
-    const data = await resp.json();
     console.log(data);
 }
 
 
+type Inputs = {
+    email: string; firstName: string; lastName: string; billingAddress1: string; billingAddress2: string;
+    billingCity: string; country: string; billingPhone: string; billingPostcode: string; message: string;
+}
+
 export default function Form({ countriesData }: any) {
-    const [ token, setToken ] = useState("")
-    const [ cart, ,] = useContext(AppContext);
-    const [ paymentMethod, setPaymentMethod ] = useState<"bambora" | "klarna">("bambora");
+    const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
+
+    function onSubmit(data: Inputs) {
+        console.log(data)
+        console.log(errors)
+    }
+
+    const [token, setToken] = useState("")
+    const [cart, ,] = useContext(AppContext);
+    const [paymentMethod, setPaymentMethod] = useState<"bambora" | "klarna">("bambora");
 
     useEffect(() => {
 
@@ -75,7 +87,7 @@ export default function Form({ countriesData }: any) {
                 cancel: "https://edvardson.se/cancel"
             }
         }
-        async function getTokenAndSetBamboraCheckout() {
+        async function getTokenAndSetCheckout() {
             const sessionToken = await getSessionToken(data)
             if (sessionToken) {
                 setToken(sessionToken)
@@ -89,13 +101,14 @@ export default function Form({ countriesData }: any) {
                 checkout.mount(document.getElementById("payment-options") || document.body)
             }
         }
-        if(paymentMethod === "bambora") {
-            getTokenAndSetBamboraCheckout();
-        } else if (paymentMethod === "klarna") {
-            createKlarnaPayment();
-        }
 
-    }, [cart, paymentMethod])
+        getTokenAndSetCheckout();
+        // if(paymentMethod === "bambora") {
+        // } else if (paymentMethod === "klarna") {
+            createKlarnaPayment();
+        // }
+
+    }, [cart])
 
 
     return (
@@ -111,52 +124,52 @@ export default function Form({ countriesData }: any) {
                     <label className="text-[14px]" htmlFor="klarna">Klarna</label>
                 </div>
             </div>
-            <form id="checkoutForm" className="px-4 pt-6 pb-3 md:max-w-[calc(100%-270px)]">
+            <form onSubmit={handleSubmit(onSubmit)} className="px-4 pt-6 pb-3 md:max-w-[calc(100%-270px)]" noValidate>
                 <div className="grid grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-2">
                     <div className="sm:col-span-2">
                         <div className="mt-2.5">
-                            <input placeholder="E-postadress*" type="email" name="email" id="email" autoComplete="email" className="input-field" required />
+                            <input {...register("email", { required: true })} placeholder="E-postadress*" type="email" id="email" autoComplete="email" className="input-field" />
                         </div>
                     </div>
                     <div>
                         <div className="mt-2.5">
-                            <input placeholder="Förnamn*" type="text" name="billing-first_name" id="billing-first_name" autoComplete="given-name" className="input-field" required />
+                            <input {...register("firstName", { required: true })} placeholder="Förnamn*" type="text" id="firstName" autoComplete="given-name" className="input-field" />
                         </div>
                     </div>
                     <div>
                         <div className="mt-2.5">
-                            <input placeholder="Efternamn*" type="text" name="billing-last_name" id="billing-last_name" autoComplete="family-name" className="input-field" required />
+                            <input placeholder="Efternamn*" type="text" {...register("lastName", { required: true })} id="lastName" autoComplete="family-name" className="input-field" />
                         </div>
                     </div>
                     <div className="sm:col-span-2">
                         <div className="mt-2.5">
-                            <input className="input-field" placeholder="Adress" type="text" id="billing-address_1" autoCapitalize="sentences" autoComplete="address-line1" name="billing-address_1" aria-label="Adress" aria-invalid="true" aria-describedby="validate-error-billing_address_1" required />
+                            <input className="input-field" placeholder="Adress" type="text" id="billingAddress1" autoCapitalize="sentences" autoComplete="address-line1" aria-label="Adress" aria-invalid="true" {...register("billingAddress1")} />
                         </div>
                     </div>
                     <div className="sm:col-span-2">
                         <div className="mt-2.5">
-                            <input className="input-field" placeholder="Lägenhet, svit etc. (valfritt)" type="text" id="billing-address_2" autoCapitalize="sentences" name="billing-address_2" autoComplete="address-line1" aria-label="" aria-invalid="true" title="Lägenhet, svit etc. (valfritt)" aria-describedby="validate-error-billing_address_1" />
+                            <input className="input-field" placeholder="Lägenhet, svit etc. (valfritt)" type="text" id="billingAddress2" autoCapitalize="sentences" autoComplete="address-line1" aria-label="" aria-invalid="true" title="Lägenhet, svit etc. (valfritt)"  {...register("billingAddress2")} />
                         </div>
                     </div>
                     <div className="space-y-2">
                         <label className="mb-4">Delivery Country</label>
-                        <CountrySelector countries={countriesData?.shippingCountries} />
+                        <CountrySelector data={{ ...register("country") }} countries={countriesData?.shippingCountries} />
                     </div>
                     <div className="flex items-end">
-                        <input type="text" required className="input-field" name="billing-city" id="billing-city" placeholder="Ort" />
+                        <input type="text" className="input-field" id="billingCity" placeholder="Ort" {...register("billingCity", { required: true })} />
                     </div>
                     <div>
-                        <input type="text" required className="input-field" name="billing-postcode" id="billing-postcode" placeholder="Postnummer" />
+                        <input type="text" className="input-field" id="billingPostcode" placeholder="Postnummer" {...register("billingPostcode", { required: true })} />
                     </div>
                     <div>
-                        <input type="text" required name="billing-phone" id="billing-phone" placeholder="Telefon (valfritt)" className="input-field" />
+                        <input type="text" id="billingPhone" placeholder="Telefon (valfritt)" className="input-field" {...register("billingPhone", { required: true })} />
                     </div>
                     <div className="sm:col-span-2">
                         <label htmlFor="message" className="block text-sm font-semibold leading-6 text-gray-900">
                             Message
                         </label>
                         <div className="mt-2.5">
-                            <textarea name="message" id="message" rows={4} className="input-field" />
+                            <textarea id="message" {...register("message")} rows={4} className="input-field" />
                         </div>
                     </div>
                 </div>

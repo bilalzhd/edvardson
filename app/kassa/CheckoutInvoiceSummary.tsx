@@ -1,6 +1,6 @@
 "use client"
 import { AppContext } from '@/context'
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 
 export default function CheckoutInvoiceSummary() {
     const [cart, , ] = useContext(AppContext)
