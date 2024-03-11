@@ -47,8 +47,11 @@ async function createKlarnaPayment() {
     const axiosInstance = axios.create({
         baseURL: "https://api.playground.klarna.com",
         headers: {
+             'Accept': 'application/json, text/plain, */*',
             'Content-Type': 'application/json',
-            'Authorization': 'Basic ' + encodedAuth
+            'Authorization': 'Basic ' + encodedAuth,
+            'Origin': 'https://edvardson.netlify.app'
+            
         }
     })
     const { data } = await axiosInstance.post("/payments/v1/sessions", bodyData)
