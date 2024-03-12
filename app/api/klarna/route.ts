@@ -13,7 +13,7 @@ export async function POST(req: any, res: any) {
             locale: "sv-SE",
             purchase_country: "SE",
             purchase_currency: "SEk",
-            order_amount: "5000",
+            order_amount: 5000,
             order_lines: [
                 {
                     type: 'physical',
