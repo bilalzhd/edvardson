@@ -56,8 +56,8 @@ fetch("https://api.playground.klarna.com/payments/v1/sessions", {
         'Authorization': `Basic ${encodedAuth}`,
     },
 
-    body: JSON.stringify(bodyData),
-     mode: 'no-cors' 
+    body: JSON.stringify(bodyData)
+     
 })
 .then(response => {
     if (!response.ok) {
