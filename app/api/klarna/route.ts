@@ -52,7 +52,7 @@ export async function POST(req: any, res: any) {
         },
     
         body: JSON.stringify(bodyData),
-         mode: 'no-cors' 
+      
     })
     .then(response => {
         if (!response.ok) {
