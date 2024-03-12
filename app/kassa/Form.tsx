@@ -49,7 +49,7 @@ async function createKlarnaPayment() {
 const encodedAuth = btoa(`${username}:${password}`);
  
 // Fetch API request
-fetch("https://api.playground.klarna.com/payments/v1/sessions", {
+fetch("api/klarna", {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
