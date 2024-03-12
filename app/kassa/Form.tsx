@@ -43,34 +43,17 @@ async function createKlarnaPayment() {
     }
     let username = "PK250113_0a0956f8edfc";
     let password = "tFAcWacQN4SzUNzq";
- // Assuming you have 'username' and 'password' variables defined
+    let encodedAuth = Buffer.from(`${username}:${password}`).toString('base64');
+    const axiosInstance = axios.create({
+        baseURL: "https://api.playground.klarna.com",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic ' + encodedAuth
+        }
+    })
+    const { data } = await axiosInstance.post("/payments/v1/sessions", bodyData)
 
-// Encode username and password for Basic authentication
-const encodedAuth = btoa(`${username}:${password}`);
- 
-// Fetch API request
-fetch("api/klarna", {
-    method: 'POST',
-    
-
-    body: JSON.stringify(bodyData)
-     
-})
-.then(response => {
-    if (!response.ok) {
-        //throw new Error('Network response was not ok');
-         console.log("res:");
-        console.log(response);
-    }
-    return response.json();
-})
-.then(data => {
     console.log(data);
-})
-.catch(error => {
-    console.error('There was a problem with your fetch operation:', error);
-});
-
 }
 
 
