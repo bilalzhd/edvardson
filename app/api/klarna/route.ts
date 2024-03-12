@@ -1,15 +1,9 @@
 import { NextResponse } from "next/server";
- 
-
-export async function GET(){
-
-    return NextResponse.json("i am sajjad")
-}
-let username = "PK250113_0a0956f8edfc";
-let password = "tFAcWacQN4SzUNzq";
- 
 
 export async function POST(req: any, res: any) {
+    let username = process.env.KLARNA_USERNAME;
+    let password = process.env.KLARNA_PASSWORD;
+    
     try {
         const bodyData = {
             locale: "sv-SE",
@@ -38,12 +32,8 @@ export async function POST(req: any, res: any) {
             }
         };
 
-     
-
-        // Encode username and password for Basic authentication
         const encodedAuth = btoa(`${username}:${password}`);
 
-        // Fetch API request
         const klarnaResponse = await fetch("https://api.playground.klarna.com/payments/v1/sessions", {
             method: 'POST',
             headers: {
@@ -58,14 +48,12 @@ export async function POST(req: any, res: any) {
         }
 
         const klarnaData = await klarnaResponse.json();
-        console.log('Klarna response:', klarnaData);
+        // console.log('Klarna response:', klarnaData);
 
-        // Return Klarna response as JSON
         return NextResponse.json({ message: "Klarna session created successfully", data: klarnaData });
     } catch (error) {
         console.error("Error processing POST request:", error);
 
-        // If an error occurs, send an appropriate error response
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
     }
 }

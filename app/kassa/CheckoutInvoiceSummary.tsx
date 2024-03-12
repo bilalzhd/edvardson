@@ -1,12 +1,12 @@
 "use client"
-import { AppContext } from '@/context'
-import { useContext } from 'react'
+import { AppContext } from '@/context';
+import { useContext } from 'react';
 
 export default function CheckoutInvoiceSummary() {
     const [cart, , ] = useContext(AppContext)
     return (
         <>
-            <h3 className="border-b pb-4 mb-[15px]">{(cart as Cart).items?.length || 0} items</h3>
+            <h3 className="border-b pb-4 mb-[15px]">{(cart as Cart)?.items?.length || 0} items</h3>
             <div className="flex-col flex text-[14px]">
                 <div className="flex justify-between w-full text-md mb-1">
                     <span>Articles: </span>

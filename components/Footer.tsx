@@ -62,8 +62,8 @@ function Footer() {
             <Link href="/integritetspolicy" className="block hover:underline">Integritetspolicy</Link>
           </div>
           <div className="md:w-1/4 w-full px-4 flex gap-3 md:justify-center items-center">
-            <a><img src="https://themes.abicart.com/components/tws-social-icons/1.1.11/files/assets/facebook-rounded_white.svg" alt="Facebook Icon" /></a>
-            <a><img src="https://themes.abicart.com/components/tws-social-icons/1.1.11/files/assets/instagram-rounded_white.svg" alt="Instagram Icon" /></a>
+            <a rel='nofollow' target='_blank' href='https://www.facebook.com/edvardson.se/'><img src="https://themes.abicart.com/components/tws-social-icons/1.1.11/files/assets/facebook-rounded_white.svg" alt="Facebook Icon" /></a>
+            <a href='https://www.instagram.com/edvardson_sweden_ab/' rel='nofollow' target='_blank'><img src="https://themes.abicart.com/components/tws-social-icons/1.1.11/files/assets/instagram-rounded_white.svg" alt="Instagram Icon" /></a>
           </div>
           <div className="md:w-1/4 w-full px-4 flex md:justify-center">
             <img className="max-w-[250px] object-contain" src="https://cdn.klarna.com/1.0/shared/image/generic/badge/sv_se/checkout/short-white.png?width=510" alt="Klarna Payment" />

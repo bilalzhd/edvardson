@@ -173,3 +173,7 @@ type OrderData = {
         cancel: string,
     }
 }
+type BamboraData = {
+    order: { id: string; amount: number; currency: string; }
+    url: { accept: string; cancel: string; }
+}
