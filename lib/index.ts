@@ -79,7 +79,7 @@ export async function createKlarnaPayment() {
     }
 
     try {
-        const response = await fetch("http://localhost:3000/api/klarna", {
+        const response = await fetch(`${process.env.PUBLIC_URL}/api/klarna`, {
             method: 'POST',
             body: JSON.stringify(bodyData)
         })

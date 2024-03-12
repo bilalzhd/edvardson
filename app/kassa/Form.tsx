@@ -1,4 +1,4 @@
-import { createKlarnaPayment } from "@/lib";
+import getCountries, { createKlarnaPayment } from "@/lib";
 import BamboraCheckout from "./BamboraCheckout";
 import CheckoutForm from "./CheckoutForm";
 import KlarnaCheckout from "./KlarnaCheckout";
@@ -6,13 +6,13 @@ import PaymentMethodSelector from "./PaymentMethodSelector";
 
 
 
-export default async function Form({ countriesData }: any) {
+export default async function Form() {
     const klarnaData = await createKlarnaPayment();
-    console.log(klarnaData?.data.payment_method_categories)
+    const countries = await getCountries();
     return (
         <>
             <PaymentMethodSelector />
-            <CheckoutForm countries={countriesData} />
+            <CheckoutForm countries={countries} />
             <div className="px-4 pt-6 pb-3 md:max-w-[calc(100%-270px)]">
                 {/* <BamboraCheckout /> */}
                 <KlarnaCheckout clientToken={klarnaData?.data?.client_token} />

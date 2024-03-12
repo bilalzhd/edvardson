@@ -14,7 +14,6 @@ export const metadata: Metadata = {
 
 
 export default async function CheckoutPage() {
-    const countries = await getCountries();
 
     return (
         <div className="px-4 md:pr-[60px] md:pl-[40px] py-[30px]">
@@ -81,7 +80,7 @@ export default async function CheckoutPage() {
                 </div> */}
                 
             </div>
-            <Form countriesData={countries} />
+            <Form />
         </div>
     )
 }

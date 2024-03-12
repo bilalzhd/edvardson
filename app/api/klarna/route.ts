@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
 
+export async function GET() {
+    return NextResponse.json({name: "Billa"})
+}
+
 export async function POST(req: any, res: any) {
     let username = process.env.KLARNA_USERNAME;
     let password = process.env.KLARNA_PASSWORD;
@@ -48,8 +52,8 @@ export async function POST(req: any, res: any) {
         }
 
         const klarnaData = await klarnaResponse.json();
-
         return NextResponse.json({ message: "Klarna session created successfully", data: klarnaData });
+        
     } catch (error) {
         console.error("Error processing POST request:", error);
 
