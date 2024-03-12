@@ -1,6 +1,6 @@
 # Edvardson
 
-Edvardson is a [brief description of your project, such as a web application, API, or utility tool].
+Edvardson is a online shop using woocommerce as backend and next js for frontend, they sell hunting products and located in Sweden
 
 ## Getting Started
 
