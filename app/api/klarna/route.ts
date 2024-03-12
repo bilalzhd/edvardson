@@ -58,7 +58,8 @@ export async function POST(req: any, res: any) {
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-        return response.json();
+         return NextResponse.json({ message: "Data received successfully", data: response.json() });
+      //  return response.json();
     })
     .then(data => {
         console.log(data);
@@ -66,7 +67,7 @@ export async function POST(req: any, res: any) {
     .catch(error => {
         console.error('error:', error);
     });
-        return NextResponse.json({ message: "Data received successfully", data: req });
+       
     } catch (error) {
         console.error("Error processing POST request:", error);
 
