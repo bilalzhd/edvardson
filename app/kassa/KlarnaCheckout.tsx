@@ -7,6 +7,7 @@ declare global {
 }
 
 declare var Klarna: any;
+
 export default function KlarnaCheckout({ clientToken }: { clientToken: string }) {
     useEffect(() => {
         const script = document.createElement('script');
