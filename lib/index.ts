@@ -25,6 +25,7 @@ export const getStates = async (countryCode: string) => {
 }
 
 export default getCountries;
+
 export async function getSessionToken(orderData: OrderData) {
     const accessToken = "pmwdw2rLJvXrfu9VVv6O";
     const merchantNumber = "P859110602";
@@ -46,8 +47,6 @@ export async function getSessionToken(orderData: OrderData) {
 
     return token;
 }
-
-
 
 export async function createKlarnaPayment() {
     const bodyData = {
@@ -88,8 +87,8 @@ export async function createKlarnaPayment() {
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-
         return data;
+
     } catch (error) {
         console.error('There was a problem with your fetch operation:', error);
     };
