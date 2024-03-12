@@ -51,17 +51,16 @@ const encodedAuth = btoa(`${username}:${password}`);
 // Fetch API request
 fetch("api/klarna", {
     method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Basic ${encodedAuth}`,
-    },
+    
 
     body: JSON.stringify(bodyData)
      
 })
 .then(response => {
     if (!response.ok) {
-        throw new Error('Network response was not ok');
+        //throw new Error('Network response was not ok');
+         console.log("res:");
+        console.log(response);
     }
     return response.json();
 })
