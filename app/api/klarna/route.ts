@@ -48,7 +48,6 @@ export async function POST(req: any, res: any) {
         }
 
         const klarnaData = await klarnaResponse.json();
-        // console.log('Klarna response:', klarnaData);
 
         return NextResponse.json({ message: "Klarna session created successfully", data: klarnaData });
     } catch (error) {
