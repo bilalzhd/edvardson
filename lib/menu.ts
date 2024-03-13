@@ -42,7 +42,7 @@ export async function getMenuItems() {
     }
   }`;
   try {
-    const response = await fetch(`https://merablog.merakommunikation.se/graphql`, {
+    const response = await fetch(`${process.env.WORDPRESS_API_URL}/graphql`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
