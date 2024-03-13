@@ -35,7 +35,7 @@ export default async function KlarnaCheckout() {
     return (
         <div>
             <img src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg" alt="" />
-            <div dangerouslySetInnerHTML={{ __html: klarnaData?.data?.html_snippet }}>
+            <div dangerouslySetInnerHTML={{ __html: klarnaData?.data?.html_snippet || "" }}>
             </div>
         </div>
 
