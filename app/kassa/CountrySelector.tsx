@@ -37,7 +37,7 @@ export default function CountrySelector({ data, countries }: any) {
                     <input type="text" onChange={(e) => setSearch(e.target.value)} className="border-gray-600 border-b border-r border-l focus:outline-none px-4 py-2 w-full tws-react-common--search-dropdown-header-input form-control" placeholder="Search..." />
                 </div>
                 <ul className={`bg-white border p-4 space-y-2 tws-react-common--search-dropdown-ul max-h-[300px] overflow-y-auto cursor-pointer`} onClick={handleClick}>
-                    {filteredCountries.map((c: Country) => {
+                    {filteredCountries?.map((c: Country) => {
                         return (
                             <li key={c.countryCode} data-value={c.countryCode} className="tws-react-common--search-dropdown-item">
                                 <a className="w-full">
@@ -46,7 +46,7 @@ export default function CountrySelector({ data, countries }: any) {
                             </li>
                         )
                     })}
-                    {filteredCountries.length < 1 && <li>No Countries Found...</li>}
+                    {filteredCountries?.length < 1 && <li>No Countries Found...</li>}
                 </ul>
             </div>
         </div>

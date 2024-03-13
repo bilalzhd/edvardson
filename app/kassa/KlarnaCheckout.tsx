@@ -1,45 +1,44 @@
-"use client"
-import { useEffect } from 'react'
-declare global {
-    interface Window {
-        klarnaAsyncCallback?: Function;
+import { createKlarnaCheckout } from "@/lib"
+import { getCart } from "@/lib/store"
+
+const bodyData = {
+    purchase_country: "SE",
+    purchase_currency: "SEK",
+    locale: "sv-SE",
+    order_amount: 50000,
+    order_tax_amount: 4545,
+    order_lines: [
+        {
+            type: "physical",
+            reference: "19-402-USA",
+            name: "Red T-Shirt",
+            quantity: 5,
+            quantity_unit: "pcs",
+            unit_price: 10000,
+            tax_rate: 1000,
+            total_amount: 50000,
+            total_discount_amount: 0,
+            total_tax_amount: 4545
+        }
+    ],
+    merchant_urls: {
+        terms: "https://edvardson.netlify.app/terms",
+        checkout: "https://edvardson.netlify.app/checkout?order_id={checkout.order.id}",
+        confirmation: "https://edvardson.netlify.app/confirmation?order_id={checkout.order.id}",
+        push: "https://edvardson.netlify.app/api/push?order_id={checkout.order.id}"
     }
 }
 
-declare var Klarna: any;
-
-export default function KlarnaCheckout({ clientToken }: { clientToken: string }) {
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.src = "https://x.klarnacdn.net/kp/lib/v1/api.js";
-        script.async = true;
-        document.body.appendChild(script)
-        script.onload = () => {
-            window.klarnaAsyncCallback = function () {
-                Klarna?.Payments.init({
-                    client_token: clientToken
-                });
-                Klarna?.Payments.load({
-                    container: '#klarna-payovertime-container',
-                    payment_method_category: "pay_now",
-                }, function (res: any) {
-                    console.debug(res);
-                })
-            };
-        }
-
-        return () => {
-            document.body.removeChild(script);
-        }
-    }, []);
-
-
+export default async function KlarnaCheckout() {
+    // const cart = await getCart(cartKey);
+    const klarnaData = await createKlarnaCheckout(bodyData)
     return (
         <div>
             <img src="https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg" alt="" />
-            <div id="klarna-payovertime-container">
+            <div dangerouslySetInnerHTML={{ __html: klarnaData?.data?.html_snippet }}>
             </div>
         </div>
 
     )
 }
+

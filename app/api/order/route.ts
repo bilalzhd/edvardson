@@ -1,18 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 
-// export async function GET() {
-//     return NextResponse.json({name: "Billa"})
-// }
-
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: Request, res: NextResponse<ResponseData>) {
     let username = process.env.KLARNA_USERNAME;
     let password = process.env.KLARNA_PASSWORD;
-    
+    const bodyData = await req.json();
+
     try {
-        const bodyData = req.body
+        
         const encodedAuth = btoa(`${username}:${password}`);
 
-        const klarnaResponse = await fetch("https://api.playground.klarna.com/payments/v1/sessions", {
+        const klarnaResponse = await fetch("https://api.playground.klarna.com/checkout/v3/orders", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -26,7 +23,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         }
 
         const klarnaData = await klarnaResponse.json();
-        return NextResponse.json({ message: "Klarna session created successfully", data: klarnaData });
+        return NextResponse.json(({ message: "Klarna order created successfully", data: klarnaData }), {status: 201});
 
     } catch (error) {
         console.error("Error processing POST request:", error);

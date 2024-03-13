@@ -1,13 +1,10 @@
-import getCountries, { createKlarnaPayment } from "@/lib";
+import getCountries, { createKlarnaCheckout } from "@/lib";
 import BamboraCheckout from "./BamboraCheckout";
 import CheckoutForm from "./CheckoutForm";
-import KlarnaCheckout from "./KlarnaCheckout";
 import PaymentMethodSelector from "./PaymentMethodSelector";
-
-
+import KlarnaCheckout from "./KlarnaCheckout";
 
 export default async function Form() {
-    const klarnaData = await createKlarnaPayment();
     const countries = await getCountries();
     return (
         <>
@@ -15,13 +12,12 @@ export default async function Form() {
             <CheckoutForm countries={countries} />
             <div className="px-4 pt-6 pb-3 md:max-w-[calc(100%-270px)]">
                 {/* <BamboraCheckout /> */}
-                <KlarnaCheckout clientToken={klarnaData?.data?.client_token} />
+                <KlarnaCheckout />
                 <PlaceOrder />
             </div>
         </>
     )
 }
-
 
 function PlaceOrder() {
     return (

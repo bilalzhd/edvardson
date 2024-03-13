@@ -4,14 +4,11 @@ import CheckoutInvoiceSummary from "./CheckoutInvoiceSummary";
 import UpsellProducts from "./UpsellProducts";
 import CheckoutItems from "./CheckoutItems";
 import { Metadata } from "next";
-import getCountries, { getSessionToken } from "@/lib";
 import Form from "./Form";
 
 export const metadata: Metadata = {
     title: "Kassa",
 }
-
-
 
 export default async function CheckoutPage() {
 

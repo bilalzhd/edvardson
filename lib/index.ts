@@ -48,35 +48,21 @@ export async function getSessionToken(orderData: OrderData) {
     return token;
 }
 
-export async function createKlarnaPayment() {
-    const bodyData = {
-        locale: "sv-SE",
-        purchase_country: "SE",
-        purchase_currency: "SEk",
-        order_amount: "5000",
-        order_lines: [
-            {
-                type: 'physical',
-                reference: '1',
-                name: 'Classic Low Bridge Sunglasses',
-                color: 'White',
-                size: 'Small',
-                imgSrc: '/sunglasses2-min.jpg',
-                quantity: 0,
-                quantity_unit: 'pcs',
-                unit_price: 5000,
-                tax_rate: 0,
-                total_amount: 5000,
-                total_tax_amount: 0,
-            }
-        ],
-        intent: "buy",
-        merchant_urls: {
-            authorization: "https://edvardson.netlify.app/kassa?order=successful"
+export async function getTokenAndSetCheckout(data: BamboraData) {
+    const sessionToken = await getSessionToken(data)
+    if (sessionToken) {
+        const checkout = new InlineCheckout(sessionToken, {
+            container: document.getElementById("#payment-options"),
+            language: "sv",
+            endpoint: "https://v1.checkout.bambora.com/",
         }
-
+        )
+        checkout.initialize(sessionToken);
+        checkout.mount(document.getElementById("payment-options") || document.body)
     }
+}
 
+export async function createKlarnaPayment(bodyData: any) {
     try {
         const response = await fetch(`${process.env.PUBLIC_URL}/api/klarna`, {
             method: 'POST',
@@ -92,19 +78,24 @@ export async function createKlarnaPayment() {
     } catch (error) {
         console.error('There was a problem with your fetch operation:', error);
     };
-
 }
+export async function createKlarnaCheckout(bodyData: any) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/order`, {
+            method: 'POST',
+            body: JSON.stringify(bodyData),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
 
-export async function getTokenAndSetCheckout(data: BamboraData) {
-    const sessionToken = await getSessionToken(data)
-    if (sessionToken) {
-        const checkout = new InlineCheckout(sessionToken, {
-            container: document.getElementById("#payment-options"),
-            language: "sv",
-            endpoint: "https://v1.checkout.bambora.com/",
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
-        )
-        checkout.initialize(sessionToken);
-        checkout.mount(document.getElementById("payment-options") || document.body)
-    }
+        return data;
+
+    } catch (error) {
+        console.error('There was a problem with your fetch operation:', error);
+    };
 }
