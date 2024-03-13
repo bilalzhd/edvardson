@@ -81,7 +81,7 @@ export async function createKlarnaPayment(bodyData: any) {
 }
 export async function createKlarnaCheckout(bodyData: any) {
     try {
-        const response = await fetch(`http://localhost:3000/api/order`, {
+        const response = await fetch(`https://edvardson.netlify.app/api/order`, {
             method: 'POST',
             body: JSON.stringify(bodyData),
             headers: {

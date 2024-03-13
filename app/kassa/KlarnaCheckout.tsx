@@ -23,7 +23,7 @@ const bodyData = {
     ],
     merchant_urls: {
         terms: "https://edvardson.netlify.app/terms",
-        checkout: "https://edvardson.netlify.app/checkout?order_id={checkout.order.id}",
+        checkout: "https://edvardson.netlify.app/kassa?order_id={checkout.order.id}",
         confirmation: "https://edvardson.netlify.app/confirmation?order_id={checkout.order.id}",
         push: "https://edvardson.netlify.app/api/push?order_id={checkout.order.id}"
     }
