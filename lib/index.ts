@@ -1,4 +1,5 @@
 import { InlineCheckout } from "@bambora/checkout-sdk-web";
+import { unstable_noStore } from "next/cache";
 
 export function isEmpty(value: any) {
     if (value == null) {
@@ -80,6 +81,7 @@ export async function createKlarnaPayment(bodyData: any) {
     };
 }
 export async function createKlarnaCheckout(bodyData: any) {
+    unstable_noStore();
     try {
         const response = await fetch(`http://localhost:3000/api/order`, {
             method: 'POST',
@@ -87,7 +89,7 @@ export async function createKlarnaCheckout(bodyData: any) {
             headers: {
                 "Content-Type": "application/json"
             }
-        })
+        },)
 
         const data = await response.json();
         if (!response.ok) {

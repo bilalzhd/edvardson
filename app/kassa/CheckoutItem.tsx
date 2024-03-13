@@ -20,6 +20,9 @@ export default function CheckoutItem({ item }: any) {
         setCart(cart)
     }
 
+    const vat = (((item.price * item.quantity.value) / 100) * 20).toFixed(2);
+
+    const vatExcl = ((item.price * item.quantity.value) - Number(vat))/100
 
     return (
         <>
@@ -46,8 +49,8 @@ export default function CheckoutItem({ item }: any) {
                     </div>
                     <div className="hidden md:flex flex-col px-4 text-left w-[calc(60%-140px)]">
                         <span className="text-gray-300">Unit: {item.totals.total} SEK</span>
-                        <span>Total: {item.totals.total * item.quantity.value} SEK</span>
-                        <span className="text-gray-400 text-sm">(VAT excl.{item.totals.total * item.quantity.value} SEK)</span>
+                        <span>Total: {item.price * item.quantity.value / 100} SEK</span>
+                        <span className="text-gray-400 text-sm">(VAT excl.{vatExcl} SEK)</span>
                     </div>
                     <div className="w-[40px] hidden md:block">
                         <button onClick={() => deleteItemFromCartHandler(item.item_key)}><Trash className="bg-white/60 rounded p-1 h-8 w-8" fill="#000" /></button>

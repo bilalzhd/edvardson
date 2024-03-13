@@ -5,14 +5,13 @@ import UpsellProducts from "./UpsellProducts";
 import CheckoutItems from "./CheckoutItems";
 import { Metadata } from "next";
 import Form from "./Form";
-import { unstable_noStore } from "next/cache";
+import KlarnaCheckout from "./KlarnaCheckout";
 
 export const metadata: Metadata = {
     title: "Kassa",
 }
 
 export default async function CheckoutPage() {
-    unstable_noStore();
 
     return (
         <div className="px-4 md:pr-[60px] md:pl-[40px] py-[30px]">

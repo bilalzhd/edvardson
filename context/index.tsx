@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect, createContext, SetStateAction, Dispatch } from "react";
 import { getCart } from "../lib/store";
+import { setCookie } from "cookies-next";
 type Cart = {
     cart_hash: string
     cart_key: string
@@ -31,8 +32,9 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
             const cartData = await getCart(cartKey);
             setCart(cartData)
         }
-        let cartKey = localStorage.getItem('cart_key') || "";
-        setCartKey(cartKey)
+        let cartKeyFromLocal = localStorage.getItem('cart_key') || "";
+        setCartKey(cartKeyFromLocal)
+        setCookie("cart_key", cartKeyFromLocal)
         getCartData();
 
     }, [])
