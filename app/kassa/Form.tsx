@@ -55,7 +55,9 @@ export default function Form() {
             <CheckoutForm countries={countries} />
             <div className="px-4 pt-6 pb-3 md:max-w-[calc(100%-270px)]">
                 {/* <BamboraCheckout /> */}
-                {!klarnaData ? <LoadingSpinner text="Loading" /> : <KlarnaCheckout klarnaData={klarnaData} />}
+                <KlarnaCheckout
+                klarnaData={klarnaData}
+                />
                 <PlaceOrder />
             </div>
         </>
