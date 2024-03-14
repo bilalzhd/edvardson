@@ -100,10 +100,9 @@ export default function Form({ countriesData }: any) {
         return new Promise<void>((resolve, reject) => {
             setTimeout(() => {
                 console.log(formData)
-                createWoocommerceOrder(formData).then((res) => {
-                    console.log(res)
+                createWoocommerceOrder(formData).then((response) => {
                     clearCart(cartKey).then(res => {
-                        // window.location.replace("/thank-you");
+                        window.location.replace("/thank-you/" + response.id);
                         // window.location.href = "/thank-you";
                     }) 
                 });

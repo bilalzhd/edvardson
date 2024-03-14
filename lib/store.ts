@@ -328,7 +328,6 @@ export const createWoocommerceCustomer = async (data: any) => {
 }
 
 export async function createWoocommerceOrder(data: any) {
-    console.log(data);
     const orderData = {
         payment_method: "klarna_payments",
         payment_method_title: "Klarna",
@@ -378,6 +377,11 @@ export async function createWoocommerceOrder(data: any) {
     })
     const orderResponseData = await response.json();
     return orderResponseData; 
+}
+export async function getWoocommerceOrder(id: string) {
+    const response = await fetch(`${process.env.PUBLIC_URL}/api/order/${id}`)
+    const data = await response.json();
+    return data; 
 }
 
 export async function clearCart(cartKey: string) {
