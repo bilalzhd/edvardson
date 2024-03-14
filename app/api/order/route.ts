@@ -1,15 +1,15 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function POST(req: Request, res: NextResponse<ResponseData>) {
-    let username = process.env.KLARNA_USERNAME;
-    let password = process.env.KLARNA_PASSWORD;
+export async function POST(req: Request) {
+   
+    let username = process.env.WC_CONSUMER_KEY;
+    let password = process.env.WC_CONSUMER_SECRET;
     const bodyData = await req.json();
 
     try {
-        
-        const encodedAuth = btoa(`${username}:${password}`);
 
-        const klarnaResponse = await fetch("https://api.playground.klarna.com/checkout/v3/orders", {
+        const encodedAuth = btoa(`${username}:${password}`);
+        const response = await fetch(`${process.env.WORDPRESS_API_URL}/wp-json/wc/v3/orders`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -17,13 +17,9 @@ export async function POST(req: Request, res: NextResponse<ResponseData>) {
             },
             body: JSON.stringify(bodyData)
         });
-
-        if (!klarnaResponse.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        const klarnaData = await klarnaResponse.json();
-        return NextResponse.json(({ message: "Klarna order created successfully", data: klarnaData }), {status: 201});
+        
+        const data = await response.json();
+        return NextResponse.json((data), { status: 201 });
 
     } catch (error) {
         console.error("Error processing POST request:", error);

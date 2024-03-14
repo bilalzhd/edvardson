@@ -36,8 +36,11 @@ export const KlarnaComponent = ({
 				}
 			},
 				async function (...args: any) {
-					console.log(...args);
-					await onComplete();
+					const response = {...args};
+					console.log(response[0]);
+					if(response[0].approved) {
+						await onComplete();
+					}
 				},
 			);
 			// Klarna.Payments.load(

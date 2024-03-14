@@ -292,32 +292,32 @@ export const createWoocommerceCustomer = async (data: any) => {
         last_name: "Doe",
         username: "john.doe",
         billing: {
-          first_name: "John",
-          last_name: "Doe",
-          company: "",
-          address_1: "969 Market",
-          address_2: "",
-          city: "San Francisco",
-          state: "CA",
-          postcode: "94103",
-          country: "US",
-          email: "john.doe@example.com",
-          phone: "(555) 555-5555"
+            first_name: "John",
+            last_name: "Doe",
+            company: "",
+            address_1: "969 Market",
+            address_2: "",
+            city: "San Francisco",
+            state: "CA",
+            postcode: "94103",
+            country: "US",
+            email: "john.doe@example.com",
+            phone: "(555) 555-5555"
         },
         shipping: {
-          first_name: "John",
-          last_name: "Doe",
-          company: "",
-          address_1: "969 Market",
-          address_2: "",
-          city: "San Francisco",
-          state: "CA",
-          postcode: "94103",
-          country: "US"
+            first_name: "John",
+            last_name: "Doe",
+            company: "",
+            address_1: "969 Market",
+            address_2: "",
+            city: "San Francisco",
+            state: "CA",
+            postcode: "94103",
+            country: "US"
         }
-      };
+    };
 
-      
+
     try {
         const response = await api.post("customers", JSON.stringify(_data))
         return response;
@@ -326,3 +326,68 @@ export const createWoocommerceCustomer = async (data: any) => {
         console.log(error.response.data);
     };
 }
+
+export async function createWoocommerceOrder(data: any) {
+    console.log(data);
+    const orderData = {
+        payment_method: "klarna_payments",
+        payment_method_title: "Klarna",
+        set_paid: true,
+        billing: {
+            first_name: data.firstName,
+            last_name: data.lastName,
+            address_1: data.billingAddress1,
+            address_2: data.billingAddress2,
+            city: data.billingCity,
+            state: "SV-AH",
+            postcode: data.billingPostcode,
+            country: data.country,
+            email: data.email,
+            phone: data.billingPhone
+        },
+        shipping: {
+            first_name: data.firstName,
+            last_name: data.lastName,
+            address_1: data.billingAddress1,
+            address_2: data.billingAddress2,
+            city: data.billingCity,
+            state: "SV-AH",
+            postcode: data.billingPostcode,
+            country: data.country,
+        },
+        line_items: data.lineItems?.map((l: any) => {
+            return {
+                product_id: l.id,
+                quantity: l.quantity.value
+            }
+        }),
+        shipping_lines: [
+            {
+                method_id: "flat_rate",
+                method_title: "Flat Rate",
+                total: "0"
+            }
+        ]
+    };
+    const response = await fetch("/api/order", {
+        method: "POST",
+        body: JSON.stringify(orderData),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const orderResponseData = await response.json();
+    return orderResponseData; 
+}
+
+export async function clearCart(cartKey: string) {
+    return fetch(cart_url + "/cart/clear?cart_key="+ cartKey, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+        }
+    })
+    .then(response => response.json())
+    .then(data => data)
+    .catch(err => err)
+}   

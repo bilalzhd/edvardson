@@ -1,13 +1,13 @@
 "use client"
-import { createWoocommerceCustomer } from "@/lib/store";
+import { clearCart, createWoocommerceOrder } from "@/lib/store";
 import CountrySelector from "./CountrySelector";
-import { getSessionToken, getStates } from "@/lib";
+import { getStates } from "@/lib";
 import { useContext, useEffect, useState } from "react";
-import { InlineCheckout } from '@bambora/checkout-sdk-web';
 import { AppContext } from "@/context";
 import { useForm } from "react-hook-form";
 import { KlarnaComponent } from "./KlarnaComponent";
 import BamboraCheckout from "./BamboraCheckout";
+
 
 
 
@@ -31,14 +31,22 @@ type Inputs = {
 }
 
 export default function Form({ countriesData }: any) {
+    const [cart, , cartKey, , formData, setFormData] = useContext(AppContext);
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
     function onSubmit(data: Inputs) {
-        console.log(data)
-        console.log(errors)
+        setFormData((prv: any) => (
+            {
+                ...prv,
+                ...data,
+                lineItems: (cart as Cart)?.items
+            }
+        ))
+        setPayWithKlarna(true);
     }
 
+    console.log(formData)
+
     const [payWithKlarna, setPayWithKlarna] = useState<Boolean>(false)
-    const [cart, ,] = useContext(AppContext);
     // const [paymentMethod, setPaymentMethod] = useState<"bambora" | "klarna">("bambora");
     const [klarnaSession, setKlarnaSession] = useState<any>(null);
     useEffect(() => {
@@ -74,7 +82,7 @@ export default function Form({ countriesData }: any) {
                 .then(data => {
                     if (data && data.data) {
                         const dt = data.data;
-                        setKlarnaSession(data.data);
+                        setKlarnaSession(dt);
                     } else {
                         console.error('Invalid server response:', data);
                         // Handle the case where the server response is invalid or missing data
@@ -90,18 +98,22 @@ export default function Form({ countriesData }: any) {
 
     function handleKlarnaComplete(): Promise<void> {
         return new Promise<void>((resolve, reject) => {
-            // Simulate asynchronous completion (replace with your actual async logic)
             setTimeout(() => {
-                console.log('Klarna payment completed.');
-                resolve(); // Resolve the promise when payment is completed
-            }, 2000); // Simulate a 2-second delay
+                console.log(formData)
+                createWoocommerceOrder(formData).then((res) => {
+                    console.log(res)
+                    clearCart(cartKey).then(res => {
+                        // window.location.replace("/thank-you");
+                        // window.location.href = "/thank-you";
+                    }) 
+                });
+                resolve();
+            }, 2000);
         });
     }
     return (
         <div>
-            {(klarnaSession && payWithKlarna) && (
-                <KlarnaComponent klarnaSession={klarnaSession} onComplete={handleKlarnaComplete} />
-            )}
+            {(klarnaSession && payWithKlarna) && (<KlarnaComponent klarnaSession={klarnaSession} onComplete={handleKlarnaComplete} />)}
             {/* <div className="md:w-1/2">
                 <h3 className="text-[20px] font-bold">Betalningsmetod</h3>
                 <div className="p-4 border rounded flex items-center gap-10">
@@ -164,14 +176,9 @@ export default function Form({ countriesData }: any) {
                 </div>
                 <div id="payment-options"></div>
                 <div className="mt-10">
-                    <button type="submit" className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                        {/* {data.pending ? 'Loading...' : 'Place Order'} */}
-                        Place Order
-                    </button>
-                    <button onClick={() => setPayWithKlarna(true)}>Pay With Klarna</button>
+                    <button type="submit" className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Pay With Klarna</button>
                 </div>
             </form>
-            <BamboraCheckout />
         </div>
     )
 }

@@ -20,12 +20,12 @@ type Cart = {
     taxes: any
     totals: any
 }
-export const AppContext = createContext<[Cart | {}, Dispatch<SetStateAction<Cart | {}>>, string, Dispatch<SetStateAction<string>>]>([{}, () => { }, "", () => { }]);
+export const AppContext = createContext<[Cart | {}, Dispatch<SetStateAction<Cart | {}>>, string, Dispatch<SetStateAction<string>>, any, any]>([{}, () => { }, "", () => { }, {}, ()=>{}]);
 
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     const [cart, setCart] = useState<Cart | {}>({});
     const [cartKey, setCartKey] = useState("");
-
+    const [formData, setFormData] = useState<any>({})
     useEffect(() => {
         async function getCartData() {
             const cartData = await getCart(cartKey);
@@ -39,7 +39,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
 
 
     return (
-        <AppContext.Provider value={[cart, setCart, cartKey, setCartKey]}>
+        <AppContext.Provider value={[cart, setCart, cartKey, setCartKey, formData, setFormData]}>
             {children}
         </AppContext.Provider>
     )
