@@ -17,7 +17,7 @@ export default function BamboraCheckout() {
                 cancel: "https://edvardson.se/cancel"
             }
         }
-        const response = getTokenAndSetCheckout(data);
+        getTokenAndSetCheckout(data);
     }, [cart])
 
     return (

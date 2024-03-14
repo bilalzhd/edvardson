@@ -1,17 +1,18 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
+ 
 
-// export async function GET() {
-//     return NextResponse.json({name: "Billa"})
-// }
+export async function GET(){
 
-export async function POST(req: NextRequest, res: NextResponse) {
-    let username = process.env.KLARNA_USERNAME;
-    let password = process.env.KLARNA_PASSWORD;
-    
+    return NextResponse.json("i am sajjad")
+}
+let username = "PK250113_0a0956f8edfc";
+let password = "tFAcWacQN4SzUNzq";
+ 
+
+export async function POST(req: Request, res: any) {
     try {
-        const bodyData = req.body
+        const bodyData = await req.json();
         const encodedAuth = btoa(`${username}:${password}`);
-
         const klarnaResponse = await fetch("https://api.playground.klarna.com/payments/v1/sessions", {
             method: 'POST',
             headers: {
@@ -21,11 +22,12 @@ export async function POST(req: NextRequest, res: NextResponse) {
             body: JSON.stringify(bodyData)
         });
 
-        if (!klarnaResponse.ok) {
-            throw new Error('Network response was not ok');
-        }
+        // if (!klarnaResponse.ok) {
+        //     throw new Error('Network response was not ok');
+        // }
 
         const klarnaData = await klarnaResponse.json();
+
         return NextResponse.json({ message: "Klarna session created successfully", data: klarnaData });
 
     } catch (error) {
