@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { InlineCheckout } from '@bambora/checkout-sdk-web';
 import { AppContext } from "@/context";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+
 import { KlarnaComponent } from "./KlarnaComponent";
 
 // import { FormEvent, useRef } from "react";
