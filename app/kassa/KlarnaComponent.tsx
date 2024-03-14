@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import Klarna from 'klarna-checkout';
+ declare var Klarna: any;
 export const KlarnaComponent = ({
 	klarnaSession,
 	onComplete,
