@@ -38,7 +38,7 @@ export default async function ThankYouPage({ params }: { params: { id: string } 
                         </div>
                     </div>
                     <div>
-                        {data.line_items.map((item: any) => <Item item={item} />)}
+                        {data.line_items.map((item: any) => <Item key={item.id} item={item} />)}
                     </div>
                     <div className="flex w-full justify-end">
                         <div className="lg:w-[calc(30%-70px)] px-2 flex flex-col gap-4">
