@@ -41,7 +41,7 @@ export default async function CheckoutPage() {
                     </div>
                 </div>
                 <div className="md:w-[250px] block float-right">
-                    <h2 className="font-semibold text-xl">Summary</h2>
+                    <h2 className="font-semibold text-xl">Sammanfattning</h2>
                     <div className="py-[25px] px-[15px]">
                         <CheckoutInvoiceSummary />
                         <div className="mb-[30px] py-[25px] px-[15px]">

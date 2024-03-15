@@ -84,7 +84,7 @@ export default function ProductCategory({ currentCategory, childrenCats, product
                     return <ProductCard key={product.id} product={product} isGallery={false} />
                 }) : <span className="text-center py-4">No Products yet</span>}
             </div>) : (
-                <div>
+                <div className="mt-4">
                     {products?.length > 0 ? sortedProducts?.map((product: any) => {
                         return <ProductCardListView key={product.id} product={product} />
                     }) : <span className="text-center py-4">No Products yet</span>}

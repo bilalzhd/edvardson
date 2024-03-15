@@ -129,10 +129,11 @@ export async function getProductsByRelatedIds(relatedIds: number[], lang = 'sv')
 
 
 export async function getProductsByCategory(category: string, lang = 'sv') {
-    // unstable_noStore();
+    unstable_noStore();
     try {
-        const response = await api.get(`products?filter[categories]=${category}`, {
-            per_page: 10, lang
+        const response = await api.get(`products?category=${category}`, {
+            per_page: 10, 
+            lang
         });
         if (response.data && response.data.length > 0) {
             const products = response.data;
@@ -179,7 +180,7 @@ export async function addToCart(productId: number, quantity = 1, cart_key: strin
             }),
             headers: {
                 "Content-Type": "application/json"
-            }
+            },
         })
         const data = await response.json();
         if (data.cart_key) {

@@ -30,6 +30,7 @@ export default async function CategoryPage({ params }: Props) {
   const childrenCats = categories.filter((cat: any) => cat.parent == currentCategory?.id);
   const products = await getProductsByCategory(currentCategory?.id, 'sv');
 
+
   return (
     <>
       <BreadCrumb />

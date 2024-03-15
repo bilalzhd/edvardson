@@ -48,6 +48,7 @@ export async function getMenuItems() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ query }),
+      next: {revalidate: 300}
     });
     const data = await response.json();
     return flatListToHierarchical(data.data.menu.menuItems.nodes);
