@@ -14,10 +14,10 @@ function Topbar() {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                     </svg> Design</p>
                 <div className="py-2 flex space-x-2 text-sm items-center justify-between">
-                    <span className="hover:underline cursor-pointer hidden md:block">Logga in</span>
-                    <select className="bg-transparent" name="" id="">
+                    {/* <span className="hover:underline cursor-pointer hidden md:block">Logga in</span> */}
+                    {/* <select className="bg-transparent" name="" id="">
                         <option value="">SVENSKA / INKL. MOMS</option>
-                    </select>
+                    </select> */}
                     <Cart className="hidden md:block" />
                 </div>
             </div>
