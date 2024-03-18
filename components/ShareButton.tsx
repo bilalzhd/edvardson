@@ -7,7 +7,7 @@ export default function ShareButton({ productName, productImage }: { productName
     return (
         <>
             <button onClick={() => setShowSocialButtons((prev) => !prev)} className="text-md bg-black hover:bg-black/50 duration-300 transition-all rounded text-white py-2 px-4 mt-2">
-                Share
+                Dela
             </button>
             {showSocialButtons && <div className="flex mt-2">
                 <a target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}>

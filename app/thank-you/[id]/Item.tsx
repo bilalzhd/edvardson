@@ -1,5 +1,4 @@
 export default function Item({ item }: any) {
-    console.log(item)
     const vat = Number(item.total / 100) * 20
     return (
         <div className="mb-2 flex md:flex-row flex-col gap-2 items-start md:items-center border-b border-b-gray-300 pb-2">
@@ -11,12 +10,12 @@ export default function Item({ item }: any) {
                     {item.name}
                 </div>
                 <div className="hidden md:flex flex-col px-4 text-left w-[calc(30%-70px)]">
-                    <span className="text-gray-600">Quantity: {item.quantity}</span>
+                    <span className="text-gray-600">Kvantitet: {item.quantity}</span>
                 </div>
                 <div className="hidden md:flex flex-col px-4 text-left w-[calc(30%-70px)]">
-                    <span className="text-gray-300">Unit: {item.subtotal} SEK</span>
+                    <span className="text-gray-300">Enhet: {item.subtotal} SEK</span>
                     <span>Total: {item.total} SEK</span>
-                    <span className="text-gray-400 text-sm">(VAT excl. {item.total - vat} SEK)</span>
+                    <span className="text-gray-400 text-sm">(Moms exkl. {item.total - vat} SEK)</span>
                 </div>
             </div>
         </div>

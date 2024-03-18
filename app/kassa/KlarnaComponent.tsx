@@ -37,7 +37,7 @@ export const KlarnaComponent = ({
 			},
 				async function (...args: any) {
 					const response = {...args};
-					console.log(response[0]);
+					// console.log(response[0]);
 					if(response[0].approved) {
 						await onComplete();
 					}
