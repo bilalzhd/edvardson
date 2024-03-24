@@ -37,7 +37,7 @@ export const getProductCategories = async (lang = "sv") => {
         return err;
     }
 }
-export const getProducts = async (per_page = 12, lang = 'sv') => {
+export const getProducts = async (per_page = 24, lang = 'sv') => {
     const responseData: ResponseData = { success: false, products: [] };
 
     try {
@@ -52,7 +52,7 @@ export const getProducts = async (per_page = 12, lang = 'sv') => {
         return responseData;
     }
 }
-export const getSearchedProducts = async (searchTerm: string, per_page = 12) => {
+export const getSearchedProducts = async (searchTerm: string, per_page = 20) => {
     const responseData: ResponseData = { success: false, products: [] };
 
     try {
@@ -111,7 +111,7 @@ export async function getProductsByRelatedIds(relatedIds: number[], lang = 'sv')
     try {
         const relatedIdsString = relatedIds?.join(',');
         const response = await api.get(`products?include=${relatedIdsString}`, {
-            per_page: 10
+            per_page: 20
         });
 
         if (response.data && response.data.length > 0) {
@@ -132,7 +132,7 @@ export async function getProductsByCategory(category: string, lang = 'sv') {
     unstable_noStore();
     try {
         const response = await api.get(`products?category=${category}`, {
-            per_page: 20
+            per_page: 24
         });
         if (response.data && response.data.length > 0) {
             const products = response.data;
@@ -152,7 +152,7 @@ export async function getProductsForCheckout(min_price: string, max_price: strin
         const response = await api.get('products', {
             min_price,
             max_price,
-            per_page: 10,
+            per_page: 20,
         });
         if (response.data && response.data.length > 0) {
             const products = response.data;

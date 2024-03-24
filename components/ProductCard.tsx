@@ -21,16 +21,35 @@ export default function ProductCard({ product, isGallery = false }: any) {
         productDescription = productDescription.substring(116);
     }
 
-    function getSalePercent() {
-        const regPrice = Number(product.regular_price);
-        const salePrice = product.price
-        return calculateSalePercent(regPrice, salePrice)
-    }
-    function calculateSalePercent(regPrice: number, salePrice: number) {
+    // function getSalePercent() {
+    //     const regPrice = Number(product.regular_price);
+    //     const salePrice = product.price
+    //     console.log("reg:" + regPrice + " salePrice:" + salePrice)
+    //     return calculateSalePercent(regPrice, salePrice)
+    // }
+    function calculateSalePercent(regPrice: number, salePrice?: number | null) {
         const discountPercent = ((regPrice - salePrice) / regPrice) * 100;
         const roundedDiscountPercent = Math.floor(discountPercent);
         return roundedDiscountPercent;
     }
+    function getSalePercent() {
+        // Parse regular price as a floating-point number
+        const regPrice = parseFloat(product.regular_price.replace(',', '.'));
+        
+        // Use regex to extract sale price from price_html
+        const salePriceRegex = /<ins[^>]*>.*?<bdi>(.*?)<\/bdi>.*?<\/ins>/;
+        const salePriceMatch = product.price_html.match(salePriceRegex);
+        
+        // Parse sale price as a floating-point number if it exists
+        let salePrice = null;
+        if (salePriceMatch) {
+            salePrice = parseFloat(salePriceMatch[1].replace(',', '.'));
+        }
+    
+        console.log("regPrice:", regPrice, "salePrice:", salePrice);
+        return calculateSalePercent(regPrice, salePrice);
+    }
+    
     productDescription = productDescription.length > 100 ? productDescription.substring(0, 100) : productDescription;
     const description = product.short_description?.length > 0 ? product.short_description?.substring(0, 100) : productDescription;
 
