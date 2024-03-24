@@ -128,12 +128,12 @@ export default function Form({ countriesData }: any) {
             {(cart as Cart)?.items?.length > 0 && <div className="w-[calc(100%-270px)] px-5">
                 <h3 className="text-[20px] font-bold mb-4">Betalningsmetod</h3>
                 <div className="flex gap-4">
-                    <div className="md:w-1/2 p-4 border rounded flex items-center gap-10">
-                        <input onChange={() => setPaymentMethod("bambora")} className="border-r border-gray-700 pr-10" type="radio" name="payment" id="bambora" checked={paymentMethod === "bambora"} />
+                    <div className="md:w-1/2 p-4 border rounded flex items-center gap-10 border-gray-600 shadow-md hover:shadow-none bg-gray-100">
+                        <input onChange={() => setPaymentMethod("bambora")} className="border-r pr-10" type="radio" name="payment" id="bambora" checked={paymentMethod === "bambora"} />
                         <label className="text-[14px]" htmlFor="bambora">Bambora</label>
                     </div>
-                    <div className="md:w-1/2 p-4 border rounded flex items-center gap-10">
-                        <input onChange={() => setPaymentMethod("klarna")} className="border-r border-gray-700 pr-10" type="radio" name="payment" id="klarna" checked={paymentMethod === "klarna"} />
+                    <div className="md:w-1/2 p-4 border rounded flex items-center gap-10 border-gray-600 shadow-md hover:shadow-none bg-gray-100">
+                        <input onChange={() => setPaymentMethod("klarna")} className="border-r pr-10" type="radio" name="payment" id="klarna" checked={paymentMethod === "klarna"} />
                         <label className="text-[14px]" htmlFor="klarna">Klarna</label>
                     </div>
                 </div>
@@ -190,7 +190,9 @@ export default function Form({ countriesData }: any) {
                             </div>
                         </div>
                         <div id="payment-options"></div>
-                        <button type="submit" className="mt-4 block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Fortsätt till betalning</button>
+                        <button type="submit" className="mt-4 block w-full rounded-md transition-all duration-300 bg-black px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:border-black border hover:text-black hover:bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                            Fortsätt till betalning 
+                        </button>
                         <div className="mt-10">
                             {/* {paymentMethod === "klarna" && <button type="submit" className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Betala med Klarna</button>} */}
                         </div>
