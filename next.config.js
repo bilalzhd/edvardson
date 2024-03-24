@@ -16,6 +16,7 @@ const nextConfig = {
             hostname: 'admin.edvardson.se',
           },
         ],
+        disableStaticImages: true,
       },
       reactStrictMode: false,
 }
