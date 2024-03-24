@@ -1,24 +1,25 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-    images: {
-        remotePatterns: [
-          {
-            protocol: 'https',
-            hostname: 'merablog.merakommunikation.se',
-          },
-          {
-            protocol: 'https',
-            hostname: 'cdn.klarna.com',
-          },
-          {
-            protocol: 'https',
-            hostname: 'admin.edvardson.se',
-          },
-        ],
-        disableStaticImages: true,
+  images: {
+    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "merablog.merakommunikation.se",
       },
-      reactStrictMode: false,
-}
+      {
+        protocol: "https",
+        hostname: "cdn.klarna.com",
+      },
+      {
+        protocol: "https",
+        hostname: "admin.edvardson.se",
+      },
+    ],
+    disableStaticImages: true,
+  },
+  reactStrictMode: false,
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
