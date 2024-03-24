@@ -132,7 +132,7 @@ export async function getProductsByCategory(category: string, lang = 'sv') {
     unstable_noStore();
     try {
         const response = await api.get(`products?category=${category}`, {
-            per_page: 24
+            per_page: 50
         });
         if (response.data && response.data.length > 0) {
             const products = response.data;
