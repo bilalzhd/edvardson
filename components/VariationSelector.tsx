@@ -2,18 +2,18 @@
 import { useState } from "react";
 import ChevronDown from "./icons/ChevronDown";
 import ChevronUp from "./icons/ChevronUp";
+import Image from "next/image";
 
 export default function VariationSelector({ selected, setSelected, variations, productId, defaultAttributes }: { variations: any, productId: string, defaultAttributes: { id: number, name: string, option: string }[], selected: any, setSelected: any }) {
 
-
     const [showAll, setShowAll] = useState(false);
-
+    const sortedVariations = variations.sort((a: any, b: any) => a.id - b.id)
     const [selectedVariation, setSelectedVariation] = useState(selected?.id);
-    const visibleVariations = showAll ? variations : variations.slice(0, 5);
+    const visibleVariations = showAll ? sortedVariations : sortedVariations.slice(0, 5);
     const count = variations.length - 5;
 
-    const showMore = <span className="flex items-center border-b border-r border-l border-white rounded p-2">Show {count} More <ChevronDown className="w-3 h-3 ml-2" /></span>
-    const showLess = <span className="flex items-center border-b border-r border-l border-white rounded p-2">Show less <ChevronUp className="w-3 h-3 ml-2" /></span>
+    const showMore = <span className="flex items-center border-b border-r border-l border-white rounded p-2">Visa {count} ytterligare <ChevronDown className="w-3 h-3 ml-2" /></span>
+    const showLess = <span className="flex items-center border-b border-r border-l border-white rounded p-2">Visa färre <ChevronUp className="w-3 h-3 ml-2" /></span>
     return (
         <div>
             {visibleVariations.map((variation: any) => {
@@ -24,10 +24,10 @@ export default function VariationSelector({ selected, setSelected, variations, p
                                 setSelected(variation);
                                 setSelectedVariation(variation.id)
                             }} className="appearance-none border border-black rounded-full w-4 h-4 checked:bg-black checked:p-1checked:border-white focus:outline-none" name={productId} id={variation.id} value={variation.id} type="radio" checked={selectedVariation == variation.id} />
-                            <img width={30} height={30} src={variation.image?.src} alt={variation.name} />
+                            <Image width={30} height={30} className="max-h-[30px] object-contain" src={variation.image?.src} alt={variation.name} />
                             <span className={`${selected && selected.id == variation.id ? 'font-bold' : ''}`}>{variation.name}</span>
                         </div>
-                        <span className={`${selected && selected.id == variation.id ? 'font-bold' : ''}`}>{variation.price}</span>
+                        <span className={`${selected && selected.id == variation.id ? 'font-bold' : ''}`}>{variation.price} SEK</span>
                     </label>
                 )
             })}

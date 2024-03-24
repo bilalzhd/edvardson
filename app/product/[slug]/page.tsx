@@ -36,11 +36,12 @@ export default async function Page({ params }: Props) {
   if (product?.type === 'variable') {
     variations = await getProductVariations(product.id);
   }
-  const categoriesId = product?.categories.map((category: any) => category.slug);
-  const upsellProducts = await getProductsByCategory(categoriesId[1]);
+  const categoriesId = product?.categories.map((category: any) => category.id);
+  const upsellProducts = await getProductsByCategory(categoriesId[0]);
   const relatedProducts = await getProductsByRelatedIds(product?.related_ids);
+
   return (
-    <div className="font-open 2xl:max-w-[70%] xl:px-8 mx-auto">
+    <div className="font-open 2xl:max-w-[80%] xl:px-8 mx-auto">
       <div className="flex md:flex-row flex-col md:p-6 p-2">
         <div className="flex flex-col items-center w-full md:w-1/2 md:p-4">
           {product && <ProductGallery items={product?.images} />}
@@ -64,8 +65,8 @@ export default async function Page({ params }: Props) {
               <span className="font-bold text-[14px] mr-2">Varumärke</span> {product?.brands?.map((b: any) => b.name)}
             </div>
             <div className="w-fit border-b border-black my-4">
-              {product?.meta_data[0]?.value && (<>
-                <span className="font-bold text-[14px] mr-2">HS Number</span> <span>{product?.meta_data[0]?.value}</span>
+              {product?.meta_data[1]?.value && (<>
+                <span className="font-bold text-[14px] mr-2">HS Number</span> <span>{product?.meta_data[1]?.value}</span>
               </>
               )}
 
@@ -75,12 +76,12 @@ export default async function Page({ params }: Props) {
         </div>
       </div>
       <div className="my-6">
-        <h3 className="text-center text-2xl uppercase md:text-[30px] mb-8 font-bold">Du kanske också behöver</h3>
-        {relatedProducts && <ProductCarousel products={relatedProducts} />}
+        <h3 className="text-center text-2xl uppercase md:text-[30px] mb-8 md:px-0 px-4 font-bold">Du kanske också behöver</h3>
+        {relatedProducts && <ProductCarousel isProductPage={true} products={relatedProducts} />}
       </div>
       <div className="my-12">
         <h3 className="text-center text-2xl uppercase md:text-[30px] font-bold mb-8">Andra köpte också</h3>
-        {upsellProducts && <ProductCarousel products={upsellProducts} />}
+        {upsellProducts && <ProductCarousel isProductPage={true} products={upsellProducts} />}
       </div>
     </div>
   )

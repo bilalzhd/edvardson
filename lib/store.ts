@@ -3,19 +3,19 @@ import { unstable_noStore } from "next/cache";
 import CoCartAPI from "@cocart/cocart-rest-api";
 const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
 
-const cart_url = "https://merablog.merakommunikation.se/wp-json/cocart/v2";
+const cart_url = "https://admin.edvardson.se/wp-json/cocart/v2";
 
 const CoCart = new CoCartAPI({
-    url: "https://merablog.merakommunikation.se",
+    url: "https://admin.edvardson.se",
     consumerKey: process.env.WC_CONSUMER_KEY || "",
     consumerSecret: process.env.WC_CONSUMER_SECRET || "",
 });
 
 
 const api = new WooCommerceRestApi({
-    url: "https://merablog.merakommunikation.se",
-    consumerKey: process.env.WC_CONSUMER_KEY || "ck_c7d9a5093230470c7dfb681882744f9aa0ec18ba",
-    consumerSecret: process.env.WC_CONSUMER_SECRET || "cs_6986ba10b2fd720db1925f456577a7dbb48276de",
+    url: "https://admin.edvardson.se",
+    consumerKey: "ck_2ddbb0b7040f6f141bf1392850465250cc6ee35f",
+    consumerSecret: "cs_cba1a0cb85e35ff19a6843e4e3a2dddfcc5ed2a3",
     version: "wc/v3",
     axiosConfig: {
         headers: {}
@@ -31,7 +31,7 @@ export const getShippingMethods = async () => {
 }
 export const getProductCategories = async (lang = "sv") => {
     try {
-        const response = await api.get(`products/categories?per_page=40&lang=${lang}`)
+        const response = await api.get(`products/categories?per_page=40`)
         return response.data;
     } catch (err) {
         return err;
@@ -41,7 +41,7 @@ export const getProducts = async (per_page = 12, lang = 'sv') => {
     const responseData: ResponseData = { success: false, products: [] };
 
     try {
-        const { data } = await api.get(`products`, { per_page: per_page, lang })
+        const { data } = await api.get(`products`, { per_page: per_page })
         responseData.success = true;
         responseData.products = data;
 
@@ -111,7 +111,7 @@ export async function getProductsByRelatedIds(relatedIds: number[], lang = 'sv')
     try {
         const relatedIdsString = relatedIds?.join(',');
         const response = await api.get(`products?include=${relatedIdsString}`, {
-            per_page: 10, lang
+            per_page: 10
         });
 
         if (response.data && response.data.length > 0) {
@@ -132,8 +132,7 @@ export async function getProductsByCategory(category: string, lang = 'sv') {
     unstable_noStore();
     try {
         const response = await api.get(`products?category=${category}`, {
-            per_page: 10, 
-            lang
+            per_page: 10
         });
         if (response.data && response.data.length > 0) {
             const products = response.data;
@@ -154,7 +153,6 @@ export async function getProductsForCheckout(min_price: string, max_price: strin
             min_price,
             max_price,
             per_page: 10,
-            lang
         });
         if (response.data && response.data.length > 0) {
             const products = response.data;
@@ -284,8 +282,7 @@ export async function deleteItemFromCart(itemKey: string, cartKey: string, setLo
 
 
 export const createWoocommerceCustomer = async (data: any) => {
-    // const d = JSON.stringify(data)
-    // console.log(d)
+    
 
     const _data = {
         email: "john.doe@example.com",
@@ -324,7 +321,7 @@ export const createWoocommerceCustomer = async (data: any) => {
         return response;
     }
     catch (error: any) {
-        console.log(error.response.data);
+        console.error(error.response.data);
     };
 }
 
@@ -377,22 +374,84 @@ export async function createWoocommerceOrder(data: any) {
         }
     })
     const orderResponseData = await response.json();
-    return orderResponseData; 
+    // TODO: also create woocommerce customer
+    return orderResponseData;
 }
 export async function getWoocommerceOrder(id: string) {
-    const response = await fetch(`${process.env.PUBLIC_URL}/api/order/${id}`)
-    const data = await response.json();
-    return data; 
+    const response = await api.get("orders/" + id)
+    const data = response.data;
+    return data;
 }
 
 export async function clearCart(cartKey: string) {
-    return fetch(cart_url + "/cart/clear?cart_key="+ cartKey, {
+    return fetch(cart_url + "/cart/clear?cart_key=" + cartKey, {
         method: "POST",
         headers: {
             "Content-Type": "application/json; charset=utf-8",
         }
     })
-    .then(response => response.json())
-    .then(data => data)
-    .catch(err => err)
-}   
+        .then(response => response.json())
+        .then(data => data)
+        .catch(err => err)
+}
+
+
+export async function createKlarnaOrder(customerData: any, klarnaData: any) {
+    const cusData = {
+        purchase_country: "SV",
+        purchase_currency: "SEK",
+        billing_address: {
+            given_name: customerData.firstName,
+            family_name: customerData.lastName,
+            email: customerData.email,
+            title: "Mr",
+            street_address: customerData.billingAddress1,
+            postal_code: customerData.billingPostcode,
+            city: customerData.billingCity,
+            phone: customerData.billingPhone,
+            country: "SE"
+        },
+        shipping_address: {
+            given_name: customerData.firstName,
+            family_name: customerData.lastName,
+            email: customerData.email,
+            title: "Mr",
+            street_address: customerData.billingAddress1,
+            postal_code: customerData.billingPostcode,
+            city: customerData.billingCity,
+            phone: customerData.billingPhone,
+            country: "SE"
+        },
+        order_amount: customerData.totalAmount,
+        order_tax_amount: 0,
+        order_lines: customerData.lineItems.map((item: any) => {
+            return {
+                type: "physical",
+                reference: item.id,
+                name: item.name,
+                quantity: item.quantity.value,
+                unit_price: item.price,
+                tax_rate: 0,
+                total_amount: item.totals.subtotal,
+                total_discount_amount: 0,
+                total_tax_amount: 0,
+                product_url: "https://edvardson.se/product/" + item.slug,
+                image_url: item.featured_image
+            };
+        }),
+        merchant_urls: {
+            confirmation: "https://edvardson.se/confirmation",
+            notification: "https://edvardson.se/pending"
+        },
+        // FIXME: merchant_reference1: "45aa52f387871e3a210645d4",
+        // TODO: fix merchant reference with dynamic original one
+    }
+    const authToken = klarnaData[0].authorization_token;
+    const response = await fetch("/api/klarnaOrder", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ customerData: cusData, authorizationToken: authToken })
+    })
+    const data = await response.json();
+
+}

@@ -6,6 +6,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import Box from "./Box";
 import Link from "next/link";
 import AddToCart from "./AddToCart";
+import Image from "next/image";
 
 export default function ProductCardListView({ product }: any) {
     const productType = product.type || "";
@@ -24,14 +25,14 @@ export default function ProductCardListView({ product }: any) {
             {isMount ? (
                 <div className="mb-2 flex items-center border p-2">
                     <div className="w-[20%] flex justify-center px-2">
-                        <img className="border rounded w-[60px] h-[60px]" src={product.images?.[0]?.src} alt={product.name} />
+                        <Image height={60} width={60} className="border rounded w-[60px] h-[60px]" src={product.images?.[0]?.src} alt={product.name} />
                     </div>
                     <span className="w-[20%] flex justify-center px-2 text-center">{product.price} SEK</span>
                     <div className="w-[35%] flex justify-center px-2 text-center">
                         <Link href={product.permalink || "#"}><span className="hover:underline">{product.name}</span></Link>
                     </div>
                     <div className="w-[25%] flex justify-center px-2">
-                        <AddToCart quantity={null} variations={null} isProductPage={false} productId={product.id} productPermalink={product.permalink} productType={productType} />
+                        <AddToCart isCarousel={false} isRelatedProducts={false} isCheckout={false} quantity={null} variations={null} isProductPage={false} productId={product.id} productPermalink={product.permalink} productType={productType} />
                     </div>
                 </div>
             ) : (

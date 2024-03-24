@@ -21,37 +21,43 @@ export default function ProductCard({ product, isGallery = false }: any) {
         productDescription = productDescription.substring(116);
     }
 
+    function getSalePercent() {
+        const regPrice = Number(product.regular_price);
+        const salePrice = product.price
+        return calculateSalePercent(regPrice, salePrice)
+    }
     function calculateSalePercent(regPrice: number, salePrice: number) {
         const discountPercent = ((regPrice - salePrice) / regPrice) * 100;
         const roundedDiscountPercent = Math.floor(discountPercent);
         return roundedDiscountPercent;
     }
+    productDescription = productDescription.length > 100 ? productDescription.substring(0, 100) : productDescription;
+    const description = product.short_description?.length > 0 ? product.short_description?.substring(0, 100) : productDescription;
 
-    const description = product.short_description?.length > 0 ? product.short_description?.substring(0, 100) : productDescription.substring(0, 100);
-    
     return (
         <>
             {isMount ? (
                 <div className={`mb-8 bg-[#F6F6F6] p-2 md:p-5 text-[#333] font-open flex flex-col ${!isGallery && '2xl:w-[calc(25%-10px)] md:w-[calc(33%-10px)]'} w-[calc(50%-12px)] mx-[6px] md:mx-0 relative`}>
                     <div className='product-thumbnail-bg w-full flex justify-center'>
-                        {product?.on_sale && <span className="bg-red-500 absolute left-[-5px] text-white text-sm p-1 top-0">-{calculateSalePercent(product.regular_price, product.sale_price)}%</span>}
+                        {product?.on_sale && <span className="bg-red-500 absolute left-[-5px] text-white text-sm p-1 top-0">-{getSalePercent()}
+                            %</span>}
                         <Link href={product.permalink || "#"}>
-                            <img className="md:max-h-[285px] md:min-h-[285px] bg-[#F0F0F0] object-contain" src={product.images?.[0]?.src} alt={product.name || "Product Image"} />
+                            <Image height={285} width={285} style={{ width: 'auto', height: 'auto' }} className="md:max-h-[285px] md:min-h-[285px] bg-[#F0F0F0] object-contain" src={product.images?.[0]?.src} alt={product.name || "Product Image"} />
                         </Link>
                     </div>
                     <div className="flex flex-col mt-2">
-                        <span className="text-[.875rem] uppercase opacity-30">{product.sku}</span>
+                        <span className="text-[.875rem] uppercase opacity-30 min-h-[21px]">{product.sku}</span>
                         <Link className="mt-[calc(1.75rem*.5)] min-h-[48px]" href={product.permalink || "#"}>
-                            <span className='font-bold text-sm mb-2 mt-2'>{product.name?.substring(0, 20)}{product.name.length > 50 && "..."}</span>
+                            <span className='font-bold text-sm mb-2 mt-2'>{product.name}</span>
                         </Link>
 
-                        <p className='text-[#0a0a0a] text-xs md:min-h-[64px] min-h-[80px] mt-[calc(1.75rem*.25)]'
-                            dangerouslySetInnerHTML={{ __html: description}}
+                        <p className='text-[#0a0a0a] text-xs min-h-[80px] mt-[calc(1.75rem*.25)]'
+                            dangerouslySetInnerHTML={{ __html: description }}
                         >
                         </p>
 
                         <span className="mb-[calc(1.75rem*.5)] text-[12px] md:text-[16px]" dangerouslySetInnerHTML={{ __html: product.price_html }}></span>
-                        <AddToCart quantity={null} variations={null} isProductPage={false} productId={product.id} productPermalink={product.permalink} productType={productType} />
+                        <AddToCart isCarousel={false} isRelatedProducts={false} isCheckout={false} quantity={null} variations={null} isProductPage={false} productId={product.id} productPermalink={product.permalink} productType={productType} />
                     </div>
                 </div>
             ) : (

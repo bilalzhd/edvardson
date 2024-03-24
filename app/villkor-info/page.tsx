@@ -1,10 +1,11 @@
 import BreadCrumb from "@/components/BreadCrumb";
+import Image from "next/image";
 
 export default function Terms() {
     return (
         <>
             <BreadCrumb />
-            <div className="xl:max-w-[80%] 2xl:max-w-[70%] mx-auto my-5 text-[14px]">
+            <div className="xl:max-w-[80%] 2xl:max-w-[80%] mx-auto my-5 text-[14px]">
                 <h1 className="text-[27px] font-bold mb-5">Köpvillkor & Info</h1>
                 <h2 className="text-[18px] mb-5 font-bold">Tillämplighet</h2>
 
@@ -19,7 +20,7 @@ export default function Terms() {
 
                 <h3 className="text-[16px] mb-5">Klarna Checkout</h3>
 
-                <img src="https://cdn.klarna.com/1.0/shared/image/generic/logo/sv_se/basic/logo_black.png?width=200" alt="Klarna Logo" className="my-4" />
+                <Image src="https://cdn.klarna.com/1.0/shared/image/generic/logo/sv_se/basic/logo_black.png?width=200" alt="Klarna Logo" className="my-4" width={200} height={200} />
 
                 <p className="mb-5">Klarna Checkout gör det enkelt, flexibelt och tryggt för dig att handla på nätet. Genom att besvara ett par frågor identifierar du dig enkelt och du kan välja den betalmetod som passar dig bäst.</p>
 
@@ -30,7 +31,7 @@ export default function Terms() {
 
                 <h2 className="mb-5 text-[18px]">Säker betalning via vår partner Worldline  (endast utvalda kundgrupper)</h2>
 
-                <img src="/images/visa_mastercard_maestro.svg" alt="Visa Mastercard" className="my-4" />
+                <Image height={70} width={650} src="/images/visa_mastercard_maestro.svg" alt="Visa Mastercard" className="my-4" />
 
                 <p className="mb-5">Vi erbjuder tillsammans med Worldline ett säkerhetssystem som kallas 3-D Secure. Detta kan ses som en säkerhetscertifiering av vårt betalningssystem.</p>
 
@@ -100,7 +101,7 @@ export default function Terms() {
 
                 <h2 className="text-[18px] mb-5 font-bold">Garanti</h2>
                 <p className="mb-5">Vid eventuella fel skall kund alltid vända sig till oss på Edvardson Sweden AB.</p>
-                <img src="/images/sigil_small.png" alt="Brand - Edvardson" />
+                <Image src="/images/sigil_small.png" height={128} width={128} alt="Brand - Edvardson" />
                 <p className="mb-5">5 års garanti</p>
 
                 <h3 className="text-[20px] mb-5">5-års garanti på våra egentillverkade produkter!</h3>

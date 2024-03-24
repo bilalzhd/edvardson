@@ -3,6 +3,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Link from "next/link";
 import AddToCart from "@/components/AddToCart";
+import Image from "next/image";
 
 export const responsive = {
     superLargeDesktop: {
@@ -31,15 +32,15 @@ export default function ProductCarouselCheckout({ products }: any) {
                     <div key={product.id} className={`bg-[#F6F6F6] p-2 md:p-3 text-[#333] font-open flex w-full mx-[6px] md:mx-0 gap-3`}>
                         <div className='product-thumbnail-bg flex justify-center'>
                             <Link href={product.permalink || "#"}>
-                                <img className="max-h-[100px] bg-[#F0F0F0]" src={product.images?.[0]?.src} alt={product.name || ""} />
+                                <Image height={100} width={100} className="max-h-[100px] bg-[#F0F0F0]" src={product.images?.[0]?.src} alt={product.name || ""} />
                             </Link>
                         </div>
                         <div className="flex flex-col">
                             <Link href={product.permalink || "#"}>
-                                <span className='font-bold text-sm mb-2 mt-2'>{product.name?.substring(0, 20)}{product.name.length > 50 && "..."}</span>
+                                <span className='font-bold text-sm mb-2 mt-2'>{product.name}</span>
                             </Link>
                             <span className="text-[12px] md:text-[16px]">Pris: {product.price} SEK</span>
-                            <AddToCart quantity={null} variations={null} isProductPage={false} productId={product.id} productPermalink={product.permalink} productType={product.type} />
+                            <AddToCart isCarousel={true} isRelatedProducts={false} isCheckout={true} quantity={null} variations={null} isProductPage={false} productId={product.id} productPermalink={product.permalink} productType={product.type} />
                         </div>
                     </div>
                 )

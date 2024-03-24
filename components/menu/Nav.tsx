@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Bars from "../icons/Bars";
 import Cart from "../Cart";
+import Image from "next/image";
 // import { redirect } from "next/dist/server/api-utils";
 
 export default function Nav({ menuItems }: any) {
@@ -44,10 +45,10 @@ export default function Nav({ menuItems }: any) {
         <>
             <div className={`${isScrolled ? '!fixed w-full bg-white top-0 md:px-16 z-[10000]' : 'md:mx-12'} relative z-20 2xl:mx-auto px-4 text-[13px] uppercase flex md:block`}>
                 <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="block md:hidden" aria-label="Toggle Menu" type="button"><Bars className="w-6 h-6" /></button>
-                <div className="2xl:max-w-[70%] mx-auto flex md:p-3 items-center justify-center md:justify-end w-full py-3">
+                <div className="2xl:max-w-[80%] mx-auto flex md:p-3 items-center justify-center md:justify-end w-full py-3">
                     <div className="flex md:flex-row flex-col w-full lg:w-[60%] items-center md:gap-0 gap-2 md:items-end justify-center md:justify-between">
                         <Link href="/">
-                            <img src="/images/logoblack.webp" alt="Edvardson Logo" className={`transition-all duration-300 w-[150px] md:w-[250px] ${isScrolled ? 'transform-scale-80 ' : ''}`} /></Link>
+                            <Image width={250} height={62} src="/images/logoblack.webp" alt="Edvardson Logo" className={`transition-all duration-300 w-[150px] h-auto md:w-[250px] ${isScrolled ? 'transform-scale-80 ' : ''}`} /></Link>
                         <div className="placeholder:text-black/80 text-grayish h-fit p-2 md:flex items-center bg-white/90 border border-black justify-between w-full md:w-fit hidden">
                             <input className="text-grayish bg-transparent text-sm placeholder:text-grayish focus:outline-none active:outline-none" placeholder="Sök produkt" type="text" name="" id="" onChange={(e) => setSearchTerm(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleSearch()} />
                             <button onClick={handleSearch}>

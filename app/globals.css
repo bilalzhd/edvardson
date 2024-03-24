@@ -4,7 +4,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+#payment-options iframe:nth-of-type(2) {display: none;}
 .letter-spacing-1 {
   letter-spacing: 1px;
 }
@@ -238,6 +238,10 @@ ins {
   border-bottom: none;
   white-space: nowrap;
 }
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {  
+  opacity: 1;
+}
 #payment-options iframe {min-height: 450px;}
 #payment-options iframe:nth-of-type(2) {display: none;}
 .main-nav { display: flex; list-style: none; justify-content: space-between; }
@@ -246,9 +250,9 @@ ins {
 .arrow { @apply ml-auto pr-[10px] }
 .table-responsive { @apply max-w-full overflow-x-auto; }
 .topbar-container { @apply relative text-[12px] text-black/80 md:px-8 min-h-[32px] bg-white; }
-.topbar { @apply items-center flex-col md:flex-row border-b 2xl:max-w-[70%] xl:mx-auto md:py-2 flex justify-between max-w-[1170px]; }
+.topbar { @apply items-center flex-col md:flex-row border-b 2xl:max-w-[80%] xl:mx-auto md:py-2 flex justify-between max-w-[1170px]; }
 .sub-menu-ul { @apply md:absolute top-0 left-full; }
 .buy-now-button { @apply font-bold w-full py-3 px-2 md:py-[13px] md:px-[28px] flex-1 transition-all duration-200 uppercase border border-[#f6f6f6] hover:border-[#000] bg-transparent md:max-w-[150px] mx-auto text-center text-[12px] md:text-[16px]; }
 .add-to-cart-button { @apply justify-center mx-auto font-bold w-full text-[12px] md:text-[16px] py-3 px-2 md:py-[13px] md:px-[28px] transition-all duration-200 uppercase hover:border-[#000] border border-[#f6f6f6] text-center bg-transparent flex items-center gap-2; }
-.mobile-menu { @apply w-[95%] mx-auto placeholder:text-black/80 h-fit p-2 flex items-center bg-white/90 border border-black justify-between md:w-fit md:hidden }
+.mobile-menu { @apply mb-4 w-[95%] mx-auto placeholder:text-black/80 h-fit p-2 flex items-center bg-white/90 border border-black justify-between md:w-fit md:hidden }
 .input-field { @apply block w-full rounded-md border px-3.5 py-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-gray-800 border-gray-600 sm:text-sm sm:leading-6 }

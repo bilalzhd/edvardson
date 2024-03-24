@@ -5,8 +5,7 @@ import { Metadata, ResolvingMetadata } from "next";
 type Props = {
   params: { slug: string }
 }
-export async function generateMetadata({ params }: Props,
-  parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
 
   const slug = params.slug;
   const categories = await getProductCategories();
@@ -15,10 +14,10 @@ export async function generateMetadata({ params }: Props,
   const prevImages = (await parent).openGraph?.images || [];
 
   return {
-    title: currentCategory?.name,
+    title: currentCategory?.name || "Not found",
     description: currentCategory?.description,
     openGraph: {
-      images: [currentCategory.image?.src, ...prevImages]
+      images: [currentCategory?.image?.src, ...prevImages]
     }
   }
 }

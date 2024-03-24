@@ -2,7 +2,6 @@
 
 import ChevronDown from "@/components/icons/ChevronDown";
 import { useState } from "react"
-import { countries } from "./responsivebreakpoints";
 
 type Country = {
     countryCode: string,

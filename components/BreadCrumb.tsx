@@ -31,7 +31,7 @@ export default function BreadCrumb() {
     }
 
     return (
-        <div className="px-4 md:px-0 py-[20px] text-[11px] text-[#0a0a0a] flex items-center mx-auto xl:max-w-[87%] 2xl:max-w-[70%] 2xl:pl-[25px]">
+        <div className="px-4 md:px-0 py-[20px] text-[11px] text-[#0a0a0a] flex items-center mx-auto xl:max-w-[87%] 2xl:max-w-[80%] 2xl:pl-[25px]">
             {breadcrumbs.map((breadcrumb, index) => (
                 <span key={index} className="tws-breadcrumbs--crumb items-center flex">
                     {index > 0 && <ChevronRight className="w-2 h-2" />}

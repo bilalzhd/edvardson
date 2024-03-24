@@ -5,6 +5,7 @@ import Trash from "./icons/Trash"
 import { deleteItemFromCart, updateCartItemQuantity } from "../lib/store";
 import { AppContext } from "../context";
 import Link from "next/link";
+import Image from "next/image";
 
 
 export default function CartItem({ item, setLoading }: any) {
@@ -27,7 +28,7 @@ export default function CartItem({ item, setLoading }: any) {
 
     return (
         <div key={item.id} className="flex p-2 mb-2 border-b border-b-gray-300">
-            <img src={item.featured_image} alt={item.name} className="border w-12 h-12 mr-2" />
+            <Image src={item.featured_image} width={48} height={48} alt={item.name} className="border w-12 h-12 mr-2" />
             <div className="flex flex-col pb-2 px-2">
                 <Link className="hover:underline" href={`/product/${item.slug}` || "#"}>{item.name}</Link>
                 <span className="text-gray-500">Enhet: {item.price.substring(0, item.price.length - 2)} SEK</span>

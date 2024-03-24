@@ -4,22 +4,30 @@ declare var Klarna: any;
 export const KlarnaComponent = ({
 	klarnaSession,
 	onComplete,
+	customerData
 }: {
 	klarnaSession: {
-		client_token: string;
-		payment_method_categories?:
-		| {
-			asset_urls?: | { descriptive?: string | undefined; standard?: string | undefined } | undefined;
-			identifier?: string | undefined;
-			name?: string | undefined;
-		}[] | undefined; session_id: string;
-	}; onComplete: () => Promise<void>;
+		client_token: string; payment_method_categories?: | { asset_urls?: | { descriptive?: string | undefined; standard?: string | undefined } | undefined; identifier?: string | undefined; name?: string | undefined; }[] | undefined; session_id: string;
+	}; onComplete: (responseData: any) => Promise<void>; customerData: any
 }) => {
+	const billingAddress = {
+		given_name: customerData.firstName,
+		family_name: customerData.lastName,
+		title: "Mr",
+		email: customerData.email,
+		street_address: customerData.billingAddress1,
+		postal_code: customerData.billingPostcode,
+		city: customerData.billingCity,
+		phone: customerData.billingPhone,
+		country: "SE",
+
+	};
+	const shippingAddress = { ...billingAddress }
+
 	useEffect(() => {
 		if (typeof window === "undefined" || "Klarna" in window) {
 			return;
 		}
-
 		// @ts-expect-error -- klarna callback
 		window.klarnaAsyncCallback = () => {
 			Klarna.Payments.init({
@@ -35,32 +43,19 @@ export const KlarnaComponent = ({
 					date_of_birth: "1980-01-01",
 				}
 			},
+				{
+					billing_address: billingAddress,
+					shipping_address: shippingAddress,
+				},
 				async function (...args: any) {
-					const response = {...args};
-					// console.log(response[0]);
-					if(response[0].approved) {
-						await onComplete();
+					const response = { ...args };
+					if (response[0].approved) {
+						await onComplete(response);
+					} else {
+						window.location.reload();
 					}
 				},
 			);
-			// Klarna.Payments.load(
-			// 	{
-			// 		container: "#klarna-payments-container",
-			// 		// payment_method_categories: klarnaSession.payment_method_categories,
-			// 		// payment_method_category: "pay_later",
-			// 		// payment_method_categories: [{ identifier: "pay_later" }],
-			// 		payment_method_categories: [
-			// 			{
-			// 				asset_urls: {},
-			// 				identifier: "klarna",
-			// 				name: "Pay with Klarna",
-			// 			},
-			// 		],
-			// 	},
-			// 	(res) => {
-			// 		console.debug(res);
-			// 	},
-			// );
 		};
 
 		const script = document.createElement("script");
@@ -68,7 +63,8 @@ export const KlarnaComponent = ({
 		script.src = `https://x.klarnacdn.net/kp/lib/v1/api.js`;
 		script.async = true;
 		document.body.appendChild(script);
-	}, []);
+		// eslint-disable-next-line
+	}, [klarnaSession.client_token, onComplete]);
 
 	return <div id="klarna-payments-container" />;
 };

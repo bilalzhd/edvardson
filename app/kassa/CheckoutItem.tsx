@@ -4,6 +4,7 @@ import Refresh from "@/components/icons/Refresh";
 import Trash from "@/components/icons/Trash";
 import { AppContext } from "@/context";
 import { deleteItemFromCart, updateCartItemQuantity } from "@/lib/store";
+import Image from "next/image";
 import { useContext, useState } from "react";
 
 export default function CheckoutItem({ item }: any) {
@@ -27,7 +28,7 @@ export default function CheckoutItem({ item }: any) {
             <div className="mb-2 flex md:flex-row flex-col gap-2 items-start md:items-center border-b border-b-gray-300 pb-2">
                 <div className="flex md:items-center justify-center items-start gap-2 w-full">
                     <div className="flex justify-center w-[80px] md:w-[100px]">
-                        <img src={item.featured_image} alt={item.name} className="md:w-[90px] md:h-[90px] border p-1 rounded md:rounded-none border-gray-300" />
+                        <Image src={item.featured_image} alt={item.name} width={90} height={90} className="md:w-[90px] md:h-[90px] border p-1 rounded md:rounded-none border-gray-300" />
                     </div>
                     <div className="w-full md:w-[40%]">
                         {item.name}

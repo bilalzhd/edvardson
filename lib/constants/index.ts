@@ -1,4 +1,4 @@
-export const CART_ENDPOINT = `https://merablog.merakommunikation.se/wp-json/rae/v1/cart/items/`;
+export const CART_ENDPOINT = `https://admin.edvardson.se/wp-json/rae/v1/cart/items/`;
 
 export const countryOptions = [
     { value: 'AF', label: 'Afghanistan' },

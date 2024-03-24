@@ -16,7 +16,7 @@ export const flatListToHierarchical = (data = [], { idKey = 'key', parentKey = '
 
 export async function getMenuItems() {
   const query = `{
-    menu(id: "dGVybToxNw==") {
+    menu(id: "dGVybToyMDc=") {
       menuItems(first: 30) {
         nodes {
           id
@@ -42,13 +42,13 @@ export async function getMenuItems() {
     }
   }`;
   try {
-    const response = await fetch(`${process.env.WORDPRESS_API_URL}/graphql`, {
+    const response = await fetch(`${"https://admin.edvardson.se"}/graphql`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ query }),
-      next: {revalidate: 300}
+      next: {revalidate: 10}
     });
     const data = await response.json();
     return flatListToHierarchical(data.data.menu.menuItems.nodes);

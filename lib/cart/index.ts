@@ -43,7 +43,7 @@ export const viewCart = ( setCart: any, setProcessing: any ) => {
 			setProcessing(false);
 		} )
 		.catch(err => {
-			console.log( 'err', err );
+			console.error( 'err', err );
 			setProcessing(false);
 		});
 };

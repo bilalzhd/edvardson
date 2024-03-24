@@ -1,9 +1,11 @@
 import { getWoocommerceOrder } from "@/lib/store"
 import Link from "next/link"
 import Item from "./Item"
+import ShippingAddress from "./ShippingAddress";
 
 export default async function ThankYouPage({ params }: { params: { id: string } }) {
     const data = await getWoocommerceOrder(params.id)
+    const shippingAddress = data.shipping.address_1;
     return (
         <>
             {data.id ? (
@@ -32,7 +34,7 @@ export default async function ThankYouPage({ params }: { params: { id: string } 
                                     <td className="pr-8">{new Date(data.date_created).toDateString()}</td>
                                     <td className="pr-8">Beställa #{data.id}</td>
                                     <td className="pr-8">{data.payment_method_title}</td>
-                                    <td className="pr-8">{data.shipping.address_1.substring(0, 30)}...</td>
+                                    <td><ShippingAddress shippingAddress={shippingAddress} /></td>
                                 </tbody>
                             </table>
                         </div>

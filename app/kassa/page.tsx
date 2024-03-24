@@ -6,19 +6,22 @@ import CheckoutItems from "./CheckoutItems";
 import { Metadata } from "next";
 import Form from "./Form";
 import { unstable_noStore } from "next/cache";
+import { clearCart } from "@/lib/store";
+import ClearCart from "@/components/ClearCart";
+import getCountries from "@/lib";
 
 export const metadata: Metadata = {
     title: "Kassa",
 }
 
 export default async function CheckoutPage() {
+    const countries = await await getCountries();
     unstable_noStore();
-
     return (
         <div className="px-4 md:pr-[60px] md:pl-[40px] py-[30px]">
             <div className="flex md:flex-row flex-col font-open">
                 <div className="md:w-[calc(100%-270px)]">
-                    <h2 className="font-semibold text-xl">Cart</h2>
+                    <h2 className="font-bold text-xl">Varukorg</h2>
                     <div className="px-4 pt-6 pb-3">
                         <div className="mb-[30px]">
                             <div className="border-b p-2">
@@ -31,9 +34,7 @@ export default async function CheckoutPage() {
                             <div className="flex flex-col gap-4 mt-4">
                                 <CheckoutItems />
                             </div>
-                            <button className="mt-4 letter-spacing-1 text-[15px] flex items-center gap-1 bg-white/60 text-[#000] px-[15px] h-[35px] font-semibold rounded uppercase">
-                                <Trash fill="#000" className="w-4 h-4" />
-                                Töm varukorg</button>
+                            <ClearCart />
                         </div>
                         <div className="md:block hidden">
                             <UpsellProducts />
@@ -79,7 +80,7 @@ export default async function CheckoutPage() {
                 </div> */}
                 
             </div>
-            <Form />
+            <Form countriesData={countries} />
         </div>
     )
 }

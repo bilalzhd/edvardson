@@ -52,7 +52,7 @@ export default function Product({ product, variations }: any) {
             {variations.length > 0 && <VariationSelector selected={selected} setSelected={setSelected} defaultAttributes={product?.default_attributes} productId={product?.id} variations={sortedVariations} />}
             <div className="mt-4 flex gap-2 relative">
                 {/* <input type="number" name="quantity" id="quantity" min={1} className="border border-black max-w-[52px] text-black p-2 text-center" value={quantity} onChange={(e) => setQuantity(Number(e.target.value))} /> */}
-                <AddToCart quantity={null} variations={selected} isProductPage productId={product?.id} productType={product?.type} productPermalink={product?.permalink} />
+                <AddToCart isCarousel={false} isRelatedProducts={false} isCheckout={false} quantity={null} variations={selected} isProductPage productId={product?.id} productType={product?.type} productPermalink={product?.permalink} />
             </div>
         </>
     )

@@ -20,7 +20,7 @@ export default function CheckoutItems() {
 
             {loading && (
                 <div className="z-[1000] h-full w-full fixed inset-0 flex items-center justify-center bg-black/40">
-                    <LoadingSpinner text="Loading..." />
+                    <LoadingSpinner text="Läser in..." />
                 </div>)}
         </div>
     )
