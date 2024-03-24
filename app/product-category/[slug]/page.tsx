@@ -28,8 +28,10 @@ export default async function CategoryPage({ params }: Props) {
   const categories = await getProductCategories();
   const currentCategory = categories && categories?.find((cat: any) => cat.slug === params.slug);
   const childrenCats = categories.filter((cat: any) => cat.parent == currentCategory?.id);
-  const products = await getProductsByCategory(currentCategory?.id, 'sv');
+  const products = await getProductsByCategory(currentCategory?.id);
 
+  console.log(products);
+  console.log(products.length);
 
   return (
     <>
