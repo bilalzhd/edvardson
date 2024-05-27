@@ -1,8 +1,9 @@
+    abc
 # Edvardson
 
 Edvardson is a online shop using woocommerce as backend and next js for frontend, they sell hunting products and located in Sweden
 
-## Getting Started
+
 
 To run the project locally, follow these steps:
 
